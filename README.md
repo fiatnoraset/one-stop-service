@@ -72,7 +72,7 @@
 
 ### 8. 💡 เปิดปิดไฟในบ้าน (Smart Home Lighting - iHITEK)
 - **เชื่อมต่อแอป iHITEK**: รองรับ Deep Link `ihitek://` เปิดแอปบนมือถือทันที
-- ลิงก์ดาวน์โหลดบน [iOS App Store](https://apps.apple.com/th/app/ihitek/id1453913076) และ [Google Play Store](https://play.google.com/store/apps/details?id=com.ihitek.smartlife)
+- ลิงก์ดาวน์โหลดบน [iOS App Store](https://apps.apple.com/th/app/ihitek/id1453913076) และ [Google Play Store](https://play.google.com/store/apps/details?id=com.hitekhome.smart)
 - **Web Smart Switch Simulator**: หน้าต่างจำลองแผงควบคุมสวิตช์ไฟอัจฉริยะ ปรับความสว่าง เปลี่ยนสี และเลือก Scene บรรยากาศ (ผ่อนคลาย, ทำงาน, ดูหนัง, ปาร์ตี้)
 
 ---

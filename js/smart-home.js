@@ -21,7 +21,7 @@ const SmartHomeManager = {
 
     const appSchemeUrl = 'ihitek://';
     const appStoreUrl = 'https://apps.apple.com/th/app/ihitek/id1453913076';
-    const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ihitek.smartlife';
+    const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.hitekhome.smart';
 
     // Notify user
     this.showToast('กำลังเชื่อมต่อไปยังแอป iHITEK...');

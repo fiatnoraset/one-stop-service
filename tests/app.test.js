@@ -58,7 +58,8 @@ console.log('✅ All mandatory emergency numbers verified with valid tel: protoc
 // 4. Validate iHITEK integration details
 const ihitekService = servicesData.services.find(s => s.id === 'ihitek' || s.name.toLowerCase().includes('ihitek') || s.name.includes('เปิดปิดไฟ'));
 assert.ok(ihitekService, 'iHITEK Smart Home service must exist');
-console.log('✅ Verified iHITEK Smart Home integration data');
+assert.strictEqual(ihitekService.playStoreUrl, 'https://play.google.com/store/apps/details?id=com.hitekhome.smart', 'playStoreUrl must match updated link');
+console.log('✅ Verified iHITEK Smart Home integration data and Google Play URL');
 
 // 5. Test Bill Calculator Logic
 const billCalc = require('../js/bill-calc.js');

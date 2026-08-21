@@ -510,7 +510,7 @@ const services = [
     description: 'เปิดแอปพลิเคชัน iHITEK สำหรับสั่งงานเปิด-ปิดไฟ สวิตช์อัจฉริยะ และควบคุมไฟในบ้านบนเว็บจำลอง',
     url: 'ihitek://',
     appStoreUrl: 'https://apps.apple.com/th/app/ihitek/id1453913076',
-    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.ihitek.smartlife',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.hitekhome.smart',
     icon: 'lightbulb',
     color: 'amber',
     badge: 'เชื่อมต่อด่วน',
