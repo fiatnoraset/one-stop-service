@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-thai: 'Prompt', 'Kanit', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'Prompt', sans-serif;
+  --brand-primary: #059669;
+  --brand-secondary: #0d9488;
+  --brand-accent: #f59e0b;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: var(--font-thai);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-thai);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 114, 128, 0.7);
+}
+
+/* Glassmorphism Styles */
+.glass-header {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.dark .glass-header {
+  background: rgba(15, 23, 42, 0.85);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.dark .glass-card {
+  background: rgba(30, 41, 59, 0.8);
+}
+
+/* Active Category Pill Animation */
+.active-pill {
+  transform: translateY(-1px);
+}
+
+/* Service Card Hover */
+.service-card {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.service-card:hover {
+  transform: translateY(-3px);
+}
+.service-card:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Range input styling for Smart Home Light slider */
+input[type="range"] {
+  accent-color: #059669;
+}
+
+/* Responsive Touch Target sizing for Mobile */
+@media (max-width: 640px) {
+  button, a {
+    min-height: 38px;
+  }
+}
