@@ -401,14 +401,20 @@ const App = {
     }
   },
 
-  // Bill Calculator Modal
-  openBillCalcModal: function() {
+  // Utility Calculators Modal
+  openBillCalcModal: function(initialTab = 'electricity') {
     const modal = document.getElementById('bill-calc-modal');
     if (modal) {
       modal.classList.remove('hidden');
       modal.classList.add('flex');
       document.body.style.overflow = 'hidden';
-      this.calculateBill();
+      if (window.UtilityCalculator) {
+        UtilityCalculator.switchTab(initialTab);
+        UtilityCalculator.calculateElectricity();
+        UtilityCalculator.calculateLoan();
+      } else {
+        this.calculateBill();
+      }
       if (window.lucide) lucide.createIcons();
     }
   },
@@ -423,10 +429,11 @@ const App = {
   },
 
   calculateBill: function() {
-    const input = document.getElementById('bill-units-input');
-    const units = input ? parseFloat(input.value) || 0 : 0;
-    
-    if (typeof calculateElectricityBill === 'function') {
+    if (window.UtilityCalculator) {
+      UtilityCalculator.calculateElectricity();
+    } else if (typeof calculateElectricityBill === 'function') {
+      const input = document.getElementById('bill-units-input');
+      const units = input ? parseFloat(input.value) || 0 : 0;
       const res = calculateElectricityBill(units, 'pea');
       const baseEl = document.getElementById('calc-base-amount');
       const ftEl = document.getElementById('calc-ft-amount');

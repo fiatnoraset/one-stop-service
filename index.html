@@ -321,15 +321,15 @@
         </div>
       </button>
 
-      <!-- Tool 2: Bill Calculator -->
+      <!-- Tool 2: Utility Calculators -->
       <button onclick="App.openBillCalcModal()" 
               class="glass-card p-3 sm:p-3.5 rounded-[20px] hover:border-blue-500/50 hover:shadow-lg transition-all flex items-center gap-3 text-left group">
         <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500/25 to-indigo-600/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 shadow-sm shadow-blue-500/20 group-hover:scale-105 transition-transform">
           <i data-lucide="calculator" class="w-5 h-5"></i>
         </div>
         <div class="min-w-0">
-          <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-blue-400 transition-colors">คำนวณค่าไฟ</h4>
-          <p class="text-[11px] text-slate-400 dark:text-slate-400 font-medium truncate">ตามหน่วย PEA/MEA</p>
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-blue-400 transition-colors">เครื่องคำนวณ</h4>
+          <p class="text-[11px] text-slate-400 dark:text-slate-400 font-medium truncate">ค่าไฟ • ผ่อนรถ/บ้าน</p>
         </div>
       </button>
 
@@ -547,7 +547,7 @@
         <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500/25 to-indigo-600/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0">
           <i data-lucide="calculator" class="w-4 h-4"></i>
         </div>
-        <span>คำนวณค่าไฟฟ้า</span>
+        <span>คำนวณค่าไฟ & ผ่อนรถ-บ้าน</span>
       </button>
 
       <button onclick="ParcelTracker.openTrackingModal(); App.closeFabMenu();" 
@@ -785,66 +785,244 @@
     </div>
   </div>
 
-  <!-- Electricity Bill Estimator Modal -->
+  <!-- Utility Calculators Modal: ศูนย์เครื่องคำนวณอรรถประโยชน์ -->
   <div id="bill-calc-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="glass-card w-full max-w-md rounded-3xl p-5 space-y-4 modal-animate-in">
+    <div class="glass-card w-full max-w-xl rounded-[24px] p-5 sm:p-6 space-y-4 modal-animate-in max-h-[92vh] overflow-y-auto border border-white/10 shadow-2xl">
       
+      <!-- Modal Header -->
       <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-white/10 pb-3">
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-xl bg-purple-500/15 text-purple-500 flex items-center justify-center">
-            <i data-lucide="calculator" class="w-4 h-4"></i>
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500/25 to-indigo-600/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 shadow-sm shadow-blue-500/20">
+            <i data-lucide="calculator" class="w-5 h-5"></i>
           </div>
           <div>
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">คำนวณค่าไฟฟ้าประมาณการ</h3>
-            <p class="text-[10px] text-slate-400">อัตราค่าไฟฟ้าที่อยู่อาศัย (PEA / MEA)</p>
+            <div class="flex items-center gap-1.5">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">ศูนย์เครื่องคำนวณอรรถประโยชน์</h3>
+              <span class="text-[9px] font-bold px-1.5 py-0.2 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30">Utility Calc</span>
+            </div>
+            <p class="text-[11px] text-slate-400">คำนวณค่าไฟฟ้า & คำนวณค่างวดผ่อนรถ/ผ่อนบ้าน (Client-Side)</p>
           </div>
         </div>
-        <button onclick="App.closeBillCalcModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+        <button onclick="App.closeBillCalcModal()" class="p-1.5 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-white/10 transition-colors">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <div class="space-y-3">
+      <!-- Switchable Tabs -->
+      <div class="flex items-center gap-2 p-1 rounded-2xl bg-slate-100/80 dark:bg-white/[0.04] border border-slate-200/60 dark:border-white/10">
+        <button id="calc-tab-electricity-btn" 
+                type="button"
+                onclick="UtilityCalculator.switchTab('electricity')" 
+                class="category-pill active-pill font-bold flex-1 py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all">
+          <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+          <span>⚡ คำนวณค่าไฟฟ้า</span>
+        </button>
+        <button id="calc-tab-loan-btn" 
+                type="button"
+                onclick="UtilityCalculator.switchTab('loan')" 
+                class="category-pill flex-1 py-2 px-3 rounded-xl text-xs font-medium text-slate-400 hover:text-white flex items-center justify-center gap-1.5 transition-all">
+          <i data-lucide="percent" class="w-3.5 h-3.5"></i>
+          <span>🚗 🏠 คำนวณผ่อนรถ/บ้าน</span>
+        </button>
+      </div>
+
+      <!-- Tab 1: Electricity Bill Estimator Panel -->
+      <div id="calc-panel-electricity" class="space-y-3.5">
         <div>
-          <label for="bill-units-input" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-            ระบุจำนวนหน่วยไฟฟ้าที่ใช้ (Units / kWh)
-          </label>
+          <div class="flex items-center justify-between mb-1">
+            <label for="bill-units-input" class="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+              ระบุจำนวนหน่วยไฟฟ้าที่ใช้ (Units / kWh)
+            </label>
+            <span class="text-[11px] text-slate-400">เรทอัตราก้าวหน้า PEA / MEA</span>
+          </div>
           <div class="relative">
             <input type="number" id="bill-units-input" value="120" min="0" max="9999" 
-                   class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100/70 dark:bg-slate-800/80 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-purple-500 focus:outline-none">
+                   class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-mono font-bold text-sm focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500/60 focus:outline-none transition-all">
             <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400">หน่วย</span>
+          </div>
+          
+          <!-- Quick Units Buttons -->
+          <div class="flex items-center gap-1.5 mt-2 overflow-x-auto pb-0.5">
+            <span class="text-[10px] text-slate-400 font-medium shrink-0">เลือกด่วน:</span>
+            <button type="button" onclick="document.getElementById('bill-units-input').value = 50; UtilityCalculator.calculateElectricity();" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-blue-500/20 text-[10px] font-semibold text-slate-600 dark:text-slate-300 transition-colors">50 หน่วย</button>
+            <button type="button" onclick="document.getElementById('bill-units-input').value = 150; UtilityCalculator.calculateElectricity();" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-blue-500/20 text-[10px] font-semibold text-slate-600 dark:text-slate-300 transition-colors">150 หน่วย</button>
+            <button type="button" onclick="document.getElementById('bill-units-input').value = 250; UtilityCalculator.calculateElectricity();" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-blue-500/20 text-[10px] font-semibold text-slate-600 dark:text-slate-300 transition-colors">250 หน่วย</button>
+            <button type="button" onclick="document.getElementById('bill-units-input').value = 400; UtilityCalculator.calculateElectricity();" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-blue-500/20 text-[10px] font-semibold text-slate-600 dark:text-slate-300 transition-colors">400 หน่วย</button>
+            <button type="button" onclick="document.getElementById('bill-units-input').value = 600; UtilityCalculator.calculateElectricity();" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-blue-500/20 text-[10px] font-semibold text-slate-600 dark:text-slate-300 transition-colors">600 หน่วย</button>
           </div>
         </div>
 
         <!-- Calculation Breakdown Table -->
-        <div class="p-3 rounded-2xl bg-slate-100/60 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 space-y-1.5 text-xs">
+        <div class="p-3.5 rounded-2xl bg-slate-100/60 dark:bg-white/[0.03] border border-slate-200/60 dark:border-white/10 space-y-2 text-xs">
           <div class="flex justify-between text-slate-600 dark:text-slate-400">
             <span>ค่าพลังงานไฟฟ้าฐาน:</span>
-            <span id="calc-base-amount" class="font-semibold text-slate-900 dark:text-white">฿0.00</span>
+            <span id="calc-base-amount" class="font-semibold text-slate-900 dark:text-white font-mono">฿0.00</span>
           </div>
           <div class="flex justify-between text-slate-600 dark:text-slate-400">
             <span>ค่าบริการรายเดือน:</span>
-            <span id="calc-service-fee" class="font-semibold text-slate-900 dark:text-white">฿24.62</span>
+            <span id="calc-service-fee" class="font-semibold text-slate-900 dark:text-white font-mono">฿24.62</span>
           </div>
           <div class="flex justify-between text-slate-600 dark:text-slate-400">
             <span>ค่า FT (ประมาณการ 0.3972 ฿/หน่วย):</span>
-            <span id="calc-ft-amount" class="font-semibold text-slate-900 dark:text-white">฿0.00</span>
+            <span id="calc-ft-amount" class="font-semibold text-slate-900 dark:text-white font-mono">฿0.00</span>
           </div>
           <div class="flex justify-between text-slate-600 dark:text-slate-400">
             <span>ภาษีมูลค่าเพิ่ม (VAT 7%):</span>
-            <span id="calc-vat-amount" class="font-semibold text-slate-900 dark:text-white">฿0.00</span>
+            <span id="calc-vat-amount" class="font-semibold text-slate-900 dark:text-white font-mono">฿0.00</span>
           </div>
           <div class="pt-2 border-t border-slate-200/60 dark:border-white/10 flex justify-between items-baseline">
             <span class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">รวมค่าไฟฟ้าสุทธิ:</span>
-            <span id="calc-total-amount" class="text-base sm:text-lg font-black text-purple-600 dark:text-purple-400">฿0.00</span>
+            <span id="calc-total-amount" class="text-lg sm:text-xl font-black text-blue-400 font-mono">฿0.00</span>
           </div>
         </div>
 
-        <a href="https://eservice.pea.co.th/Account/Login?ReturnUrl=%2f" target="_blank" rel="noopener noreferrer"
-           class="block w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold text-center shadow-sm transition-all">
-          ไปหน้าชำระเงิน PEA e-Service
-        </a>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="https://eservice.pea.co.th/Account/Login?ReturnUrl=%2f" target="_blank" rel="noopener noreferrer"
+             class="py-2.5 px-3 rounded-xl bg-purple-600/80 hover:bg-purple-600 text-white text-xs font-bold text-center shadow-sm transition-all flex items-center justify-center gap-1.5">
+            <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+            <span>PEA e-Service</span>
+          </a>
+          <a href="https://eservice.mea.or.th/" target="_blank" rel="noopener noreferrer"
+             class="py-2.5 px-3 rounded-xl bg-orange-600/80 hover:bg-orange-600 text-white text-xs font-bold text-center shadow-sm transition-all flex items-center justify-center gap-1.5">
+            <i data-lucide="power" class="w-3.5 h-3.5"></i>
+            <span>MEA Smart Life</span>
+          </a>
+        </div>
       </div>
+
+      <!-- Tab 2: Loan & Installment Calculator Panel -->
+      <div id="calc-panel-loan" class="hidden space-y-3.5">
+        
+        <!-- Loan Calculation Mode Toggle -->
+        <div class="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-slate-100/60 dark:bg-white/[0.03] border border-slate-200/60 dark:border-white/10">
+          <button id="loan-type-flat-btn" 
+                  type="button"
+                  onclick="UtilityCalculator.setLoanType('flat')" 
+                  class="px-2.5 py-1.5 rounded-xl bg-blue-600 text-white font-bold text-xs shadow-sm shadow-blue-500/25 border border-blue-400/40 transition-all flex items-center justify-center gap-1.5">
+            <i data-lucide="car" class="w-3.5 h-3.5"></i>
+            <span class="truncate">ผ่อนรถ (ดอกเบี้ยคงที่)</span>
+          </button>
+          <button id="loan-type-effective-btn" 
+                  type="button"
+                  onclick="UtilityCalculator.setLoanType('effective')" 
+                  class="px-2.5 py-1.5 rounded-xl bg-white/5 dark:bg-white/[0.04] text-slate-400 hover:text-white font-medium text-xs border border-white/10 transition-all flex items-center justify-center gap-1.5">
+            <i data-lucide="home" class="w-3.5 h-3.5"></i>
+            <span class="truncate">ผ่อนบ้าน (ลดต้นลดดอก)</span>
+          </button>
+        </div>
+
+        <!-- Quick Presets -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-0.5">
+          <span class="text-[10px] text-slate-400 font-medium shrink-0">พรีเซ็ตด่วน:</span>
+          <button type="button" onclick="UtilityCalculator.setLoanPreset('car-eco')" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-blue-500/20 text-[10px] font-semibold text-slate-600 dark:text-slate-300 transition-colors whitespace-nowrap">🚗 Eco-Car 600k</button>
+          <button type="button" onclick="UtilityCalculator.setLoanPreset('car-suv')" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-blue-500/20 text-[10px] font-semibold text-slate-600 dark:text-slate-300 transition-colors whitespace-nowrap">🚗 SUV 1.2M</button>
+          <button type="button" onclick="UtilityCalculator.setLoanPreset('home-condo')" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-blue-500/20 text-[10px] font-semibold text-slate-600 dark:text-slate-300 transition-colors whitespace-nowrap">🏠 คอนโด 2.5M</button>
+          <button type="button" onclick="UtilityCalculator.setLoanPreset('home-house')" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-blue-500/20 text-[10px] font-semibold text-slate-600 dark:text-slate-300 transition-colors whitespace-nowrap">🏠 บ้านเดี่ยว 4.5M</button>
+        </div>
+
+        <!-- Form Inputs Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          
+          <!-- Price Input -->
+          <div>
+            <label for="loan-price-input" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              ราคารถ / ราคาบ้าน / ยอดจัด (บาท)
+            </label>
+            <div class="relative">
+              <input type="number" id="loan-price-input" value="800000" min="0" step="10000"
+                     class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-mono font-bold text-xs focus:ring-2 focus:ring-blue-500/40 focus:outline-none">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400">฿</span>
+            </div>
+          </div>
+
+          <!-- Down Payment Input -->
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label for="loan-down-input" class="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                เงินดาวน์ (%)
+              </label>
+              <span id="loan-down-amount-badge" class="text-[10px] font-mono text-blue-400 font-semibold">= ฿160,000</span>
+            </div>
+            <div class="relative">
+              <input type="number" id="loan-down-input" value="20" min="0" max="99" step="5"
+                     class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-mono font-bold text-xs focus:ring-2 focus:ring-blue-500/40 focus:outline-none">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400">%</span>
+            </div>
+          </div>
+
+          <!-- Interest Rate Input -->
+          <div>
+            <label for="loan-rate-input" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              อัตราดอกเบี้ยต่อปี (% ต่อปี)
+            </label>
+            <div class="relative">
+              <input type="number" id="loan-rate-input" value="2.50" min="0" max="50" step="0.05"
+                     class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-mono font-bold text-xs focus:ring-2 focus:ring-blue-500/40 focus:outline-none">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400">%</span>
+            </div>
+          </div>
+
+          <!-- Months / Term Selector -->
+          <div>
+            <label for="loan-months-select" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              ระยะเวลาผ่อน (จำนวนงวด)
+            </label>
+            <div class="relative">
+              <select id="loan-months-select" 
+                      class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100/70 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold text-xs focus:ring-2 focus:ring-blue-500/40 focus:outline-none appearance-none cursor-pointer">
+                <option value="12">12 งวด (1 ปี)</option>
+                <option value="24">24 งวด (2 ปี)</option>
+                <option value="36">36 งวด (3 ปี)</option>
+                <option value="48" selected>48 งวด (4 ปี)</option>
+                <option value="60">60 งวด (5 ปี)</option>
+                <option value="72">72 งวด (6 ปี)</option>
+                <option value="84">84 งวด (7 ปี)</option>
+                <option value="120">120 งวด (10 ปี)</option>
+                <option value="240">240 งวด (20 ปี)</option>
+                <option value="360">360 งวด (30 ปี)</option>
+              </select>
+              <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Calculation Results Cards -->
+        <div class="p-4 rounded-2xl bg-gradient-to-br from-blue-950/40 to-indigo-950/40 border border-blue-500/30 space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 pb-2 border-b border-white/10">
+            <div>
+              <span class="text-xs font-bold text-slate-300 flex items-center gap-1">
+                <i data-lucide="wallet" class="w-3.5 h-3.5 text-blue-400"></i>
+                ประมาณการค่างวดต่อเดือน
+              </span>
+              <span class="text-[10px] text-slate-400">(Monthly Installment)</span>
+            </div>
+            <div class="flex items-baseline gap-1">
+              <span id="loan-monthly-val" class="text-xl sm:text-2xl font-black text-blue-400 font-mono">฿0.00</span>
+              <span class="text-xs text-slate-400 font-medium">/ เดือน</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs pt-1">
+            <div class="p-2 rounded-xl bg-white/5 border border-white/5">
+              <span class="text-[10px] text-slate-400 block">ยอดเงินกู้สุทธิ:</span>
+              <span id="loan-principal-val" class="font-bold text-slate-200 font-mono text-xs sm:text-sm">฿0.00</span>
+            </div>
+            <div class="p-2 rounded-xl bg-white/5 border border-white/5">
+              <span class="text-[10px] text-amber-400/80 block">ดอกเบี้ยรวมทั้งหมด:</span>
+              <span id="loan-interest-val" class="font-bold text-amber-400 font-mono text-xs sm:text-sm">฿0.00</span>
+            </div>
+            <div class="p-2 rounded-xl bg-white/5 border border-white/5">
+              <span class="text-[10px] text-indigo-400/80 block">ยอดรวมที่ต้องจ่าย:</span>
+              <span id="loan-total-payable-val" class="font-bold text-indigo-300 font-mono text-xs sm:text-sm">฿0.00</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
 
