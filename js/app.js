@@ -501,22 +501,28 @@ const App = {
       }
     });
 
-    // Close modals on clicking backdrop
+    // Close modals and FAB on clicking backdrop
     window.addEventListener('click', (e) => {
       const subModal = document.getElementById('sub-services-modal');
       const smartModal = document.getElementById('smart-home-modal');
       const billModal = document.getElementById('bill-calc-modal');
       const trackModal = document.getElementById('parcel-tracking-modal');
       const emergencyModal = document.getElementById('emergency-modal');
+      const fabMenu = document.getElementById('fab-popup-menu');
+      const fabBtn = document.getElementById('fab-main-btn');
 
       if (e.target === subModal) this.closeSubServicesModal();
       if (e.target === smartModal && window.SmartHomeManager) SmartHomeManager.closeSmartHomeModal();
       if (e.target === billModal) this.closeBillCalcModal();
       if (e.target === trackModal && window.ParcelTracker) ParcelTracker.closeTrackingModal();
       if (e.target === emergencyModal && window.EmergencyManager) EmergencyManager.closeEmergencyModal();
+
+      if (fabMenu && !fabMenu.classList.contains('hidden') && !fabMenu.contains(e.target) && !fabBtn.contains(e.target)) {
+        this.closeFabMenu();
+      }
     });
 
-    // Escape key closes modals
+    // Escape key closes modals and FAB
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         this.closeSubServicesModal();
@@ -524,8 +530,36 @@ const App = {
         this.closeBillCalcModal();
         if (window.ParcelTracker) ParcelTracker.closeTrackingModal();
         if (window.EmergencyManager) EmergencyManager.closeEmergencyModal();
+        this.closeFabMenu();
       }
     });
+  },
+
+  // FAB Popup Menu Controls
+  toggleFabMenu: function() {
+    const menu = document.getElementById('fab-popup-menu');
+    const icon = document.getElementById('fab-icon');
+    if (!menu) return;
+
+    if (menu.classList.contains('hidden')) {
+      menu.classList.remove('hidden');
+      menu.classList.add('flex', 'fab-menu-animate');
+      if (icon) icon.setAttribute('data-lucide', 'x');
+    } else {
+      this.closeFabMenu();
+    }
+    if (window.lucide) lucide.createIcons();
+  },
+
+  closeFabMenu: function() {
+    const menu = document.getElementById('fab-popup-menu');
+    const icon = document.getElementById('fab-icon');
+    if (menu) {
+      menu.classList.add('hidden');
+      menu.classList.remove('flex', 'fab-menu-animate');
+    }
+    if (icon) icon.setAttribute('data-lucide', 'sparkles');
+    if (window.lucide) lucide.createIcons();
   },
 
   // Toast Notification

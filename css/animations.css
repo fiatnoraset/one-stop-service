@@ -1,51 +1,108 @@
 /**
- * One Stop Service - Animations & Micro-interactions
+ * One Stop Service - Ultramodern Animations & Micro-interactions
+ * Fluid motion, infinite marquee scrolling, spring easings, and shimmer skeletons.
  */
 
+/* 1. Infinite Auto-Scrolling Marquee Ticker */
+@keyframes tickerScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: tickerScroll 30s linear infinite;
+  will-change: transform;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* 2. Fade In & Slide Up Staggered Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3. Modal Spring Scale In */
+@keyframes modalSpringIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-animate-in {
+  animation: modalSpringIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 4. FAB Menu Spring Expand */
+@keyframes fabMenuExpand {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.fab-menu-animate {
+  animation: fabMenuExpand 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* 5. Skeleton Shimmer Loading */
+@keyframes shimmerWave {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmerWave 1.8s infinite linear;
+}
+
+/* 6. Glowing SOS Pulsing */
 @keyframes pulseGlow {
   0%, 100% {
     box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6);
   }
   50% {
-    box-shadow: 0 0 0 14px rgba(239, 68, 68, 0);
+    box-shadow: 0 0 0 12px rgba(239, 68, 68, 0);
   }
 }
 
 .sos-pulse-glow {
   animation: pulseGlow 1.8s infinite;
-}
-
-@keyframes floatGentle {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-.floating-hero-logo {
-  animation: floatGentle 4s ease-in-out infinite;
-}
-
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.modal-animate-in {
-  animation: fadeInScale 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Shimmer Loading Effect */
-@keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
 }

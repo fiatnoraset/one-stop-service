@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --font-thai: 'Prompt', 'Kanit', sans-serif;
-  --font-sans: 'Plus Jakarta Sans', 'Prompt', sans-serif;
-  --brand-primary: #059669;
-  --brand-secondary: #0d9488;
-  --brand-accent: #f59e0b;
+  --font-thai: 'Noto Sans Thai', 'Prompt', 'Kanit', 'Sarabun', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'Noto Sans Thai', sans-serif;
+  --brand-emerald: #059669;
+  --brand-teal: #0d9488;
+  --brand-cyan: #0284c7;
 }
 
 * {
@@ -19,9 +19,115 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f8fafc;
 }
 
-/* Custom Sleek Scrollbar */
+/* Dark Mode Deep Slate Mesh Background */
+.dark body, body.dark {
+  background-color: #090d16;
+}
+
+/* Background Ambient Glow Orbs for Glassmorphism */
+.mesh-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.mesh-orb-1 {
+  position: absolute;
+  top: -10%;
+  left: 15%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0) 70%);
+  filter: blur(60px);
+}
+
+.mesh-orb-2 {
+  position: absolute;
+  top: 40%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, rgba(14, 165, 233, 0) 70%);
+  filter: blur(80px);
+}
+
+.dark .mesh-orb-1 {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(16, 185, 129, 0) 70%);
+}
+
+.dark .mesh-orb-2 {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.14) 0%, rgba(99, 102, 241, 0) 70%);
+}
+
+/* Glassmorphism Header */
+.glass-header {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+.dark .glass-header {
+  background: rgba(9, 13, 22, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Glass Cards (Light-Glass & Dark-Glass) */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+}
+.dark .glass-card {
+  background: rgba(17, 24, 39, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* Service Card Hover Micro-Interactions */
+.service-card {
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -4px rgba(16, 185, 129, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.06);
+}
+
+.dark .service-card:hover {
+  box-shadow: 0 16px 36px -4px rgba(16, 185, 129, 0.18), 0 0 0 1px rgba(16, 185, 129, 0.4);
+}
+
+.service-card:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* Fluid Pill Category Buttons */
+.category-pill {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-pill.active-pill {
+  background: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px 0 rgba(5, 150, 105, 0.35);
+  border-color: transparent;
+}
+
+/* Sleek Scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -30,47 +136,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.35);
+  background: rgba(148, 163, 184, 0.3);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(100, 116, 139, 0.6);
-}
-
-/* Glassmorphism Styles */
-.glass-header {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-.dark .glass-header {
-  background: rgba(15, 23, 42, 0.9);
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-.dark .glass-card {
-  background: rgba(30, 41, 59, 0.85);
-}
-
-/* Modern Dashboard Clean Cards */
-.service-card {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform, box-shadow;
-}
-.service-card:hover {
-  transform: translateY(-2px);
-}
-.service-card:active {
-  transform: translateY(0) scale(0.99);
-}
-
-/* Active Category Pill Animation */
-.active-pill {
-  transform: translateY(-1px);
 }
 
 /* Range input styling for Smart Home Light slider */
@@ -78,23 +148,7 @@ input[type="range"] {
   accent-color: #059669;
 }
 
-/* Floating Action Dock */
-.floating-dock {
-  animation: floatUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes floatUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Touch targets optimization */
+/* Touch target optimizations */
 @media (max-width: 640px) {
   button, a, input, select {
     min-height: 38px;

@@ -180,8 +180,12 @@ const SmartHomeManager = {
     const activeCount = Object.values(this.state).filter(l => l.on).length;
     const totalCount = Object.keys(this.state).length;
     const badgeEl = document.getElementById('active-lights-count');
+    const summaryBadgeEl = document.getElementById('summary-lights-badge');
     if (badgeEl) {
       badgeEl.textContent = `${activeCount}/${totalCount} เปิดอยู่`;
+    }
+    if (summaryBadgeEl) {
+      summaryBadgeEl.textContent = `💡 ${activeCount}/${totalCount} ไฟเปิดอยู่`;
     }
   },
 
