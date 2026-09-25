@@ -107,6 +107,14 @@
           <span>191 / 1669</span>
         </button>
 
+        <!-- Parcel Tracking Quick Button -->
+        <button onclick="ParcelTracker.openTrackingModal()" 
+                class="p-2 sm:px-3 sm:py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                title="เช็กเลขพัสดุด่วน">
+          <i data-lucide="package" class="w-4 h-4 text-emerald-500"></i>
+          <span class="hidden sm:inline">เช็กพัสดุ</span>
+        </button>
+
         <!-- Smart Home Switch Direct Button -->
         <button onclick="SmartHomeManager.openSmartHomeModal()" 
                 class="p-2 sm:px-3 sm:py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-xs font-semibold flex items-center gap-1.5 transition-colors"
@@ -295,6 +303,140 @@
         </div>
 
       </div>
+    </section>
+
+    <!-- Quick Parcel Tracking Section: เช็กเลขพัสดุด่วน -->
+    <section id="parcel-tracking-section" class="rounded-3xl bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-slate-900/5 dark:from-emerald-950/40 dark:via-slate-900 dark:to-slate-900/90 p-5 sm:p-7 border border-emerald-500/30 dark:border-emerald-500/20 shadow-lg space-y-5 transition-all">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shadow-md shadow-emerald-500/30 shrink-0">
+            <i data-lucide="package" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                เช็กเลขพัสดุด่วน (Quick Parcel Tracking)
+              </h2>
+              <span class="px-2.5 py-0.5 text-[11px] font-semibold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/90 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+                รวมทุกขนส่ง
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              กรอกหมายเลขพัสดุ เลือกบริษัทขนส่ง แล้วกดปุ่มติดตามพัสดุเพื่อเปิดหน้าตรวจสอบสถานะทันที
+            </p>
+          </div>
+        </div>
+
+        <button onclick="ParcelTracker.openTrackingModal()" class="self-start sm:self-auto text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1">
+          <span>เปิดแบบหน้าต่างป๊อปอัป</span>
+          <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+      <!-- Quick Courier Pill Selectors -->
+      <div class="space-y-2">
+        <label class="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+          <i data-lucide="truck" class="w-3.5 h-3.5 text-emerald-500"></i>
+          <span>เลือกบริษัทขนส่ง:</span>
+        </label>
+        <div id="courier-quick-pills" class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Tracking Input & Submit Grid Form -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-stretch">
+        
+        <!-- Courier Dropdown Select (3 cols on MD) -->
+        <div class="md:col-span-4 relative">
+          <label for="tracking-courier-select" class="sr-only">เลือกบริษัทขนส่ง</label>
+          <div class="relative">
+            <select id="tracking-courier-select" 
+                    class="w-full h-12 pl-4 pr-10 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-emerald-500 focus:outline-none appearance-none cursor-pointer shadow-sm transition-all">
+              <option value="thailandpost">🔴 ไปรษณีย์ไทย (Thailand Post)</option>
+              <option value="flash">🟡 Flash Express (แฟลช เอ็กซ์เพรส)</option>
+              <option value="jtexpress">🔴 J&T Express (เจแอนด์ที เอ็กซ์เพรส)</option>
+              <option value="kerry">🟠 Kerry Express / KEX (เคอรี่ เอ็กซ์เพรส)</option>
+              <option value="spx">🟧 SPX Express (Shopee Xpress)</option>
+              <option value="ninjavan">🔴 Ninja Van (นินจาแวน ประเทศไทย)</option>
+              <option value="bestexpress">🔵 Best Express (เบสท์ เอ็กซ์เพรส)</option>
+              <option value="dhl">🟡 DHL Express Thailand (ดีเอชแอล)</option>
+            </select>
+            <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
+              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tracking Number Input with Paste Button (6 cols on MD) -->
+        <div class="md:col-span-5 relative">
+          <div class="relative flex items-center">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i data-lucide="barcode" class="w-5 h-5 text-emerald-500"></i>
+            </div>
+            <input type="text" 
+                   id="tracking-number-input" 
+                   placeholder="กรอกเลขพัสดุ เช่น EF123456789TH..." 
+                   class="w-full h-12 pl-11 pr-24 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-mono text-sm uppercase placeholder-slate-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none shadow-sm transition-all"
+                   autocomplete="off"
+                   spellcheck="false">
+            
+            <!-- Paste & Clear Buttons inside input -->
+            <div class="absolute inset-y-0 right-0 pr-2 flex items-center gap-1">
+              <button type="button" 
+                      onclick="ParcelTracker.pasteFromClipboard('section')" 
+                      class="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-[11px] font-semibold flex items-center gap-1 transition-colors"
+                      title="วางเลขพัสดุจากคลิปบอร์ด">
+                <i data-lucide="clipboard" class="w-3 h-3 text-emerald-500"></i>
+                <span class="hidden xs:inline">วางเลข</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button (3 cols on MD) -->
+        <div class="md:col-span-3">
+          <button type="button" 
+                  id="btn-track-parcel"
+                  onclick="ParcelTracker.track('section')" 
+                  class="w-full h-12 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 active:scale-95 text-white text-sm font-bold flex items-center justify-center gap-2 shadow-md shadow-emerald-500/25 transition-all">
+            <i data-lucide="search" class="w-4 h-4"></i>
+            <span>ติดตามพัสดุ</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5 opacity-80"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Quick Sample Numbers & Recent Search History -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 border-t border-slate-200/60 dark:border-slate-800 text-xs">
+        
+        <!-- Sample numbers for testing -->
+        <div class="flex items-center gap-1.5 flex-wrap">
+          <span class="text-[11px] text-slate-400 dark:text-slate-500 font-medium">ตัวอย่างเลข:</span>
+          <button type="button" onclick="ParcelTracker.fillSample('EF123456789TH', 'thailandpost')" class="px-2 py-0.5 rounded-lg bg-red-100/70 dark:bg-red-950/60 text-red-700 dark:text-red-300 text-[11px] font-mono hover:bg-red-200 transition-colors">
+            EF..TH (ไปรษณีย์)
+          </button>
+          <button type="button" onclick="ParcelTracker.fillSample('TH0123456789A', 'flash')" class="px-2 py-0.5 rounded-lg bg-amber-100/70 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-[11px] font-mono hover:bg-amber-200 transition-colors">
+            TH01.. (Flash)
+          </button>
+          <button type="button" onclick="ParcelTracker.fillSample('821234567890', 'jtexpress')" class="px-2 py-0.5 rounded-lg bg-rose-100/70 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 text-[11px] font-mono hover:bg-rose-200 transition-colors">
+            82.. (J&T)
+          </button>
+          <button type="button" onclick="ParcelTracker.fillSample('KEX1234567890', 'kerry')" class="px-2 py-0.5 rounded-lg bg-orange-100/70 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300 text-[11px] font-mono hover:bg-orange-200 transition-colors">
+            KEX.. (Kerry)
+          </button>
+        </div>
+
+        <!-- Recent Search History Chips -->
+        <div id="tracking-history-chips">
+          <!-- Injected via JavaScript -->
+        </div>
+
+      </div>
+
     </section>
 
     <!-- Category Filters Navigation -->
@@ -665,6 +807,121 @@
     </div>
   </div>
 
+  <!-- Parcel Tracking Modal: เช็กเลขพัสดุด่วน -->
+  <div id="parcel-tracking-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-5 modal-animate-in max-h-[90vh] overflow-y-auto">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3.5">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shadow-md shadow-emerald-500/30 shrink-0">
+            <i data-lucide="package" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white">เช็กเลขพัสดุด่วน (Parcel Tracking)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">ตรวจสอบสถานะพัสดุทุกบริษัทขนส่งในไทย</p>
+          </div>
+        </div>
+        <button onclick="ParcelTracker.closeTrackingModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Form Inputs -->
+      <div class="space-y-4">
+        
+        <!-- Courier Selection -->
+        <div>
+          <label for="modal-tracking-courier-select" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center gap-1.5">
+            <i data-lucide="truck" class="w-3.5 h-3.5 text-emerald-500"></i>
+            <span>เลือกบริษัทขนส่ง:</span>
+          </label>
+          <div class="relative">
+            <select id="modal-tracking-courier-select" 
+                    class="w-full h-11 pl-4 pr-10 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-emerald-500 focus:outline-none appearance-none cursor-pointer">
+              <option value="thailandpost">🔴 ไปรษณีย์ไทย (Thailand Post)</option>
+              <option value="flash">🟡 Flash Express (แฟลช เอ็กซ์เพรส)</option>
+              <option value="jtexpress">🔴 J&T Express (เจแอนด์ที เอ็กซ์เพรส)</option>
+              <option value="kerry">🟠 Kerry Express / KEX (เคอรี่ เอ็กซ์เพรส)</option>
+              <option value="spx">🟧 SPX Express (Shopee Xpress)</option>
+              <option value="ninjavan">🔴 Ninja Van (นินจาแวน ประเทศไทย)</option>
+              <option value="bestexpress">🔵 Best Express (เบสท์ เอ็กซ์เพรส)</option>
+              <option value="dhl">🟡 DHL Express Thailand (ดีเอชแอล)</option>
+            </select>
+            <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
+              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tracking Number Input -->
+        <div>
+          <label for="modal-tracking-number-input" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between">
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="barcode" class="w-3.5 h-3.5 text-emerald-500"></i>
+              <span>หมายเลขพัสดุ (Tracking No.):</span>
+            </span>
+            <button type="button" 
+                    onclick="ParcelTracker.pasteFromClipboard('modal')" 
+                    class="text-[11px] text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1">
+              <i data-lucide="clipboard" class="w-3 h-3"></i>
+              <span>วางจากคลิปบอร์ด</span>
+            </button>
+          </label>
+          <div class="relative flex items-center">
+            <input type="text" 
+                   id="modal-tracking-number-input" 
+                   placeholder="กรอกเลขพัสดุ เช่น EF123456789TH..." 
+                   class="w-full h-11 px-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-mono text-sm uppercase placeholder-slate-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                   autocomplete="off"
+                   spellcheck="false">
+          </div>
+        </div>
+
+        <!-- Sample Buttons -->
+        <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700 space-y-1.5">
+          <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">ตัวอย่างเลขพัสดุ:</span>
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button type="button" onclick="ParcelTracker.fillSample('EF123456789TH', 'thailandpost')" class="px-2 py-0.5 rounded-lg bg-red-100 text-red-700 dark:bg-red-950/80 dark:text-red-300 text-[11px] font-mono hover:opacity-80">
+              EF..TH (ไปรษณีย์)
+            </button>
+            <button type="button" onclick="ParcelTracker.fillSample('TH0123456789A', 'flash')" class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 text-[11px] font-mono hover:opacity-80">
+              TH01.. (Flash)
+            </button>
+            <button type="button" onclick="ParcelTracker.fillSample('821234567890', 'jtexpress')" class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-700 dark:bg-rose-950/80 dark:text-rose-300 text-[11px] font-mono hover:opacity-80">
+              82.. (J&T)
+            </button>
+            <button type="button" onclick="ParcelTracker.fillSample('KEX1234567890', 'kerry')" class="px-2 py-0.5 rounded-lg bg-orange-100 text-orange-700 dark:bg-orange-950/80 dark:text-orange-300 text-[11px] font-mono hover:opacity-80">
+              KEX.. (Kerry)
+            </button>
+          </div>
+        </div>
+
+        <!-- Track Button -->
+        <button type="button" 
+                onclick="ParcelTracker.track('modal')" 
+                class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 active:scale-95 text-white text-sm font-bold flex items-center justify-center gap-2 shadow-md shadow-emerald-500/25 transition-all">
+          <i data-lucide="search" class="w-4 h-4"></i>
+          <span>ติดตามพัสดุ (เปิดหน้าขนส่ง)</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5 opacity-80"></i>
+        </button>
+
+        <!-- History -->
+        <div id="modal-tracking-history-chips" class="pt-1">
+          <!-- Injected via JavaScript -->
+        </div>
+
+      </div>
+
+      <div class="pt-2 text-center border-t border-slate-100 dark:border-slate-800">
+        <button onclick="ParcelTracker.closeTrackingModal()" class="w-full py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+          ปิดหน้าต่าง
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8 mt-12 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
@@ -700,6 +957,8 @@
   <script src="js/financial.js"></script>
   <script src="js/emergency.js"></script>
   <script src="js/smart-home.js"></script>
+  <script src="js/tracking.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
+

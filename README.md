@@ -91,6 +91,15 @@
 - [DLT Smart Queue (จองคิวใบขับขี่ กรมการขนส่งทางบก)](https://gecc.dlt.go.th/): ระบบจองคิวล่วงหน้าทำใบขับขี่ ต่ออายุใบขับขี่ ตรวจสภาพรถ และต่อทะเบียน
 - [LandsMaps (ระบบค้นหารูปแปลงที่ดิน กรมที่ดิน)](https://landsmaps.dol.go.th/): ค้นหาตำแหน่งแปลงที่ดิน ตรวจสอบแนวเขต ระวางที่ดิน ราคาประเมินทุนทรัพย์ และภาษีที่ดิน
 
+### 11. 📦 เช็กเลขพัสดุด่วน (Quick Parcel Tracking)
+ระบบตรวจสอบสถานะพัสดุรวมศูนย์ รองรับผู้ให้บริการขนส่งชั้นนำในไทย กรอกหมายเลขพัสดุแล้วกด **"ติดตามพัสดุ"** เพื่อเปิดแท็บใหม่ไปยังหน้าระบบติดตามของขนส่งนั้นๆ พร้อมแนบหมายเลขพัสดุใน URL โดยอัตโนมัติ:
+- **ไปรษณีย์ไทย (Thailand Post)**: `https://track.thailandpost.co.th/?trackNumber={TRACK_NO}`
+- **Flash Express (แฟลช เอ็กซ์เพรส)**: `https://www.flashexpress.co.th/tracking/?se={TRACK_NO}`
+- **J&T Express (เจแอนด์ที เอ็กซ์เพรส)**: `https://www.jtexpress.co.th/service/track?bills={TRACK_NO}`
+- **Kerry Express / KEX (เคอรี่ เอ็กซ์เพรส)**: `https://th.kerexpress.com/th/track/?track={TRACK_NO}`
+- **SPX Express (Shopee Xpress)**: `https://spx.co.th/m/track?tracking_number={TRACK_NO}`
+- **ฟังก์ชันเสริม**: รองรับปุ่มวางเลขพัสดุจากคลิปบอร์ด (Clipboard Paste), บันทึกประวัติการค้นหาล่าสุดในเครื่อง (Search History), และหน้าต่างป๊อปอัป Modal เช็กพัสดุได้จากทุกหน้าจอ
+
 ---
 
 ## 📱 วิธีติดตั้งลงหน้าจอมือถือ (PWA Installation Guide)
@@ -128,6 +137,7 @@ one-stop-service/
 │   └── animations.css      # เอฟเฟกต์การเคลื่อนไหว Micro-interactions
 ├── js/
 │   ├── app.js              # ระบบค้นหา, ตัวกรองหมวดหมู่, ปักหมุด Favorite, Theme Switch
+│   ├── tracking.js         # ระบบเช็กเลขพัสดุด่วน เชื่อมต่อขนส่งไทย & บันทึกประวัติ
 │   ├── services-data.js    # ข้อมูลบริการ ลิงก์ และเบอร์โทรฉุกเฉินทั้งหมด
 │   ├── smart-home.js       # ระบบควบคุมไฟบ้านจำลอง + iHITEK Launcher
 │   ├── emergency.js        # ระบบสายด่วนฉุกเฉิน ไซเรน SOS และแชร์ GPS
@@ -142,6 +152,7 @@ one-stop-service/
 ---
 
 ## 🛠️ การเปิดใช้งานและ Push ขึ้น GitHub
+
 
 ### คำสั่ง Git สำหรับ Push ขึ้น Repository
 

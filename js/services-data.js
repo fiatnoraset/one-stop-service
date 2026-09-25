@@ -448,6 +448,55 @@ const services = [
     color: 'orange',
     badge: 'ส่งฟรีทั่วไทย'
   },
+  {
+    id: 'parcel-tracking-hub',
+    categoryId: 'shopping',
+    name: 'เช็กเลขพัสดุด่วน (Parcel Tracking)',
+    nameEn: 'Quick Parcel Tracking Hub',
+    description: 'ระบบติดตามสถานะพัสดุและตรวจสอบหมายเลขพัสดุทุกค่าย ไปรษณีย์ไทย, Flash Express, J&T Express, Kerry/KEX และ SPX',
+    url: '#parcel-tracking-section',
+    icon: 'package',
+    color: 'emerald',
+    badge: 'เช็กพัสดุด่วน',
+    isInteractiveModal: true,
+    subServices: [
+      {
+        name: 'ไปรษณีย์ไทย (Thailand Post Track & Trace)',
+        url: 'https://track.thailandpost.co.th/',
+        desc: 'ติดตามพัสดุ EMS, ลงทะเบียน, พัสดุในประเทศและต่างประเทศ',
+        icon: 'mail',
+        color: '#ed1c24'
+      },
+      {
+        name: 'Flash Express (แฟลช เอ็กซ์เพรส)',
+        url: 'https://www.flashexpress.co.th/tracking/',
+        desc: 'เช็กพัสดุด่วน Flash Express เช็กสถานะการจัดส่งแบบเรียลไทม์',
+        icon: 'zap',
+        color: '#ffcc00'
+      },
+      {
+        name: 'J&T Express (เจแอนด์ที เอ็กซ์เพรส)',
+        url: 'https://www.jtexpress.co.th/service/track',
+        desc: 'ตรวจสอบสถานะพัสดุ J&T Express ขนส่ง 365 วันทั่วประเทศ',
+        icon: 'truck',
+        color: '#e60012'
+      },
+      {
+        name: 'Kerry Express / KEX (เคอรี่ เอ็กซ์เพรส)',
+        url: 'https://th.kerexpress.com/th/track/',
+        desc: 'ติดตามสถานะพัสดุด่วน KEX และ Kerry Express ตลอด 24 ชั่วโมง',
+        icon: 'package-check',
+        color: '#ff6600'
+      },
+      {
+        name: 'SPX Express (Shopee Xpress)',
+        url: 'https://spx.co.th/',
+        desc: 'ระบบติดตามพัสดุ Shopee Xpress สำหรับคำสั่งซื้อบน Shopee',
+        icon: 'shopping-bag',
+        color: '#ee4d2d'
+      }
+    ]
+  },
 
   // --- เมนูตลาดหุ้น & การเงิน (Stock Market & Finance) ---
   {

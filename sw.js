@@ -1,4 +1,4 @@
-const CACHE_NAME = 'oss-cache-v1';
+const CACHE_NAME = 'oss-cache-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -6,6 +6,7 @@ const ASSETS_TO_CACHE = [
   './css/style.css',
   './css/animations.css',
   './js/app.js',
+  './js/tracking.js',
   './js/services-data.js',
   './js/smart-home.js',
   './js/emergency.js',

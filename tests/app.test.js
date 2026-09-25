@@ -93,6 +93,7 @@ const requiredFiles = [
   '../js/smart-home.js',
   '../js/emergency.js',
   '../js/financial.js',
+  '../js/tracking.js',
   '../README.md'
 ];
 
@@ -100,6 +101,7 @@ requiredFiles.forEach(file => {
   const fp = path.join(__dirname, file);
   assert.ok(fs.existsSync(fp), `File ${file} must exist`);
 });
+
 // 7. Test Favorites Section and Elements in index.html
 const indexHtmlContent = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
 assert.ok(indexHtmlContent.includes('id="favorites-section"'), 'index.html must contain #favorites-section');
@@ -107,4 +109,40 @@ assert.ok(indexHtmlContent.includes('id="favorites-grid"'), 'index.html must con
 assert.ok(indexHtmlContent.includes('id="favorites-count-badge"'), 'index.html must contain #favorites-count-badge');
 console.log('✅ Favorites section (#favorites-section, #favorites-grid) verified in index.html');
 
+// 8. Test Quick Parcel Tracking Controller & Carriers
+const { COURIERS, ParcelTracker } = require('../js/tracking.js');
+assert.ok(COURIERS, 'COURIERS dictionary must exist in js/tracking.js');
+assert.ok(ParcelTracker, 'ParcelTracker controller must exist');
+
+// Validate mandatory 4 couriers
+const expectedCouriers = {
+  thailandpost: 'https://track.thailandpost.co.th/?trackNumber=',
+  flash: 'https://www.flashexpress.co.th/tracking/?se=',
+  jtexpress: 'https://www.jtexpress.co.th/service/track?bills=',
+  kerry: 'https://th.kerexpress.com/th/track/?track='
+};
+
+for (const [courierKey, baseTrackUrl] of Object.entries(expectedCouriers)) {
+  const courier = COURIERS[courierKey];
+  assert.ok(courier, `Courier ${courierKey} must be defined in COURIERS`);
+  
+  const testTrackNo = 'TEST123456TH';
+  const generatedUrl = ParcelTracker.getTrackingUrl(courierKey, testTrackNo);
+  assert.ok(generatedUrl.includes(testTrackNo), `Generated URL must include tracking number for ${courierKey}`);
+  assert.ok(generatedUrl.startsWith(baseTrackUrl), `Generated URL for ${courierKey} must start with ${baseTrackUrl}`);
+  console.log(`  ✓ Verified courier ${courier.name}: ${generatedUrl}`);
+}
+
+// 9. Test Parcel Tracking Elements in index.html
+assert.ok(indexHtmlContent.includes('id="parcel-tracking-section"'), 'index.html must contain #parcel-tracking-section');
+assert.ok(indexHtmlContent.includes('id="tracking-courier-select"'), 'index.html must contain #tracking-courier-select');
+assert.ok(indexHtmlContent.includes('id="tracking-number-input"'), 'index.html must contain #tracking-number-input');
+assert.ok(indexHtmlContent.includes('id="btn-track-parcel"'), 'index.html must contain #btn-track-parcel');
+assert.ok(indexHtmlContent.includes('id="parcel-tracking-modal"'), 'index.html must contain #parcel-tracking-modal');
+assert.ok(indexHtmlContent.includes('id="modal-tracking-courier-select"'), 'index.html must contain #modal-tracking-courier-select');
+assert.ok(indexHtmlContent.includes('id="modal-tracking-number-input"'), 'index.html must contain #modal-tracking-number-input');
+assert.ok(indexHtmlContent.includes('js/tracking.js'), 'index.html must load js/tracking.js');
+console.log('✅ Quick Parcel Tracking section and modal elements verified in index.html');
+
 console.log('\n🎉 All test cases passed successfully!');
+

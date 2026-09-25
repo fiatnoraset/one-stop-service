@@ -24,6 +24,7 @@ const App = {
     this.initEventListeners();
     this.initPWA();
     if (window.FinancialManager) FinancialManager.init();
+    if (window.ParcelTracker) ParcelTracker.init();
     if (window.lucide) lucide.createIcons();
   },
 
@@ -477,10 +478,12 @@ const App = {
       const subModal = document.getElementById('sub-services-modal');
       const smartModal = document.getElementById('smart-home-modal');
       const billModal = document.getElementById('bill-calc-modal');
+      const trackModal = document.getElementById('parcel-tracking-modal');
 
       if (e.target === subModal) this.closeSubServicesModal();
       if (e.target === smartModal && window.SmartHomeManager) SmartHomeManager.closeSmartHomeModal();
       if (e.target === billModal) this.closeBillCalcModal();
+      if (e.target === trackModal && window.ParcelTracker) ParcelTracker.closeTrackingModal();
     });
 
     // Escape key closes modals
@@ -489,6 +492,7 @@ const App = {
         this.closeSubServicesModal();
         if (window.SmartHomeManager) SmartHomeManager.closeSmartHomeModal();
         this.closeBillCalcModal();
+        if (window.ParcelTracker) ParcelTracker.closeTrackingModal();
       }
     });
   },
