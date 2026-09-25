@@ -144,5 +144,14 @@ assert.ok(indexHtmlContent.includes('id="modal-tracking-number-input"'), 'index.
 assert.ok(indexHtmlContent.includes('js/tracking.js'), 'index.html must load js/tracking.js');
 console.log('✅ Quick Parcel Tracking section and modal elements verified in index.html');
 
+// 10. Test Clean Dashboard elements (Market Ticker & Emergency Modal)
+assert.ok(indexHtmlContent.includes('id="emergency-modal"'), 'index.html must contain #emergency-modal');
+assert.ok(indexHtmlContent.includes('id="set-index-val"'), 'index.html must contain #set-index-val');
+assert.ok(indexHtmlContent.includes('id="gold-sell-val"'), 'index.html must contain #gold-sell-val');
+assert.ok(indexHtmlContent.includes('id="oil-95-val"'), 'index.html must contain #oil-95-val');
+assert.ok(indexHtmlContent.includes('id="usd-thb-val"'), 'index.html must contain #usd-thb-val');
+console.log('✅ Clean Dashboard Ticker & Emergency modal verified in index.html');
+
 console.log('\n🎉 All test cases passed successfully!');
+
 

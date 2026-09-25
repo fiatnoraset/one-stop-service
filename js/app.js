@@ -107,18 +107,20 @@ const App = {
     if (window.lucide) lucide.createIcons();
   },
 
-  // Reusable Card Component
+  // Reusable Compact Card Component (Clean Modern Dashboard Design)
   renderCard: function(item) {
     const isFav = this.favorites.includes(item.id);
-    const favIconFill = isFav ? 'fill-amber-400 text-amber-400' : 'text-slate-400 hover:text-amber-400';
+    const favIconFill = isFav ? 'fill-amber-400 text-amber-400' : 'text-slate-300 dark:text-slate-600 hover:text-amber-400';
     const favTitle = isFav ? 'คลิกเพื่อนำออกจากรายการโปรด' : 'คลิกเพื่อปักหมุดบริการโปรด';
     const hasSubServices = item.subServices && item.subServices.length > 0;
     
     let clickAction = '';
     if (item.isSmartHome) {
-      clickAction = `onclick="SmartHomeManager.launchApp()"`;
+      clickAction = `onclick="SmartHomeManager.openSmartHomeModal()"`;
     } else if (item.isEmergencyHub) {
-      clickAction = `onclick="App.scrollToEmergency()"`;
+      clickAction = `onclick="EmergencyManager.openEmergencyModal()"`;
+    } else if (item.id === 'parcel-tracking-hub') {
+      clickAction = `onclick="ParcelTracker.openTrackingModal()"`;
     } else if (hasSubServices) {
       clickAction = `onclick="App.openSubServicesModal('${item.id}')"`;
     } else {
@@ -126,41 +128,41 @@ const App = {
     }
 
     return `
-      <div class="service-card group relative bg-white dark:bg-slate-800/90 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-700/80 shadow-sm hover:shadow-xl hover:border-emerald-500/50 dark:hover:border-emerald-400/50 transition-all duration-300 flex flex-col justify-between cursor-pointer" ${clickAction}>
+      <div class="service-card group relative bg-white dark:bg-slate-800/90 rounded-2xl p-4 sm:p-5 border border-slate-200/80 dark:border-slate-700/70 shadow-sm hover:shadow-md hover:border-emerald-500/40 dark:hover:border-emerald-400/40 transition-all duration-200 flex flex-col justify-between cursor-pointer" ${clickAction}>
         
         <div>
           <!-- Top Header in Card -->
-          <div class="flex items-start justify-between gap-3 mb-3.5">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/10 to-teal-500/20 dark:from-emerald-500/20 dark:to-teal-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform duration-300">
-              <i data-lucide="${item.icon}" class="w-6 h-6"></i>
+          <div class="flex items-start justify-between gap-2.5 mb-2.5">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <i data-lucide="${item.icon}" class="w-5 h-5"></i>
             </div>
 
-            <div class="flex items-center gap-1.5">
+            <div class="flex items-center gap-1">
               ${item.badge ? `
-                <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-50 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-800">
                   ${item.badge}
                 </span>
               ` : ''}
-              <button type="button" onclick="App.toggleFavorite('${item.id}', event)" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors" title="${favTitle}">
+              <button type="button" onclick="App.toggleFavorite('${item.id}', event)" class="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors" title="${favTitle}">
                 <i data-lucide="star" class="w-4 h-4 ${favIconFill}"></i>
               </button>
             </div>
           </div>
 
           <!-- Title & Description -->
-          <h3 class="text-base font-semibold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+          <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-snug">
             ${item.name}
           </h3>
-          <p class="text-xs text-slate-400 dark:text-slate-500 font-medium mb-2">${item.nameEn}</p>
+          <p class="text-[11px] text-slate-400 dark:text-slate-500 font-medium mb-1.5 truncate">${item.nameEn}</p>
           <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
             ${item.description}
           </p>
         </div>
 
         <!-- Bottom Action Buttons -->
-        <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
-          <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-            ${hasSubServices ? 'เลือกบริการย่อย' : (item.isSmartHome ? 'เปิดแอป / ควบคุม' : 'เข้าใช้งาน')}
+        <div class="mt-3.5 pt-2.5 border-t border-slate-100 dark:border-slate-700/50 flex items-center justify-between">
+          <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+            ${hasSubServices ? 'เลือกบริการ' : (item.isSmartHome ? 'ควบคุมไฟ' : 'เข้าใช้งาน')}
             <i data-lucide="${hasSubServices ? 'chevron-right' : 'external-link'}" class="w-3.5 h-3.5"></i>
           </span>
 
@@ -207,17 +209,17 @@ const App = {
     if (favItems.length === 0) {
       if (this.favorites.length === 0) {
         grid.innerHTML = `
-          <div class="col-span-full p-6 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 text-center space-y-2">
-            <div class="w-10 h-10 rounded-full bg-amber-50 dark:bg-amber-950/50 text-amber-500 flex items-center justify-center mx-auto">
-              <i data-lucide="star" class="w-5 h-5"></i>
+          <div class="col-span-full p-4 sm:p-5 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 text-center space-y-1">
+            <div class="w-8 h-8 rounded-full bg-amber-50 dark:bg-amber-950/50 text-amber-500 flex items-center justify-center mx-auto">
+              <i data-lucide="star" class="w-4 h-4"></i>
             </div>
-            <h4 class="text-sm font-semibold text-slate-700 dark:text-slate-200">ยังไม่มีบริการโปรดที่ปักหมุดไว้</h4>
-            <p class="text-xs text-slate-500 dark:text-slate-400">กดไอคอนรูปดาว ⭐ ที่มุมขวาบนของการ์ดบริการ เพื่อนำมาปักหมุดไว้ที่นี่</p>
+            <h4 class="text-xs font-semibold text-slate-700 dark:text-slate-200">ยังไม่มีบริการโปรดที่ปักหมุดไว้</h4>
+            <p class="text-[11px] text-slate-400">กดไอคอนรูปดาว ⭐ บนการ์ดบริการเพื่อปักหมุดไว้ที่นี่</p>
           </div>
         `;
       } else {
         grid.innerHTML = `
-          <div class="col-span-full p-4 rounded-xl bg-slate-100/60 dark:bg-slate-800/40 text-center text-xs text-slate-500 dark:text-slate-400">
+          <div class="col-span-full p-3.5 rounded-xl bg-slate-100/60 dark:bg-slate-800/40 text-center text-xs text-slate-500 dark:text-slate-400">
             ไม่พบบริการโปรดที่ตรงกับคำค้นหา "${this.searchQuery}"
           </div>
         `;
@@ -228,7 +230,7 @@ const App = {
     grid.innerHTML = favItems.map(item => this.renderCard(item)).join('');
   },
 
-  // Category Tabs
+  // Category Tabs (Scrollable Horizontal Pill Tabs)
   initCategories: function() {
     const container = document.getElementById('category-pills');
     if (!container || !categories) return;
@@ -236,13 +238,13 @@ const App = {
     container.innerHTML = categories.map(cat => {
       const isActive = cat.id === this.currentCategory;
       const activeClass = isActive 
-        ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/20 active-pill' 
-        : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700';
+        ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-500/25 active-pill font-bold' 
+        : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/80 border border-slate-200/80 dark:border-slate-700';
 
       return `
         <button onclick="App.selectCategory('${cat.id}')" 
-                class="category-pill flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap ${activeClass}">
-          <i data-lucide="${cat.icon}" class="w-4 h-4"></i>
+                class="category-pill flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-medium transition-all duration-150 whitespace-nowrap ${activeClass}">
+          <i data-lucide="${cat.icon}" class="w-3.5 h-3.5"></i>
           <span>${cat.name}</span>
         </button>
       `;
@@ -289,12 +291,12 @@ const App = {
 
     if (filtered.length === 0) {
       grid.innerHTML = `
-        <div class="col-span-full py-12 text-center">
-          <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
-            <i data-lucide="search-x" class="w-8 h-8"></i>
+        <div class="col-span-full py-10 text-center">
+          <div class="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-400">
+            <i data-lucide="search-x" class="w-6 h-6"></i>
           </div>
-          <h3 class="text-lg font-medium text-slate-800 dark:text-slate-200">ไม่พบรายการที่ค้นหา</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">ลองพิมพ์คำค้นหาใหม่อีกครั้ง เช่น ข่าว, grab, สั่งอาหาร, ค่าไฟ</p>
+          <h3 class="text-sm font-semibold text-slate-800 dark:text-slate-200">ไม่พบรายการที่ค้นหา</h3>
+          <p class="text-xs text-slate-400 mt-0.5">ลองพิมพ์คำค้นหาใหม่อีกครั้ง เช่น ข่าว, grab, ค่าไฟ, รัฐบาล</p>
         </div>
       `;
       if (window.lucide) lucide.createIcons();
@@ -305,31 +307,31 @@ const App = {
     if (window.lucide) lucide.createIcons();
   },
 
-  // Emergency Hotlines rendering
+  // Emergency Hotlines rendering (Used in Emergency Modal & Section)
   renderEmergencyHotlines: function() {
     const listEl = document.getElementById('emergency-hotlines-list');
     if (!listEl || !emergencyNumbers) return;
 
     listEl.innerHTML = emergencyNumbers.map(item => `
-      <div class="bg-white dark:bg-slate-800/90 rounded-xl p-4 border border-red-100 dark:border-red-950/50 hover:border-red-400 dark:hover:border-red-500 shadow-sm transition-all duration-200 flex items-center justify-between gap-3">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0">
-            <i data-lucide="${item.icon}" class="w-5 h-5"></i>
+      <div class="bg-white dark:bg-slate-800/90 rounded-xl p-3 sm:p-3.5 border border-red-100 dark:border-red-950/50 hover:border-red-400 dark:hover:border-red-500 shadow-sm transition-all flex items-center justify-between gap-2.5">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-9 h-9 rounded-xl bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0">
+            <i data-lucide="${item.icon}" class="w-4 h-4"></i>
           </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="text-base font-bold text-red-600 dark:text-red-400 tracking-wide">${item.number}</span>
-              <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-medium">${item.badge}</span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="text-sm font-bold text-red-600 dark:text-red-400 font-mono">${item.number}</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-medium truncate">${item.badge}</span>
             </div>
-            <h4 class="text-xs font-semibold text-slate-800 dark:text-slate-100 mt-0.5">${item.name}</h4>
-            <p class="text-[11px] text-slate-400">${item.dept}</p>
+            <h4 class="text-xs font-semibold text-slate-800 dark:text-slate-100 truncate">${item.name}</h4>
+            <p class="text-[10px] text-slate-400 truncate">${item.dept}</p>
           </div>
         </div>
 
         <button onclick="EmergencyManager.callNumber('${item.number}', '${item.name}')" 
-                class="px-3.5 py-2 rounded-lg bg-red-600 hover:bg-red-700 active:scale-95 text-white text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-red-500/20 shrink-0 transition-transform">
-          <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
-          <span>โทรออก</span>
+                class="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 active:scale-95 text-white text-xs font-semibold flex items-center gap-1 shadow-sm shrink-0 transition-transform">
+          <i data-lucide="phone-call" class="w-3 h-3"></i>
+          <span>โทร</span>
         </button>
       </div>
     `).join('');
@@ -355,25 +357,27 @@ const App = {
         let action = '';
         if (sub.isInteractiveModal && sub.url === '#bill-calc-modal') {
           action = `onclick="App.closeSubServicesModal(); App.openBillCalcModal();"`;
+        } else if (sub.isInteractiveModal && sub.url === '#parcel-tracking-modal') {
+          action = `onclick="App.closeSubServicesModal(); ParcelTracker.openTrackingModal();"`;
         } else {
           action = `onclick="App.launchExternalUrl('${sub.url}')"`;
         }
 
         return `
-          <div ${action} class="group p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-emerald-400 bg-white dark:bg-slate-800 hover:bg-emerald-50/40 dark:hover:bg-emerald-950/20 transition-all duration-200 cursor-pointer flex items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
-                <i data-lucide="${sub.icon || 'external-link'}" class="w-5 h-5"></i>
+          <div ${action} class="group p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-emerald-400 bg-white dark:bg-slate-800 hover:bg-emerald-50/40 dark:hover:bg-emerald-950/20 transition-all duration-150 cursor-pointer flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-105 transition-transform shrink-0">
+                <i data-lucide="${sub.icon || 'external-link'}" class="w-4 h-4"></i>
               </div>
-              <div>
-                <h4 class="text-sm font-semibold text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+              <div class="min-w-0">
+                <h4 class="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors truncate">
                   ${sub.name}
                 </h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">${sub.desc}</p>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 truncate">${sub.desc}</p>
               </div>
             </div>
-            <div class="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 group-hover:bg-emerald-600 group-hover:text-white transition-colors shrink-0">
-              <i data-lucide="${sub.isInteractiveModal ? 'calculator' : 'external-link'}" class="w-4 h-4"></i>
+            <div class="p-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 group-hover:bg-emerald-600 group-hover:text-white transition-colors shrink-0">
+              <i data-lucide="${sub.isInteractiveModal ? 'calculator' : 'external-link'}" class="w-3.5 h-3.5"></i>
             </div>
           </div>
         `;
@@ -441,6 +445,14 @@ const App = {
   launchExternalUrl: function(url) {
     if (!url) return;
     if (url.startsWith('#')) {
+      if (url === '#emergency-section') {
+        this.scrollToEmergency();
+        return;
+      }
+      if (url === '#parcel-tracking-section' && window.ParcelTracker) {
+        ParcelTracker.openTrackingModal();
+        return;
+      }
       const target = document.querySelector(url);
       if (target) target.scrollIntoView({ behavior: 'smooth' });
       return;
@@ -449,6 +461,10 @@ const App = {
   },
 
   scrollToEmergency: function() {
+    if (window.EmergencyManager && typeof EmergencyManager.openEmergencyModal === 'function') {
+      EmergencyManager.openEmergencyModal();
+      return;
+    }
     const el = document.getElementById('emergency-section');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -473,17 +489,31 @@ const App = {
       billUnitsInput.addEventListener('input', () => this.calculateBill());
     }
 
+    // Keyboard shortcut (Ctrl+K or /) to focus search
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey && e.key.toLowerCase() === 'k') || (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'SELECT')) {
+        e.preventDefault();
+        const s = document.getElementById('global-search-input');
+        if (s) {
+          s.focus();
+          s.select();
+        }
+      }
+    });
+
     // Close modals on clicking backdrop
     window.addEventListener('click', (e) => {
       const subModal = document.getElementById('sub-services-modal');
       const smartModal = document.getElementById('smart-home-modal');
       const billModal = document.getElementById('bill-calc-modal');
       const trackModal = document.getElementById('parcel-tracking-modal');
+      const emergencyModal = document.getElementById('emergency-modal');
 
       if (e.target === subModal) this.closeSubServicesModal();
       if (e.target === smartModal && window.SmartHomeManager) SmartHomeManager.closeSmartHomeModal();
       if (e.target === billModal) this.closeBillCalcModal();
       if (e.target === trackModal && window.ParcelTracker) ParcelTracker.closeTrackingModal();
+      if (e.target === emergencyModal && window.EmergencyManager) EmergencyManager.closeEmergencyModal();
     });
 
     // Escape key closes modals
@@ -493,6 +523,7 @@ const App = {
         if (window.SmartHomeManager) SmartHomeManager.closeSmartHomeModal();
         this.closeBillCalcModal();
         if (window.ParcelTracker) ParcelTracker.closeTrackingModal();
+        if (window.EmergencyManager) EmergencyManager.closeEmergencyModal();
       }
     });
   },
@@ -503,7 +534,7 @@ const App = {
     if (!container) return;
 
     const toast = document.createElement('div');
-    toast.className = 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs sm:text-sm font-medium px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 transform transition-all duration-300 translate-y-2 opacity-0';
+    toast.className = 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs sm:text-sm font-medium px-3.5 py-2 rounded-xl shadow-xl flex items-center gap-2 transform transition-all duration-200 translate-y-2 opacity-0';
     toast.innerHTML = `
       <i data-lucide="info" class="w-4 h-4 text-emerald-400 dark:text-emerald-600 shrink-0"></i>
       <span>${message}</span>
@@ -518,8 +549,8 @@ const App = {
 
     setTimeout(() => {
       toast.classList.add('translate-y-2', 'opacity-0');
-      setTimeout(() => toast.remove(), 300);
-    }, 3000);
+      setTimeout(() => toast.remove(), 250);
+    }, 2800);
   },
 
   // PWA Support

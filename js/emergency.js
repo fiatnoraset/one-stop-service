@@ -130,6 +130,26 @@ const EmergencyManager = {
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
+  },
+
+  // Open/Close Emergency SOS Modal
+  openEmergencyModal: function() {
+    const modal = document.getElementById('emergency-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      if (window.lucide) lucide.createIcons();
+    }
+  },
+
+  closeEmergencyModal: function() {
+    const modal = document.getElementById('emergency-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
   }
 };
 

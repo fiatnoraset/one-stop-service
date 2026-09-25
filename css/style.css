@@ -21,39 +21,51 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar */
+/* Custom Sleek Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(156, 163, 175, 0.4);
+  background: rgba(148, 163, 184, 0.35);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(107, 114, 128, 0.7);
+  background: rgba(100, 116, 139, 0.6);
 }
 
 /* Glassmorphism Styles */
 .glass-header {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 .dark .glass-header {
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(15, 23, 42, 0.9);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 .dark .glass-card {
-  background: rgba(30, 41, 59, 0.8);
+  background: rgba(30, 41, 59, 0.85);
+}
+
+/* Modern Dashboard Clean Cards */
+.service-card {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+.service-card:hover {
+  transform: translateY(-2px);
+}
+.service-card:active {
+  transform: translateY(0) scale(0.99);
 }
 
 /* Active Category Pill Animation */
@@ -61,25 +73,30 @@ body {
   transform: translateY(-1px);
 }
 
-/* Service Card Hover */
-.service-card {
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.service-card:hover {
-  transform: translateY(-3px);
-}
-.service-card:active {
-  transform: translateY(0) scale(0.98);
-}
-
 /* Range input styling for Smart Home Light slider */
 input[type="range"] {
   accent-color: #059669;
 }
 
-/* Responsive Touch Target sizing for Mobile */
+/* Floating Action Dock */
+.floating-dock {
+  animation: floatUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Touch targets optimization */
 @media (max-width: 640px) {
-  button, a {
+  button, a, input, select {
     min-height: 38px;
   }
 }

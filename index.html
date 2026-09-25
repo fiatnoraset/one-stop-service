@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta name="theme-color" content="#059669">
-  <meta name="description" content="One Stop Service (วันสต็อปเซอร์วิส) - ศูนย์รวมบริการออนไลน์ ข่าว สั่งอาหาร เรียกรถ จ่ายค่าไฟ ตลาดหุ้น เปิดปิดไฟบ้าน และแจ้งเหตุฉุกเฉิน ใช้งานได้ทันทีบนทุกอุปกรณ์">
+  <meta name="description" content="One Stop Service (วันสต็อปเซอร์วิส) - ศูนย์รวมบริการออนไลน์ ข่าว สั่งอาหาร เรียกรถ จ่ายค่าไฟ ตลาดหุ้น เปิดปิดไฟบ้าน พัสดุ และแจ้งเหตุฉุกเฉิน ใช้งานได้ทันทีบนทุกอุปกรณ์">
   <meta name="author" content="One Stop Service Team">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -37,11 +37,6 @@
               800: '#065f46',
               900: '#064e3b',
               950: '#022c22',
-            },
-            accent: {
-              gold: '#f59e0b',
-              sky: '#0284c7',
-              rose: '#f43f5e',
             }
           },
           fontFamily: {
@@ -61,31 +56,31 @@
   <link rel="stylesheet" href="css/animations.css">
 </head>
 
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300 antialiased selection:bg-emerald-500 selection:text-white">
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200 antialiased selection:bg-emerald-500 selection:text-white">
 
   <!-- Toast Notification Container -->
   <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none max-w-sm w-full px-4"></div>
 
   <!-- Top Sticky Navigation Bar -->
   <header class="sticky top-0 z-40 glass-header border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-3">
       
       <!-- Brand Logo & Title -->
-      <a href="index.html" class="flex items-center gap-3 group shrink-0">
-        <div class="relative w-10 h-10 rounded-full overflow-hidden border-2 border-emerald-500/80 shadow-md group-hover:scale-105 transition-transform duration-300">
+      <a href="index.html" class="flex items-center gap-2.5 group shrink-0">
+        <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl overflow-hidden border border-emerald-500/50 shadow-sm group-hover:scale-105 transition-transform duration-200">
           <img src="assets/logo.png" alt="One Stop Service Logo" class="w-full h-full object-cover">
         </div>
         <div>
           <div class="flex items-center gap-1.5">
-            <span class="font-bold text-lg text-slate-900 dark:text-white tracking-tight leading-none group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">One Stop Service</span>
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-semibold uppercase">Hub</span>
+            <span class="font-bold text-base sm:text-lg text-slate-900 dark:text-white tracking-tight leading-none group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">One Stop Service</span>
+            <span class="text-[9px] sm:text-[10px] px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-bold uppercase">Hub</span>
           </div>
-          <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">วันสต็อปเซอร์วิส รวมทุกบริการ</p>
+          <p class="text-[10px] sm:text-[11px] text-slate-400 font-medium hidden xs:block">ศูนย์รวมบริการดิจิทัลไทย</p>
         </div>
       </a>
 
       <!-- Quick Date & Live Status (Desktop/Tablet) -->
-      <div class="hidden md:flex items-center gap-4 text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100/80 dark:bg-slate-800/80 px-3.5 py-1.5 rounded-full border border-slate-200/60 dark:border-slate-700/60">
+      <div class="hidden lg:flex items-center gap-3 text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100/80 dark:bg-slate-800/80 px-3 py-1 rounded-full border border-slate-200/60 dark:border-slate-700/60">
         <div class="flex items-center gap-1.5">
           <i data-lucide="calendar" class="w-3.5 h-3.5 text-emerald-500"></i>
           <span id="current-date">กำลังโหลด...</span>
@@ -97,464 +92,443 @@
         </div>
       </div>
 
-      <!-- Action Buttons (Emergency Direct, PWA Install, Theme Switch) -->
-      <div class="flex items-center gap-2">
+      <!-- Action Buttons (Emergency Direct, Parcel Tracking, Smart Home, Theme Switch) -->
+      <div class="flex items-center gap-1.5 sm:gap-2">
         <!-- Emergency SOS Button -->
-        <button onclick="App.scrollToEmergency()" 
-                class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white text-xs font-bold flex items-center gap-1.5 shadow-md shadow-red-500/25 transition-all">
-          <i data-lucide="shield-alert" class="w-4 h-4 animate-pulse"></i>
-          <span class="hidden xs:inline">แจ้งเหตุด่วน</span>
+        <button onclick="EmergencyManager.openEmergencyModal()" 
+                class="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white text-xs font-bold flex items-center gap-1 shadow-sm shadow-red-500/20 transition-all">
+          <i data-lucide="shield-alert" class="w-3.5 h-3.5 animate-pulse"></i>
+          <span class="hidden sm:inline">แจ้งเหตุด่วน</span>
           <span>191 / 1669</span>
         </button>
 
-        <!-- Parcel Tracking Quick Button -->
+        <!-- Parcel Tracking Quick Header Button -->
         <button onclick="ParcelTracker.openTrackingModal()" 
-                class="p-2 sm:px-3 sm:py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                class="p-2 sm:px-2.5 sm:py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1 transition-colors"
                 title="เช็กเลขพัสดุด่วน">
-          <i data-lucide="package" class="w-4 h-4 text-emerald-500"></i>
-          <span class="hidden sm:inline">เช็กพัสดุ</span>
+          <i data-lucide="package" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
+          <span class="hidden md:inline">เช็กพัสดุ</span>
         </button>
 
         <!-- Smart Home Switch Direct Button -->
         <button onclick="SmartHomeManager.openSmartHomeModal()" 
-                class="p-2 sm:px-3 sm:py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                class="p-2 sm:px-2.5 sm:py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-xs font-semibold flex items-center gap-1 transition-colors"
                 title="แผงควบคุมเปิดปิดไฟบ้าน">
           <i data-lucide="lightbulb" class="w-4 h-4 text-amber-500"></i>
-          <span class="hidden sm:inline">คุมไฟบ้าน</span>
+          <span class="hidden md:inline">คุมไฟบ้าน</span>
         </button>
 
         <!-- Theme Toggle -->
         <button onclick="App.toggleTheme()" 
                 class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 title="เปลี่ยนธีม สว่าง/มืด">
-          <i id="theme-icon" data-lucide="moon" class="w-5 h-5"></i>
+          <i id="theme-icon" data-lucide="moon" class="w-4 h-4 sm:w-5 sm:h-5"></i>
         </button>
       </div>
 
     </div>
   </header>
 
+  <!-- Compact Market Ticker Strip (Single Horizontal Row) -->
+  <section class="border-b border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between gap-3 overflow-x-auto scrollbar-none text-xs">
+      
+      <div class="flex items-center gap-1.5 shrink-0 text-slate-400 font-bold uppercase tracking-wider text-[11px]">
+        <i data-lucide="activity" class="w-3.5 h-3.5 text-emerald-500"></i>
+        <span class="hidden sm:inline">ตลาดวันนี้:</span>
+      </div>
+
+      <div class="flex items-center gap-3 sm:gap-6 shrink-0 font-medium">
+        <!-- SET Index -->
+        <a href="https://www.set.or.th/th/market/index/set/overview" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-1.5 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors group">
+          <span class="font-semibold text-slate-600 dark:text-slate-400">SET</span>
+          <span id="set-index-val" class="font-bold text-slate-900 dark:text-white">1,428.50</span>
+          <span id="set-index-chg" class="font-semibold text-emerald-500 text-[11px]">+8.35 (+0.59%)</span>
+        </a>
+
+        <span class="text-slate-200 dark:text-slate-700">|</span>
+
+        <!-- Gold Price -->
+        <a href="https://www.goldtraders.or.th/" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-1.5 hover:text-amber-600 dark:hover:text-amber-400 transition-colors group">
+          <span class="font-semibold text-slate-600 dark:text-slate-400">ทองแท่ง</span>
+          <span id="gold-sell-val" class="font-bold text-amber-600 dark:text-amber-400">฿41,300</span>
+        </a>
+
+        <span class="text-slate-200 dark:text-slate-700">|</span>
+
+        <!-- Oil Price -->
+        <a href="https://www.pttor.com/th/oil_price" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-1.5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group">
+          <span class="font-semibold text-slate-600 dark:text-slate-400">แก๊สโซฮอล์ 95</span>
+          <span id="oil-95-val" class="font-bold text-slate-900 dark:text-white">฿38.65/L</span>
+        </a>
+
+        <span class="text-slate-200 dark:text-slate-700">|</span>
+
+        <!-- USD Exchange -->
+        <div class="inline-flex items-center gap-1.5">
+          <span class="font-semibold text-slate-600 dark:text-slate-400">USD/THB</span>
+          <span id="usd-thb-val" class="font-bold text-slate-900 dark:text-white">฿36.45</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- PWA Install Banner -->
-  <div id="pwa-install-banner" class="hidden bg-gradient-to-r from-emerald-600 to-teal-700 text-white px-4 py-2.5 text-xs sm:text-sm font-medium shadow-md">
+  <div id="pwa-install-banner" class="hidden bg-gradient-to-r from-emerald-600 to-teal-700 text-white px-4 py-2 text-xs font-medium shadow-sm">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
       <div class="flex items-center gap-2">
-        <i data-lucide="smartphone" class="w-5 h-5 shrink-0 text-amber-300"></i>
+        <i data-lucide="smartphone" class="w-4 h-4 shrink-0 text-amber-300"></i>
         <span>ติดตั้ง One Stop Service ลงบนหน้าจอเพื่อเข้าใช้งานได้ทันทีเหมือนแอปมือถือ</span>
       </div>
       <div class="flex items-center gap-2">
-        <button onclick="App.installPWA()" class="px-3 py-1 bg-white text-emerald-800 rounded-lg font-bold hover:bg-emerald-50 transition-colors shadow-sm">
+        <button onclick="App.installPWA()" class="px-2.5 py-1 bg-white text-emerald-800 rounded-lg font-bold hover:bg-emerald-50 transition-colors shadow-sm">
           ติดตั้งแอป
         </button>
         <button onclick="document.getElementById('pwa-install-banner').classList.add('hidden')" class="p-1 hover:bg-white/20 rounded">
-          <i data-lucide="x" class="w-4 h-4"></i>
+          <i data-lucide="x" class="w-3.5 h-3.5"></i>
         </button>
       </div>
     </div>
   </div>
 
   <!-- Main Content Container -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-6">
 
-    <!-- Hero Section -->
-    <section class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-emerald-600 via-teal-700 to-slate-900 text-white p-6 sm:p-10 shadow-xl">
-      <!-- Background Decorative Circles -->
-      <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-emerald-400/20 blur-3xl pointer-events-none"></div>
-      <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-amber-400/20 blur-3xl pointer-events-none"></div>
-
-      <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-        
-        <div class="space-y-3 text-center md:text-left max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-emerald-200">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            ไม่ต้องล็อกอิน • ใช้งานได้ฟรีทุกอุปกรณ์
-          </div>
-          <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
-            One Stop Service
-            <span class="block text-emerald-300 text-lg sm:text-2xl font-semibold mt-1">
-              รวมทุกบริการยอดนิยมในไทยไว้ในหน้าเดียว
-            </span>
-          </h1>
-          <p class="text-sm sm:text-base text-emerald-100/90 leading-relaxed">
-            เข้าถึงข่าวสาร สั่งอาหาร เรียกรถ จ่ายบิลค่าไฟ สั่งของออนไลน์ ดูตลาดหุ้น เปิดปิดไฟบ้าน iHITEK และสายด่วนฉุกเฉินได้ทันใจ
-          </p>
-
-          <!-- Search Bar -->
-          <div class="pt-2">
-            <div class="relative max-w-xl">
-              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
-                <i data-lucide="search" class="w-5 h-5"></i>
-              </div>
-              <input type="text" 
-                     id="global-search-input"
-                     placeholder="ค้นหาบริการ เช่น ข่าว, grab, สั่งอาหาร, ค่าไฟ, bolt, ช้อปปิ้ง, หุ้น, 191..." 
-                     class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-white/95 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-4 focus:ring-emerald-400/50 shadow-lg border-0 transition-all">
-            </div>
-          </div>
-        </div>
-
-        <!-- Hero Logo Visual Presentation -->
-        <div class="relative shrink-0 text-center">
-          <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-white/10 backdrop-blur-md p-2.5 border-2 border-white/30 shadow-2xl floating-hero-logo mx-auto">
-            <img src="assets/logo.png" alt="One Stop Service App" class="w-full h-full object-contain rounded-2xl drop-shadow-md">
-          </div>
-          <div class="mt-2 text-xs font-semibold text-emerald-200">
-            One Stop Service v2.0
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Real-time Financial & Utility Quick Bar -->
-    <section class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-      <!-- SET Index -->
-      <a href="https://www.set.or.th/th/market/index/set/overview" target="_blank" rel="noopener noreferrer"
-         class="p-3.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:border-emerald-500 transition-all flex flex-col justify-between group">
-        <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-          <span class="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1">
-            <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-500"></i> SET Index
-          </span>
-          <i data-lucide="external-link" class="w-3 h-3 group-hover:text-emerald-500"></i>
-        </div>
-        <div class="mt-1.5 flex items-baseline justify-between gap-1">
-          <span id="set-index-val" class="text-base font-bold text-slate-900 dark:text-white">1,428.50</span>
-          <span id="set-index-chg" class="text-xs font-semibold text-emerald-500">+8.35 (+0.59%)</span>
-        </div>
-      </a>
-
-      <!-- Gold Price -->
-      <a href="https://www.goldtraders.or.th/" target="_blank" rel="noopener noreferrer"
-         class="p-3.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:border-amber-500 transition-all flex flex-col justify-between group">
-        <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-          <span class="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1">
-            <i data-lucide="award" class="w-3.5 h-3.5 text-amber-500"></i> ราคาทองแท่ง (บาท)
-          </span>
-          <i data-lucide="external-link" class="w-3 h-3 group-hover:text-amber-500"></i>
-        </div>
-        <div class="mt-1.5 flex items-baseline justify-between gap-1">
-          <span id="gold-sell-val" class="text-base font-bold text-amber-600 dark:text-amber-400">฿41,300</span>
-          <span class="text-xs text-slate-400">ขายออก</span>
-        </div>
-      </a>
-
-      <!-- Oil Price -->
-      <a href="https://www.pttor.com/th/oil_price" target="_blank" rel="noopener noreferrer"
-         class="p-3.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:border-blue-500 transition-all flex flex-col justify-between group">
-        <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-          <span class="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1">
-            <i data-lucide="droplet" class="w-3.5 h-3.5 text-blue-500"></i> แก๊สโซฮอล์ 95
-          </span>
-          <i data-lucide="external-link" class="w-3 h-3 group-hover:text-blue-500"></i>
-        </div>
-        <div class="mt-1.5 flex items-baseline justify-between gap-1">
-          <span id="oil-95-val" class="text-base font-bold text-slate-900 dark:text-white">฿38.65/L</span>
-          <span class="text-xs text-slate-400">ปตท.</span>
-        </div>
-      </a>
-
-      <!-- USD Exchange -->
-      <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
-        <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-          <span class="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1">
-            <i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-teal-500"></i> อัตราแลกเปลี่ยน
-          </span>
-          <span class="text-[10px] text-slate-400">USD/THB</span>
-        </div>
-        <div class="mt-1.5 flex items-baseline justify-between gap-1">
-          <span id="usd-thb-val" class="text-base font-bold text-slate-900 dark:text-white">฿36.45</span>
-          <span class="text-xs text-emerald-500 font-medium">1 USD</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Section: วิทยาลัยชุมชนยโสธร (Yasothon Community College) -->
-    <section class="rounded-2xl p-4 sm:p-5 bg-gradient-to-r from-indigo-900/90 via-slate-900 to-cyan-950 text-white border border-indigo-500/30 shadow-md">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        
-        <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 border border-indigo-400/40 flex items-center justify-center text-indigo-300 shrink-0">
-            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <h3 class="text-base sm:text-lg font-bold text-white">วิทยาลัยชุมชนยโสธร (Yasothon Community College)</h3>
-              <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-indigo-500/30 text-indigo-200 border border-indigo-400/30">วชช.ยโสธร</span>
-            </div>
-            <p class="text-xs text-slate-300 mt-0.5">ศูนย์บริการข้อมูลการศึกษา เว็บไซต์หลัก และระบบสารสนเทศนักศึกษา</p>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap sm:flex-nowrap items-center gap-2.5 w-full md:w-auto">
-          <!-- Link 1: Official Website -->
-          <a href="https://www.yasocc.ac.th/" target="_blank" rel="noopener noreferrer"
-             class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-md shadow-indigo-500/25 transition-all">
-            <i data-lucide="globe" class="w-4 h-4"></i>
-            <span>เว็บไซต์สถาบัน (yasocc.ac.th)</span>
-            <i data-lucide="external-link" class="w-3 h-3 opacity-70"></i>
-          </a>
-
-          <!-- Link 2: Student Login SSO -->
-          <a href="https://iccs-sso.iccs.ac.th/oAuthBcca?client_id=6&redirect_uri=https%3A%2F%2Ficcs-portal.iccs.ac.th%2FcallbackResponseCode&response_type=code&scope=" target="_blank" rel="noopener noreferrer"
-             class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 active:scale-95 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-md shadow-cyan-500/25 transition-all">
-            <i data-lucide="user-check" class="w-4 h-4"></i>
-            <span>เข้าสู่ระบบนักศึกษา (ICCS SSO)</span>
-            <i data-lucide="external-link" class="w-3 h-3 opacity-70"></i>
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Quick Parcel Tracking Section: เช็กเลขพัสดุด่วน -->
-    <section id="parcel-tracking-section" class="rounded-3xl bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-slate-900/5 dark:from-emerald-950/40 dark:via-slate-900 dark:to-slate-900/90 p-5 sm:p-7 border border-emerald-500/30 dark:border-emerald-500/20 shadow-lg space-y-5 transition-all">
+    <!-- Compact Hero & Centerpiece Search Section -->
+    <section class="space-y-4">
       
-      <!-- Section Header -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shadow-md shadow-emerald-500/30 shrink-0">
-            <i data-lucide="package" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
-                เช็กเลขพัสดุด่วน (Quick Parcel Tracking)
-              </h2>
-              <span class="px-2.5 py-0.5 text-[11px] font-semibold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/90 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
-                รวมทุกขนส่ง
-              </span>
-            </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              กรอกหมายเลขพัสดุ เลือกบริษัทขนส่ง แล้วกดปุ่มติดตามพัสดุเพื่อเปิดหน้าตรวจสอบสถานะทันที
-            </p>
-          </div>
+      <!-- Centerpiece Search Bar -->
+      <div class="max-w-2xl mx-auto text-center space-y-2.5">
+        <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-emerald-100/80 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-[11px] font-semibold">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          ไม่ต้องล็อกอิน • ใช้งานฟรีทุกอุปกรณ์
         </div>
 
-        <button onclick="ParcelTracker.openTrackingModal()" class="self-start sm:self-auto text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1">
-          <span>เปิดแบบหน้าต่างป๊อปอัป</span>
-          <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
-        </button>
-      </div>
+        <h1 class="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+          รวมทุกบริการดิจิทัลยอดนิยมในไทย
+        </h1>
 
-      <!-- Quick Courier Pill Selectors -->
-      <div class="space-y-2">
-        <label class="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-          <i data-lucide="truck" class="w-3.5 h-3.5 text-emerald-500"></i>
-          <span>เลือกบริษัทขนส่ง:</span>
-        </label>
-        <div id="courier-quick-pills" class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-          <!-- Injected via JavaScript -->
-        </div>
-      </div>
-
-      <!-- Tracking Input & Submit Grid Form -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-stretch">
-        
-        <!-- Courier Dropdown Select (3 cols on MD) -->
-        <div class="md:col-span-4 relative">
-          <label for="tracking-courier-select" class="sr-only">เลือกบริษัทขนส่ง</label>
-          <div class="relative">
-            <select id="tracking-courier-select" 
-                    class="w-full h-12 pl-4 pr-10 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-emerald-500 focus:outline-none appearance-none cursor-pointer shadow-sm transition-all">
-              <option value="thailandpost">🔴 ไปรษณีย์ไทย (Thailand Post)</option>
-              <option value="flash">🟡 Flash Express (แฟลช เอ็กซ์เพรส)</option>
-              <option value="jtexpress">🔴 J&T Express (เจแอนด์ที เอ็กซ์เพรส)</option>
-              <option value="kerry">🟠 Kerry Express / KEX (เคอรี่ เอ็กซ์เพรส)</option>
-              <option value="spx">🟧 SPX Express (Shopee Xpress)</option>
-              <option value="ninjavan">🔴 Ninja Van (นินจาแวน ประเทศไทย)</option>
-              <option value="bestexpress">🔵 Best Express (เบสท์ เอ็กซ์เพรส)</option>
-              <option value="dhl">🟡 DHL Express Thailand (ดีเอชแอล)</option>
-            </select>
-            <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
-              <i data-lucide="chevron-down" class="w-4 h-4"></i>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tracking Number Input with Paste Button (6 cols on MD) -->
-        <div class="md:col-span-5 relative">
-          <div class="relative flex items-center">
-            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <i data-lucide="barcode" class="w-5 h-5 text-emerald-500"></i>
+        <!-- Search Input -->
+        <div class="pt-1">
+          <div class="relative group">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-emerald-500 transition-colors">
+              <i data-lucide="search" class="w-5 h-5"></i>
             </div>
             <input type="text" 
-                   id="tracking-number-input" 
-                   placeholder="กรอกเลขพัสดุ เช่น EF123456789TH..." 
-                   class="w-full h-12 pl-11 pr-24 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-mono text-sm uppercase placeholder-slate-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none shadow-sm transition-all"
-                   autocomplete="off"
-                   spellcheck="false">
-            
-            <!-- Paste & Clear Buttons inside input -->
-            <div class="absolute inset-y-0 right-0 pr-2 flex items-center gap-1">
-              <button type="button" 
-                      onclick="ParcelTracker.pasteFromClipboard('section')" 
-                      class="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-[11px] font-semibold flex items-center gap-1 transition-colors"
-                      title="วางเลขพัสดุจากคลิปบอร์ด">
-                <i data-lucide="clipboard" class="w-3 h-3 text-emerald-500"></i>
-                <span class="hidden xs:inline">วางเลข</span>
-              </button>
+                   id="global-search-input"
+                   placeholder="ค้นหาบริการ เช่น ข่าว, grab, ค่าไฟ, รัฐบาล, หุ้น, 191..." 
+                   class="w-full pl-11 pr-20 py-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 shadow-sm group-hover:shadow-md transition-all"
+                   autocomplete="off">
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center gap-1 text-[10px] font-mono text-slate-400 pointer-events-none hidden sm:flex">
+              <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">Ctrl</kbd>
+              <span>+</span>
+              <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">K</kbd>
             </div>
           </div>
         </div>
-
-        <!-- Submit Button (3 cols on MD) -->
-        <div class="md:col-span-3">
-          <button type="button" 
-                  id="btn-track-parcel"
-                  onclick="ParcelTracker.track('section')" 
-                  class="w-full h-12 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 active:scale-95 text-white text-sm font-bold flex items-center justify-center gap-2 shadow-md shadow-emerald-500/25 transition-all">
-            <i data-lucide="search" class="w-4 h-4"></i>
-            <span>ติดตามพัสดุ</span>
-            <i data-lucide="external-link" class="w-3.5 h-3.5 opacity-80"></i>
-          </button>
-        </div>
-
       </div>
 
-      <!-- Quick Sample Numbers & Recent Search History -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 border-t border-slate-200/60 dark:border-slate-800 text-xs">
-        
-        <!-- Sample numbers for testing -->
-        <div class="flex items-center gap-1.5 flex-wrap">
-          <span class="text-[11px] text-slate-400 dark:text-slate-500 font-medium">ตัวอย่างเลข:</span>
-          <button type="button" onclick="ParcelTracker.fillSample('EF123456789TH', 'thailandpost')" class="px-2 py-0.5 rounded-lg bg-red-100/70 dark:bg-red-950/60 text-red-700 dark:text-red-300 text-[11px] font-mono hover:bg-red-200 transition-colors">
-            EF..TH (ไปรษณีย์)
-          </button>
-          <button type="button" onclick="ParcelTracker.fillSample('TH0123456789A', 'flash')" class="px-2 py-0.5 rounded-lg bg-amber-100/70 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-[11px] font-mono hover:bg-amber-200 transition-colors">
-            TH01.. (Flash)
-          </button>
-          <button type="button" onclick="ParcelTracker.fillSample('821234567890', 'jtexpress')" class="px-2 py-0.5 rounded-lg bg-rose-100/70 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 text-[11px] font-mono hover:bg-rose-200 transition-colors">
-            82.. (J&T)
-          </button>
-          <button type="button" onclick="ParcelTracker.fillSample('KEX1234567890', 'kerry')" class="px-2 py-0.5 rounded-lg bg-orange-100/70 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300 text-[11px] font-mono hover:bg-orange-200 transition-colors">
-            KEX.. (Kerry)
-          </button>
+      <!-- Minimalist Yasothon Community College (วชช.ยโสธร) Banner -->
+      <div class="rounded-2xl p-3 sm:p-3.5 bg-gradient-to-r from-indigo-950 via-slate-900 to-cyan-950 text-white border border-indigo-500/30 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5 text-center sm:text-left">
+          <div class="w-8 h-8 rounded-xl bg-indigo-500/20 border border-indigo-400/40 flex items-center justify-center text-indigo-300 shrink-0">
+            <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5 justify-center sm:justify-start">
+              <span class="text-xs sm:text-sm font-bold text-white">วิทยาลัยชุมชนยโสธร (Yasothon Community College)</span>
+              <span class="px-1.5 py-0.2 text-[9px] font-bold rounded bg-indigo-500/30 text-indigo-200">วชช.ยโสธร</span>
+            </div>
+            <p class="text-[11px] text-slate-300 truncate">ศูนย์ข้อมูลการศึกษา & ระบบสารสนเทศนักศึกษา</p>
+          </div>
         </div>
 
-        <!-- Recent Search History Chips -->
-        <div id="tracking-history-chips">
-          <!-- Injected via JavaScript -->
+        <div class="flex items-center gap-2 w-full sm:w-auto shrink-0">
+          <a href="https://www.yasocc.ac.th/" target="_blank" rel="noopener noreferrer"
+             class="flex-1 sm:flex-none px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-sm transition-all">
+            <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+            <span>เว็บสถาบัน (yasocc.ac.th)</span>
+          </a>
+          <a href="https://iccs-sso.iccs.ac.th/oAuthBcca?client_id=6&redirect_uri=https%3A%2F%2Ficcs-portal.iccs.ac.th%2FcallbackResponseCode&response_type=code&scope=" target="_blank" rel="noopener noreferrer"
+             class="flex-1 sm:flex-none px-3 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 active:scale-95 text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-sm transition-all">
+            <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
+            <span>เข้าสู่ระบบนักศึกษา (ICCS SSO)</span>
+          </a>
         </div>
-
       </div>
 
     </section>
 
-    <!-- Category Filters Navigation -->
-    <section class="space-y-3">
+    <!-- Quick Interactive Tools Bar (4 Interactive Modal Launchers in 1 Row) -->
+    <section class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+      <!-- Tool 1: iHITEK Smart Home -->
+      <button onclick="SmartHomeManager.openSmartHomeModal()" 
+              class="p-3 sm:p-3.5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 hover:border-amber-500/50 dark:hover:border-amber-400/50 hover:shadow-md transition-all flex items-center gap-3 text-left group">
+        <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+          <i data-lucide="lightbulb" class="w-5 h-5"></i>
+        </div>
+        <div class="min-w-0">
+          <h4 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 truncate group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">เปิดปิดไฟบ้าน</h4>
+          <p class="text-[11px] text-slate-400 truncate">แผงคุมไฟ iHITEK</p>
+        </div>
+      </button>
+
+      <!-- Tool 2: Bill Calculator -->
+      <button onclick="App.openBillCalcModal()" 
+              class="p-3 sm:p-3.5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 hover:border-purple-500/50 dark:hover:border-purple-400/50 hover:shadow-md transition-all flex items-center gap-3 text-left group">
+        <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+          <i data-lucide="calculator" class="w-5 h-5"></i>
+        </div>
+        <div class="min-w-0">
+          <h4 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 truncate group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">คำนวณค่าไฟ</h4>
+          <p class="text-[11px] text-slate-400 truncate">ตามหน่วย PEA/MEA</p>
+        </div>
+      </button>
+
+      <!-- Tool 3: Emergency SOS -->
+      <button onclick="EmergencyManager.openEmergencyModal()" 
+              class="p-3 sm:p-3.5 rounded-2xl bg-white dark:bg-slate-800/90 border border-red-200/80 dark:border-red-950/80 hover:border-red-500 dark:hover:border-red-400 hover:shadow-md transition-all flex items-center gap-3 text-left group">
+        <div class="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+          <i data-lucide="shield-alert" class="w-5 h-5 animate-pulse"></i>
+        </div>
+        <div class="min-w-0">
+          <h4 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 truncate group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">สายด่วนฉุกเฉิน</h4>
+          <p class="text-[11px] text-slate-400 truncate">191 / 1669 / ไซเรน</p>
+        </div>
+      </button>
+
+      <!-- Tool 4: Parcel Tracking -->
+      <button onclick="ParcelTracker.openTrackingModal()" 
+              class="p-3 sm:p-3.5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 hover:border-emerald-500/50 dark:hover:border-emerald-400/50 hover:shadow-md transition-all flex items-center gap-3 text-left group">
+        <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+          <i data-lucide="package" class="w-5 h-5"></i>
+        </div>
+        <div class="min-w-0">
+          <h4 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">เช็กเลขพัสดุ</h4>
+          <p class="text-[11px] text-slate-400 truncate">ไปรษณีย์, Flash, J&T</p>
+        </div>
+      </button>
+    </section>
+
+    <!-- Category Filters Navigation (Horizontal Scrollable Pill Tabs) -->
+    <section class="space-y-2">
       <div class="flex items-center justify-between">
-        <h2 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <i data-lucide="layout-grid" class="w-4 h-4 text-emerald-500"></i>
+        <h2 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+          <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-emerald-500"></i>
           หมวดหมู่บริการ
         </h2>
-        <span class="text-xs text-slate-400">คลิกเพื่อกรองหมวดที่ต้องการ</span>
+        <span class="text-[11px] text-slate-400">เลื่อนเพื่อเลือกหมวด</span>
       </div>
 
       <!-- Horizontal Scrollable Pill Categories -->
-      <div id="category-pills" class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+      <div id="category-pills" class="flex items-center gap-1.5 overflow-x-auto pb-1.5 scrollbar-none">
         <!-- Injected via JavaScript -->
       </div>
     </section>
 
     <!-- Favorites Section: บริการที่ใช้บ่อย (My Favorites) -->
-    <section id="favorites-section" class="space-y-4">
+    <section id="favorites-section" class="space-y-3">
       <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center">
             <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-500"></i>
           </div>
           <div>
-            <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <h2 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
               บริการที่ใช้บ่อย (My Favorites)
             </h2>
-            <p class="text-xs text-slate-500 dark:text-slate-400">บริการที่คุณปักหมุดดาว ⭐ ไว้ เข้าถึงได้สะดวกรวดเร็ว</p>
           </div>
         </div>
-        <span id="favorites-count-badge" class="px-2.5 py-1 text-xs font-bold rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+        <span id="favorites-count-badge" class="px-2 py-0.5 text-[11px] font-bold rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
           0 รายการ
         </span>
       </div>
 
       <!-- Favorites Grid Container -->
-      <div id="favorites-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div id="favorites-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-3.5">
         <!-- Injected via JavaScript -->
       </div>
     </section>
 
-    <!-- Services Grid Section -->
-    <section id="services-section" class="space-y-4">
+    <!-- Services Grid Section (Clean & Modern Directory) -->
+    <section id="services-section" class="space-y-3">
       <div class="flex items-center justify-between">
-        <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <i data-lucide="sparkles" class="w-5 h-5 text-emerald-500"></i>
+        <h2 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+          <i data-lucide="sparkles" class="w-4 h-4 text-emerald-500"></i>
           บริการทั้งหมด (Services Directory)
         </h2>
       </div>
 
       <!-- Cards Grid -->
-      <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-3.5">
         <!-- Rendered via JavaScript -->
       </div>
     </section>
 
-    <!-- Emergency Hotline Special Section -->
-    <section id="emergency-section" class="rounded-3xl bg-gradient-to-br from-red-50 to-rose-100 dark:from-red-950/40 dark:to-slate-900 p-6 sm:p-8 border border-red-200 dark:border-red-900/60 shadow-lg space-y-6 transition-all">
-      
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div class="space-y-1">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/60 text-red-700 dark:text-red-300 text-xs font-bold">
-            <i data-lucide="shield-alert" class="w-4 h-4 text-red-600 dark:text-red-400"></i>
+    <!-- Retained Compact Emergency Section for direct anchor & test compliance -->
+    <section id="emergency-section" class="rounded-2xl bg-gradient-to-r from-red-50 to-rose-100 dark:from-red-950/30 dark:to-slate-900 p-4 sm:p-5 border border-red-200/80 dark:border-red-900/50 shadow-sm space-y-4 transition-all">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="space-y-0.5">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-100 dark:bg-red-900/60 text-red-700 dark:text-red-300 text-[11px] font-bold">
+            <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-red-600 dark:text-red-400"></i>
             ศูนย์ประสานงานเหตุฉุกเฉินแห่งประเทศไทย
           </div>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-red-950 dark:text-red-100">
-            แจ้งเหตุด่วนเหตุร้าย & สายด่วนฉุกเฉิน (Thai Hotlines)
+          <h2 class="text-base sm:text-lg font-bold text-red-950 dark:text-red-100">
+            แจ้งเหตุด่วนเหตุร้าย & สายด่วนฉุกเฉิน 24 ชม.
           </h2>
-          <p class="text-xs sm:text-sm text-red-800/80 dark:text-red-200/80">
-            กดปุ่มโทรออกเพื่อเชื่อมต่อไปยังศูนย์รับแจ้งเหตุทันที พร้อมระบบช่วยเหลือเร่งด่วน
+          <p class="text-xs text-red-800/80 dark:text-red-200/80">
+            กดโทรออกได้ทันที พร้อมระบบส่งสัญญาณเสียงไซเรน SOS และแชร์พิกัด GPS
           </p>
         </div>
 
         <!-- SOS Quick Actions -->
-        <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+        <div class="flex items-center gap-2 shrink-0">
           <button id="btn-sos-siren" onclick="EmergencyManager.toggleSiren()" 
-                  class="px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800 text-red-600 dark:text-red-400 border border-red-300 dark:border-red-700 hover:bg-red-50 text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
-            <i data-lucide="bell-ring" class="w-4 h-4"></i>
-            <span>ส่งเสียงไซเรนฉุกเฉิน SOS</span>
+                  class="px-3 py-2 rounded-xl bg-white dark:bg-slate-800 text-red-600 dark:text-red-400 border border-red-300 dark:border-red-700 hover:bg-red-50 text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+            <i data-lucide="bell-ring" class="w-3.5 h-3.5"></i>
+            <span>ส่งเสียงไซเรน SOS</span>
           </button>
           <button onclick="EmergencyManager.shareLocation()" 
-                  class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white text-xs font-bold shadow-md shadow-red-500/30 transition-transform flex items-center gap-1.5">
-            <i data-lucide="map-pin" class="w-4 h-4"></i>
-            <span>แชร์พิกัด GPS ขอความช่วยเหลือ</span>
+                  class="px-3 py-2 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white text-xs font-bold shadow-sm transition-transform flex items-center gap-1">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+            <span>แชร์ GPS</span>
           </button>
         </div>
       </div>
 
       <!-- Hotlines List Grid -->
-      <div id="emergency-hotlines-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div id="emergency-hotlines-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5">
         <!-- Rendered via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Retained Compact Parcel Tracking Section for direct anchor & test compliance -->
+    <section id="parcel-tracking-section" class="rounded-2xl bg-white dark:bg-slate-800/90 p-4 sm:p-5 border border-slate-200/80 dark:border-slate-700/80 shadow-sm space-y-3.5 transition-all">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+            <i data-lucide="package" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">เช็กเลขพัสดุด่วน (Parcel Tracking)</h3>
+            <p class="text-[11px] text-slate-400">ไปรษณีย์ไทย, Flash, J&T, Kerry/KEX, SPX</p>
+          </div>
+        </div>
+
+        <button onclick="ParcelTracker.openTrackingModal()" class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1">
+          <span>เปิดหน้าต่างป๊อปอัป</span>
+          <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+      <!-- Quick Courier Pill Selectors -->
+      <div id="courier-quick-pills" class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- Tracking Input Grid Form -->
+      <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
+        <div class="sm:col-span-4 relative">
+          <select id="tracking-courier-select" 
+                  class="w-full h-11 pl-3 pr-8 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-xs font-semibold focus:ring-2 focus:ring-emerald-500 focus:outline-none appearance-none cursor-pointer">
+            <option value="thailandpost">🔴 ไปรษณีย์ไทย (Thailand Post)</option>
+            <option value="flash">🟡 Flash Express (แฟลช เอ็กซ์เพรส)</option>
+            <option value="jtexpress">🔴 J&T Express (เจแอนด์ที เอ็กซ์เพรส)</option>
+            <option value="kerry">🟠 Kerry Express / KEX (เคอรี่ เอ็กซ์เพรส)</option>
+            <option value="spx">🟧 SPX Express (Shopee Xpress)</option>
+            <option value="ninjavan">🔴 Ninja Van (นินจาแวน ประเทศไทย)</option>
+            <option value="bestexpress">🔵 Best Express (เบสท์ เอ็กซ์เพรส)</option>
+            <option value="dhl">🟡 DHL Express Thailand (ดีเอชแอล)</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+          </div>
+        </div>
+
+        <div class="sm:col-span-5 relative">
+          <input type="text" 
+                 id="tracking-number-input" 
+                 placeholder="กรอกเลขพัสดุ เช่น EF123456789TH..." 
+                 class="w-full h-11 pl-3 pr-20 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-mono text-xs uppercase placeholder-slate-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+          <div class="absolute inset-y-0 right-0 pr-2 flex items-center">
+            <button type="button" 
+                    onclick="ParcelTracker.pasteFromClipboard('section')" 
+                    class="px-2 py-1 rounded-lg bg-slate-200/80 hover:bg-slate-300 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-[10px] font-semibold flex items-center gap-1 transition-colors">
+              <i data-lucide="clipboard" class="w-3 h-3"></i>
+              <span>วาง</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <button type="button" 
+                  id="btn-track-parcel"
+                  onclick="ParcelTracker.track('section')" 
+                  class="w-full h-11 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all">
+            <i data-lucide="search" class="w-3.5 h-3.5"></i>
+            <span>ติดตามพัสดุ</span>
+            <i data-lucide="external-link" class="w-3 h-3 opacity-80"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Recent History Chips -->
+      <div id="tracking-history-chips">
+        <!-- Injected via JavaScript -->
       </div>
     </section>
 
   </main>
 
+  <!-- Floating Action Bar (Bottom Quick Dock) -->
+  <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 floating-dock">
+    <div class="bg-slate-900/90 dark:bg-slate-800/95 text-white px-3 py-1.5 rounded-full shadow-2xl border border-slate-700/80 backdrop-blur-md flex items-center gap-1 sm:gap-2 text-xs font-semibold">
+      <button onclick="SmartHomeManager.openSmartHomeModal()" class="px-2.5 py-1 rounded-full hover:bg-white/15 transition-colors flex items-center gap-1 text-amber-300">
+        <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
+        <span class="hidden sm:inline">ไฟบ้าน</span>
+      </button>
+      <span class="text-slate-600">|</span>
+      <button onclick="App.openBillCalcModal()" class="px-2.5 py-1 rounded-full hover:bg-white/15 transition-colors flex items-center gap-1 text-purple-300">
+        <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+        <span class="hidden sm:inline">ค่าไฟ</span>
+      </button>
+      <span class="text-slate-600">|</span>
+      <button onclick="ParcelTracker.openTrackingModal()" class="px-2.5 py-1 rounded-full hover:bg-white/15 transition-colors flex items-center gap-1 text-emerald-300">
+        <i data-lucide="package" class="w-3.5 h-3.5"></i>
+        <span class="hidden sm:inline">พัสดุ</span>
+      </button>
+      <span class="text-slate-600">|</span>
+      <button onclick="EmergencyManager.openEmergencyModal()" class="px-2.5 py-1 rounded-full bg-red-600 hover:bg-red-500 text-white transition-colors flex items-center gap-1 shadow-sm">
+        <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i>
+        <span>191 / 1669</span>
+      </button>
+    </div>
+  </div>
+
   <!-- Subservices Modal -->
   <div id="sub-services-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-5 modal-animate-in max-h-[90vh] overflow-y-auto">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-5 space-y-4 modal-animate-in max-h-[90vh] overflow-y-auto">
       
-      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
         <div>
-          <h3 id="sub-modal-title" class="text-lg font-bold text-slate-900 dark:text-white">เลือกบริการ</h3>
-          <p id="sub-modal-desc" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">เลือกช่องทางที่ต้องการเข้าใช้งาน</p>
+          <h3 id="sub-modal-title" class="text-base font-bold text-slate-900 dark:text-white">เลือกบริการ</h3>
+          <p id="sub-modal-desc" class="text-xs text-slate-400 mt-0.5">เลือกช่องทางที่ต้องการเข้าใช้งาน</p>
         </div>
-        <button onclick="App.closeSubServicesModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-          <i data-lucide="x" class="w-5 h-5"></i>
+        <button onclick="App.closeSubServicesModal()" class="p-1.5 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <div id="sub-modal-list" class="space-y-2.5">
-        <!-- Sub services items will be inserted here -->
+      <div id="sub-modal-list" class="space-y-2">
+        <!-- Sub services items inserted here -->
       </div>
 
-      <div class="pt-2 text-center">
-        <button onclick="App.closeSubServicesModal()" class="w-full py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold hover:bg-slate-200 transition-colors">
+      <div class="pt-1 text-center">
+        <button onclick="App.closeSubServicesModal()" class="w-full py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold hover:bg-slate-200 transition-colors">
           ปิดหน้าต่าง
         </button>
       </div>
@@ -563,79 +537,79 @@
 
   <!-- Smart Home Lighting (iHITEK) Interactive Modal -->
   <div id="smart-home-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-6 modal-animate-in max-h-[90vh] overflow-y-auto">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 space-y-5 modal-animate-in max-h-[90vh] overflow-y-auto">
       
       <!-- Modal Header -->
-      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
             <i data-lucide="lightbulb" class="w-5 h-5"></i>
           </div>
           <div>
-            <div class="flex items-center gap-2">
-              <h3 class="text-lg font-bold text-slate-900 dark:text-white">ควบคุมเปิด-ปิดไฟบ้าน (iHITEK Hub)</h3>
-              <span id="active-lights-count" class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 font-semibold">3/5 เปิดอยู่</span>
+            <div class="flex items-center gap-1.5">
+              <h3 class="text-base font-bold text-slate-900 dark:text-white">ควบคุมเปิด-ปิดไฟบ้าน (iHITEK Hub)</h3>
+              <span id="active-lights-count" class="text-[10px] px-2 py-0.2 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 font-semibold">3/5 เปิดอยู่</span>
             </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400">ควบคุมสวิตช์ไฟอัจฉริยะในบ้านจำลอง หรือเปิดแอปพลิเคชัน iHITEK</p>
+            <p class="text-xs text-slate-400">ควบคุมสวิตช์ไฟอัจฉริยะในบ้านจำลอง หรือเปิดแอปพลิเคชัน iHITEK</p>
           </div>
         </div>
-        <button onclick="SmartHomeManager.closeSmartHomeModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-          <i data-lucide="x" class="w-5 h-5"></i>
+        <button onclick="SmartHomeManager.closeSmartHomeModal()" class="p-1.5 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
       <!-- Quick Scene Presets -->
-      <div class="space-y-2">
-        <label class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">โหมดบรรยากาศสำเร็จรูป (Preset Scenes)</label>
+      <div class="space-y-1.5">
+        <label class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">โหมดบรรยากาศสำเร็จรูป (Preset Scenes)</label>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          <button onclick="SmartHomeManager.applyScene('relax')" class="p-2.5 rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/50 dark:bg-amber-950/20 hover:bg-amber-100 text-xs font-medium text-amber-800 dark:text-amber-300 flex items-center justify-center gap-1.5 transition-colors">
+          <button onclick="SmartHomeManager.applyScene('relax')" class="p-2 rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/50 dark:bg-amber-950/20 hover:bg-amber-100 text-xs font-medium text-amber-800 dark:text-amber-300 flex items-center justify-center gap-1.5 transition-colors">
             <span>🛋️ ผ่อนคลาย</span>
           </button>
-          <button onclick="SmartHomeManager.applyScene('focus')" class="p-2.5 rounded-xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/50 dark:bg-blue-950/20 hover:bg-blue-100 text-xs font-medium text-blue-800 dark:text-blue-300 flex items-center justify-center gap-1.5 transition-colors">
+          <button onclick="SmartHomeManager.applyScene('focus')" class="p-2 rounded-xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/50 dark:bg-blue-950/20 hover:bg-blue-100 text-xs font-medium text-blue-800 dark:text-blue-300 flex items-center justify-center gap-1.5 transition-colors">
             <span>📚 ทำงาน/อ่านหนังสือ</span>
           </button>
-          <button onclick="SmartHomeManager.applyScene('movie')" class="p-2.5 rounded-xl border border-indigo-200 dark:border-indigo-900/60 bg-indigo-50/50 dark:bg-indigo-950/20 hover:bg-indigo-100 text-xs font-medium text-indigo-800 dark:text-indigo-300 flex items-center justify-center gap-1.5 transition-colors">
+          <button onclick="SmartHomeManager.applyScene('movie')" class="p-2 rounded-xl border border-indigo-200 dark:border-indigo-900/60 bg-indigo-50/50 dark:bg-indigo-950/20 hover:bg-indigo-100 text-xs font-medium text-indigo-800 dark:text-indigo-300 flex items-center justify-center gap-1.5 transition-colors">
             <span>🍿 ดูหนัง</span>
           </button>
-          <button onclick="SmartHomeManager.applyScene('party')" class="p-2.5 rounded-xl border border-pink-200 dark:border-pink-900/60 bg-pink-50/50 dark:bg-pink-950/20 hover:bg-pink-100 text-xs font-medium text-pink-800 dark:text-pink-300 flex items-center justify-center gap-1.5 transition-colors">
+          <button onclick="SmartHomeManager.applyScene('party')" class="p-2 rounded-xl border border-pink-200 dark:border-pink-900/60 bg-pink-50/50 dark:bg-pink-950/20 hover:bg-pink-100 text-xs font-medium text-pink-800 dark:text-pink-300 flex items-center justify-center gap-1.5 transition-colors">
             <span>🎉 ปาร์ตี้</span>
           </button>
         </div>
       </div>
 
       <!-- Master Controls -->
-      <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-100 dark:bg-slate-800/80">
+      <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-100/80 dark:bg-slate-800/80">
         <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">ควบคุมพร้อมกันทุกห้อง</span>
         <div class="flex items-center gap-2">
-          <button onclick="SmartHomeManager.setAllLights(true)" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors">
+          <button onclick="SmartHomeManager.setAllLights(true)" class="px-2.5 py-1 rounded-lg bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors">
             เปิดไฟทั้งหมด
           </button>
-          <button onclick="SmartHomeManager.setAllLights(false)" class="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold hover:bg-slate-300 transition-colors">
+          <button onclick="SmartHomeManager.setAllLights(false)" class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold hover:bg-slate-300 transition-colors">
             ปิดไฟทั้งหมด
           </button>
         </div>
       </div>
 
       <!-- Individual Rooms Light Switches -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         
         <!-- Living Room -->
-        <div id="light-card-livingRoom" class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 space-y-3 transition-all">
+        <div id="light-card-livingRoom" class="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 space-y-2.5 transition-all">
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-              <i id="bulb-icon-livingRoom" data-lucide="lightbulb" class="w-6 h-6 transition-all"></i>
+            <div class="flex items-center gap-2">
+              <i id="bulb-icon-livingRoom" data-lucide="lightbulb" class="w-5 h-5 transition-all"></i>
               <div>
-                <h4 class="text-sm font-semibold text-slate-900 dark:text-white">ห้องนั่งเล่น (Living Room)</h4>
-                <p class="text-[11px] text-slate-400">โคมไฟหลักเพดาน</p>
+                <h4 class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">ห้องนั่งเล่น (Living Room)</h4>
+                <p class="text-[10px] text-slate-400">โคมไฟหลักเพดาน</p>
               </div>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" id="switch-livingRoom" onchange="SmartHomeManager.toggleLight('livingRoom')" class="sr-only peer" checked>
-              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-500"></div>
+              <div class="w-10 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
             </label>
           </div>
           <div class="space-y-1">
-            <div class="flex justify-between text-[11px] text-slate-500">
+            <div class="flex justify-between text-[10px] text-slate-500">
               <span>ความสว่าง</span>
               <span>85%</span>
             </div>
@@ -644,22 +618,22 @@
         </div>
 
         <!-- Bedroom -->
-        <div id="light-card-bedroom" class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 space-y-3 transition-all">
+        <div id="light-card-bedroom" class="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 space-y-2.5 transition-all">
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-              <i id="bulb-icon-bedroom" data-lucide="lightbulb" class="w-6 h-6 transition-all"></i>
+            <div class="flex items-center gap-2">
+              <i id="bulb-icon-bedroom" data-lucide="lightbulb" class="w-5 h-5 transition-all"></i>
               <div>
-                <h4 class="text-sm font-semibold text-slate-900 dark:text-white">ห้องนอนใหญ่ (Master Bed)</h4>
-                <p class="text-[11px] text-slate-400">ไฟหัวเตียง & ซ่อนฝ้า</p>
+                <h4 class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">ห้องนอนใหญ่ (Master Bed)</h4>
+                <p class="text-[10px] text-slate-400">ไฟหัวเตียง & ซ่อนฝ้า</p>
               </div>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" id="switch-bedroom" onchange="SmartHomeManager.toggleLight('bedroom')" class="sr-only peer">
-              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-500"></div>
+              <div class="w-10 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
             </label>
           </div>
           <div class="space-y-1">
-            <div class="flex justify-between text-[11px] text-slate-500">
+            <div class="flex justify-between text-[10px] text-slate-500">
               <span>ความสว่าง</span>
               <span>50%</span>
             </div>
@@ -668,22 +642,22 @@
         </div>
 
         <!-- Kitchen -->
-        <div id="light-card-kitchen" class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 space-y-3 transition-all">
+        <div id="light-card-kitchen" class="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 space-y-2.5 transition-all">
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-              <i id="bulb-icon-kitchen" data-lucide="lightbulb" class="w-6 h-6 transition-all"></i>
+            <div class="flex items-center gap-2">
+              <i id="bulb-icon-kitchen" data-lucide="lightbulb" class="w-5 h-5 transition-all"></i>
               <div>
-                <h4 class="text-sm font-semibold text-slate-900 dark:text-white">ห้องครัว (Kitchen)</h4>
-                <p class="text-[11px] text-slate-400">ไฟเคาน์เตอร์ & ทานข้าว</p>
+                <h4 class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">ห้องครัว (Kitchen)</h4>
+                <p class="text-[10px] text-slate-400">ไฟเคาน์เตอร์ & ทานข้าว</p>
               </div>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" id="switch-kitchen" onchange="SmartHomeManager.toggleLight('kitchen')" class="sr-only peer" checked>
-              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-500"></div>
+              <div class="w-10 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
             </label>
           </div>
           <div class="space-y-1">
-            <div class="flex justify-between text-[11px] text-slate-500">
+            <div class="flex justify-between text-[10px] text-slate-500">
               <span>ความสว่าง</span>
               <span>100%</span>
             </div>
@@ -692,22 +666,22 @@
         </div>
 
         <!-- Study Room -->
-        <div id="light-card-study" class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 space-y-3 transition-all">
+        <div id="light-card-study" class="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 space-y-2.5 transition-all">
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-              <i id="bulb-icon-study" data-lucide="lightbulb" class="w-6 h-6 transition-all"></i>
+            <div class="flex items-center gap-2">
+              <i id="bulb-icon-study" data-lucide="lightbulb" class="w-5 h-5 transition-all"></i>
               <div>
-                <h4 class="text-sm font-semibold text-slate-900 dark:text-white">ห้องทำงาน (Workspace)</h4>
-                <p class="text-[11px] text-slate-400">ไฟสว่างถนอมสายตา</p>
+                <h4 class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">ห้องทำงาน (Workspace)</h4>
+                <p class="text-[10px] text-slate-400">ไฟสว่างถนอมสายตา</p>
               </div>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" id="switch-study" onchange="SmartHomeManager.toggleLight('study')" class="sr-only peer" checked>
-              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-500"></div>
+              <div class="w-10 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
             </label>
           </div>
           <div class="space-y-1">
-            <div class="flex justify-between text-[11px] text-slate-500">
+            <div class="flex justify-between text-[10px] text-slate-500">
               <span>ความสว่าง</span>
               <span>90%</span>
             </div>
@@ -718,24 +692,24 @@
       </div>
 
       <!-- App Store / Google Play Links for iHITEK -->
-      <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0">
-            <i data-lucide="smartphone" class="w-5 h-5"></i>
+      <div class="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0">
+            <i data-lucide="smartphone" class="w-4 h-4"></i>
           </div>
           <div>
             <h4 class="text-xs font-bold text-slate-900 dark:text-white">เปิดแอป iHITEK บนสมาร์ทโฟน</h4>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400">ควบคุมอุปกรณ์ IoT และสวิตช์ไฟจริงของ iHITEK ผ่านระบบคลาวด์</p>
+            <p class="text-[10px] text-slate-400">ควบคุมอุปกรณ์ IoT และสวิตช์ไฟจริงของ iHITEK ผ่านระบบคลาวด์</p>
           </div>
         </div>
 
         <div class="flex items-center gap-2 w-full sm:w-auto">
           <a href="https://apps.apple.com/th/app/ihitek/id1453913076" target="_blank" rel="noopener noreferrer" 
-             class="flex-1 sm:flex-none px-3 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition-colors text-center">
+             class="flex-1 sm:flex-none px-3 py-1.5 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition-colors text-center">
             iOS App Store
           </a>
           <a href="https://play.google.com/store/apps/details?id=com.hitekhome.smart" target="_blank" rel="noopener noreferrer" 
-             class="flex-1 sm:flex-none px-3 py-2 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors text-center">
+             class="flex-1 sm:flex-none px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors text-center">
             Google Play
           </a>
         </div>
@@ -746,20 +720,20 @@
 
   <!-- Electricity Bill Estimator Modal -->
   <div id="bill-calc-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-5 modal-animate-in">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-5 space-y-4 modal-animate-in">
       
       <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center">
-            <i data-lucide="calculator" class="w-5 h-5"></i>
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+            <i data-lucide="calculator" class="w-4 h-4"></i>
           </div>
           <div>
-            <h3 class="text-base font-bold text-slate-900 dark:text-white">คำนวณค่าไฟฟ้าประมาณการ</h3>
-            <p class="text-[11px] text-slate-400">อัตราค่าไฟฟ้าที่อยู่อาศัย (PEA / MEA)</p>
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">คำนวณค่าไฟฟ้าประมาณการ</h3>
+            <p class="text-[10px] text-slate-400">อัตราค่าไฟฟ้าที่อยู่อาศัย (PEA / MEA)</p>
           </div>
         </div>
         <button onclick="App.closeBillCalcModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-          <i data-lucide="x" class="w-5 h-5"></i>
+          <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
@@ -770,13 +744,13 @@
           </label>
           <div class="relative">
             <input type="number" id="bill-units-input" value="120" min="0" max="9999" 
-                   class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-base focus:ring-2 focus:ring-purple-500 focus:outline-none">
-            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400">หน่วย</span>
+                   class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-purple-500 focus:outline-none">
+            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400">หน่วย</span>
           </div>
         </div>
 
         <!-- Calculation Breakdown Table -->
-        <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 space-y-2 text-xs">
+        <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 space-y-1.5 text-xs">
           <div class="flex justify-between text-slate-600 dark:text-slate-400">
             <span>ค่าพลังงานไฟฟ้าฐาน:</span>
             <span id="calc-base-amount" class="font-semibold text-slate-900 dark:text-white">฿0.00</span>
@@ -794,13 +768,13 @@
             <span id="calc-vat-amount" class="font-semibold text-slate-900 dark:text-white">฿0.00</span>
           </div>
           <div class="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between items-baseline">
-            <span class="text-sm font-bold text-slate-900 dark:text-white">รวมค่าไฟฟ้าสุทธิ:</span>
-            <span id="calc-total-amount" class="text-lg font-black text-purple-600 dark:text-purple-400">฿0.00</span>
+            <span class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">รวมค่าไฟฟ้าสุทธิ:</span>
+            <span id="calc-total-amount" class="text-base sm:text-lg font-black text-purple-600 dark:text-purple-400">฿0.00</span>
           </div>
         </div>
 
         <a href="https://eservice.pea.co.th/Account/Login?ReturnUrl=%2f" target="_blank" rel="noopener noreferrer"
-           class="block w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold text-center shadow-md shadow-purple-500/20 transition-all">
+           class="block w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold text-center shadow-sm transition-all">
           ไปหน้าชำระเงิน PEA e-Service
         </a>
       </div>
@@ -809,36 +783,36 @@
 
   <!-- Parcel Tracking Modal: เช็กเลขพัสดุด่วน -->
   <div id="parcel-tracking-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-5 modal-animate-in max-h-[90vh] overflow-y-auto">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-5 space-y-4 modal-animate-in max-h-[90vh] overflow-y-auto">
       
       <!-- Modal Header -->
-      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3.5">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shadow-md shadow-emerald-500/30 shrink-0">
-            <i data-lucide="package" class="w-5 h-5"></i>
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0">
+            <i data-lucide="package" class="w-4 h-4"></i>
           </div>
           <div>
-            <h3 class="text-base font-bold text-slate-900 dark:text-white">เช็กเลขพัสดุด่วน (Parcel Tracking)</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">ตรวจสอบสถานะพัสดุทุกบริษัทขนส่งในไทย</p>
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">เช็กเลขพัสดุด่วน (Parcel Tracking)</h3>
+            <p class="text-[11px] text-slate-400">ตรวจสอบสถานะพัสดุทุกบริษัทขนส่งในไทย</p>
           </div>
         </div>
-        <button onclick="ParcelTracker.closeTrackingModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-          <i data-lucide="x" class="w-5 h-5"></i>
+        <button onclick="ParcelTracker.closeTrackingModal()" class="p-1.5 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
       <!-- Form Inputs -->
-      <div class="space-y-4">
+      <div class="space-y-3.5">
         
         <!-- Courier Selection -->
         <div>
-          <label for="modal-tracking-courier-select" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center gap-1.5">
+          <label for="modal-tracking-courier-select" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center gap-1.5">
             <i data-lucide="truck" class="w-3.5 h-3.5 text-emerald-500"></i>
             <span>เลือกบริษัทขนส่ง:</span>
           </label>
           <div class="relative">
             <select id="modal-tracking-courier-select" 
-                    class="w-full h-11 pl-4 pr-10 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-emerald-500 focus:outline-none appearance-none cursor-pointer">
+                    class="w-full h-10 pl-3 pr-8 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-xs font-semibold focus:ring-2 focus:ring-emerald-500 focus:outline-none appearance-none cursor-pointer">
               <option value="thailandpost">🔴 ไปรษณีย์ไทย (Thailand Post)</option>
               <option value="flash">🟡 Flash Express (แฟลช เอ็กซ์เพรส)</option>
               <option value="jtexpress">🔴 J&T Express (เจแอนด์ที เอ็กซ์เพรส)</option>
@@ -848,18 +822,18 @@
               <option value="bestexpress">🔵 Best Express (เบสท์ เอ็กซ์เพรส)</option>
               <option value="dhl">🟡 DHL Express Thailand (ดีเอชแอล)</option>
             </select>
-            <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
-              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
             </div>
           </div>
         </div>
 
         <!-- Tracking Number Input -->
         <div>
-          <label for="modal-tracking-number-input" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between">
+          <label for="modal-tracking-number-input" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center justify-between">
             <span class="flex items-center gap-1.5">
               <i data-lucide="barcode" class="w-3.5 h-3.5 text-emerald-500"></i>
-              <span>หมายเลขพัสดุ (Tracking No.):</span>
+              <span>หมายเลขพัสดุ:</span>
             </span>
             <button type="button" 
                     onclick="ParcelTracker.pasteFromClipboard('modal')" 
@@ -872,26 +846,25 @@
             <input type="text" 
                    id="modal-tracking-number-input" 
                    placeholder="กรอกเลขพัสดุ เช่น EF123456789TH..." 
-                   class="w-full h-11 px-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-mono text-sm uppercase placeholder-slate-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
-                   autocomplete="off"
-                   spellcheck="false">
+                   class="w-full h-10 px-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-mono text-xs uppercase placeholder-slate-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                   autocomplete="off">
           </div>
         </div>
 
         <!-- Sample Buttons -->
-        <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700 space-y-1.5">
-          <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">ตัวอย่างเลขพัสดุ:</span>
+        <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700 space-y-1">
+          <span class="text-[10px] font-semibold text-slate-400">ตัวอย่างเลขพัสดุ:</span>
           <div class="flex items-center gap-1.5 flex-wrap">
-            <button type="button" onclick="ParcelTracker.fillSample('EF123456789TH', 'thailandpost')" class="px-2 py-0.5 rounded-lg bg-red-100 text-red-700 dark:bg-red-950/80 dark:text-red-300 text-[11px] font-mono hover:opacity-80">
+            <button type="button" onclick="ParcelTracker.fillSample('EF123456789TH', 'thailandpost')" class="px-2 py-0.5 rounded-lg bg-red-100 text-red-700 dark:bg-red-950/80 dark:text-red-300 text-[10px] font-mono hover:opacity-80">
               EF..TH (ไปรษณีย์)
             </button>
-            <button type="button" onclick="ParcelTracker.fillSample('TH0123456789A', 'flash')" class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 text-[11px] font-mono hover:opacity-80">
+            <button type="button" onclick="ParcelTracker.fillSample('TH0123456789A', 'flash')" class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 text-[10px] font-mono hover:opacity-80">
               TH01.. (Flash)
             </button>
-            <button type="button" onclick="ParcelTracker.fillSample('821234567890', 'jtexpress')" class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-700 dark:bg-rose-950/80 dark:text-rose-300 text-[11px] font-mono hover:opacity-80">
+            <button type="button" onclick="ParcelTracker.fillSample('821234567890', 'jtexpress')" class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-700 dark:bg-rose-950/80 dark:text-rose-300 text-[10px] font-mono hover:opacity-80">
               82.. (J&T)
             </button>
-            <button type="button" onclick="ParcelTracker.fillSample('KEX1234567890', 'kerry')" class="px-2 py-0.5 rounded-lg bg-orange-100 text-orange-700 dark:bg-orange-950/80 dark:text-orange-300 text-[11px] font-mono hover:opacity-80">
+            <button type="button" onclick="ParcelTracker.fillSample('KEX1234567890', 'kerry')" class="px-2 py-0.5 rounded-lg bg-orange-100 text-orange-700 dark:bg-orange-950/80 dark:text-orange-300 text-[10px] font-mono hover:opacity-80">
               KEX.. (Kerry)
             </button>
           </div>
@@ -900,21 +873,74 @@
         <!-- Track Button -->
         <button type="button" 
                 onclick="ParcelTracker.track('modal')" 
-                class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 active:scale-95 text-white text-sm font-bold flex items-center justify-center gap-2 shadow-md shadow-emerald-500/25 transition-all">
-          <i data-lucide="search" class="w-4 h-4"></i>
+                class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all">
+          <i data-lucide="search" class="w-3.5 h-3.5"></i>
           <span>ติดตามพัสดุ (เปิดหน้าขนส่ง)</span>
-          <i data-lucide="external-link" class="w-3.5 h-3.5 opacity-80"></i>
+          <i data-lucide="external-link" class="w-3 h-3 opacity-80"></i>
         </button>
 
         <!-- History -->
-        <div id="modal-tracking-history-chips" class="pt-1">
+        <div id="modal-tracking-history-chips">
           <!-- Injected via JavaScript -->
         </div>
 
       </div>
 
-      <div class="pt-2 text-center border-t border-slate-100 dark:border-slate-800">
-        <button onclick="ParcelTracker.closeTrackingModal()" class="w-full py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+      <div class="pt-1 text-center border-t border-slate-100 dark:border-slate-800">
+        <button onclick="ParcelTracker.closeTrackingModal()" class="w-full py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold hover:bg-slate-200 transition-colors">
+          ปิดหน้าต่าง
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Emergency SOS Modal -->
+  <div id="emergency-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-5 space-y-4 modal-animate-in max-h-[90vh] overflow-y-auto">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center shrink-0">
+            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">ศูนย์ประสานงานสายด่วนฉุกเฉินไทย 24 ชม.</h3>
+            <p class="text-[11px] text-slate-400">กดโทรออกได้ทันที พร้อมระบบเสียงไซเรน SOS และแชร์ GPS</p>
+          </div>
+        </div>
+        <button onclick="EmergencyManager.closeEmergencyModal()" class="p-1.5 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-2 p-3 rounded-2xl bg-red-50 dark:bg-red-950/40 border border-red-100 dark:border-red-950">
+        <button onclick="EmergencyManager.toggleSiren()" 
+                class="flex-1 min-w-[140px] px-3 py-2 rounded-xl bg-white dark:bg-slate-800 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 text-xs font-bold shadow-sm flex items-center justify-center gap-1.5">
+          <i data-lucide="bell-ring" class="w-4 h-4"></i>
+          <span>ส่งเสียงไซเรน SOS</span>
+        </button>
+        <button onclick="EmergencyManager.shareLocation()" 
+                class="flex-1 min-w-[140px] px-3 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold shadow-sm flex items-center justify-center gap-1.5">
+          <i data-lucide="map-pin" class="w-4 h-4"></i>
+          <span>แชร์พิกัด GPS ขอความช่วยเหลือ</span>
+        </button>
+      </div>
+
+      <!-- Quick Emergency Call Direct -->
+      <div class="grid grid-cols-2 gap-2">
+        <a href="tel:191" class="p-3 rounded-xl bg-red-600 hover:bg-red-700 text-white text-center font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-sm">
+          <i data-lucide="phone" class="w-4 h-4"></i> โทร 191 (ตำรวจ)
+        </a>
+        <a href="tel:1669" class="p-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-center font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-sm">
+          <i data-lucide="activity" class="w-4 h-4"></i> โทร 1669 (กู้ชีพ)
+        </a>
+      </div>
+
+      <div class="pt-1 text-center border-t border-slate-100 dark:border-slate-800">
+        <button onclick="EmergencyManager.closeEmergencyModal()" class="w-full py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold hover:bg-slate-200 transition-colors">
           ปิดหน้าต่าง
         </button>
       </div>
@@ -923,19 +949,19 @@
   </div>
 
   <!-- Footer -->
-  <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8 mt-12 transition-colors">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+  <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 mt-10 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
       
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-        <div class="flex items-center gap-3">
-          <img src="assets/logo.png" alt="One Stop Service" class="w-8 h-8 rounded-full">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
+        <div class="flex items-center gap-2.5">
+          <img src="assets/logo.png" alt="One Stop Service" class="w-7 h-7 rounded-full">
           <div>
-            <h4 class="text-sm font-bold text-slate-900 dark:text-white">One Stop Service (วันสต็อปเซอร์วิส)</h4>
-            <p class="text-xs text-slate-500">ศูนย์รวมบริการออนไลน์เพื่อคนไทย ใช้งานได้ทุกอุปกรณ์</p>
+            <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">One Stop Service Hub (วันสต็อปเซอร์วิส)</h4>
+            <p class="text-[11px] text-slate-400">ศูนย์รวมบริการออนไลน์เพื่อคนไทย ใช้งานได้ทุกอุปกรณ์</p>
           </div>
         </div>
 
-        <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-600 dark:text-slate-400">
+        <div class="flex flex-wrap items-center justify-center gap-3 text-xs font-medium text-slate-500 dark:text-slate-400">
           <span class="inline-flex items-center gap-1"><i data-lucide="smartphone" class="w-3.5 h-3.5 text-emerald-500"></i> iOS & Android</span>
           <span class="inline-flex items-center gap-1"><i data-lucide="tablet" class="w-3.5 h-3.5 text-emerald-500"></i> iPad & Tablet</span>
           <span class="inline-flex items-center gap-1"><i data-lucide="monitor" class="w-3.5 h-3.5 text-emerald-500"></i> PC & Mac</span>
@@ -945,8 +971,8 @@
         </div>
       </div>
 
-      <div class="pt-4 border-t border-slate-100 dark:border-slate-800/80 text-center text-xs text-slate-400">
-        &copy; 2026 One Stop Service. All rights reserved. ออกแบบและพัฒนาเพื่ออำนวยความสะดวกแก่ผู้ใช้งานทุกแพลตฟอร์ม
+      <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 text-center text-[11px] text-slate-400">
+        &copy; 2026 One Stop Service. All rights reserved. สะอาดตา โล่งสบายตา รวดเร็ว ทันใจ
       </div>
     </div>
   </footer>
@@ -961,4 +987,3 @@
   <script src="js/app.js"></script>
 </body>
 </html>
-
