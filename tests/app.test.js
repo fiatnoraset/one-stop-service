@@ -35,7 +35,13 @@ const requiredLinks = {
   'Shopee': 'https://shopee.co.th/',
   'SET': 'https://www.set.or.th/th/market/index/set/overview',
   'Yasothon Community College': 'https://www.yasocc.ac.th/',
-  'ICCS Student SSO': 'https://iccs-sso.iccs.ac.th/oAuthBcca?client_id=6&redirect_uri=https%3A%2F%2Ficcs-portal.iccs.ac.th%2FcallbackResponseCode&response_type=code&scope='
+  'ICCS Student SSO': 'https://iccs-sso.iccs.ac.th/oAuthBcca?client_id=6&redirect_uri=https%3A%2F%2Ficcs-portal.iccs.ac.th%2FcallbackResponseCode&response_type=code&scope=',
+  'แอปทางรัฐ': 'https://www.ทางรัฐ.com/',
+  'ThaID': 'https://www.bora.dopa.go.th/app-thaid/',
+  'สปสช.': 'https://eservices.nhso.go.th/eServices/mobile/login.xhtml',
+  'ประกันสังคม SSO': 'https://www.sso.go.th/wpr/main/login',
+  'DLT Smart Queue': 'https://gecc.dlt.go.th/',
+  'LandsMaps': 'https://landsmaps.dol.go.th/'
 };
 
 for (const [name, targetUrl] of Object.entries(requiredLinks)) {

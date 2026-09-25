@@ -13,6 +13,7 @@ const categories = [
   { id: 'news', name: 'ข่าวสาร', nameEn: 'News & Media', icon: 'newspaper', color: 'cyan' },
   { id: 'utility', name: 'จ่ายค่าไฟ / บิล', nameEn: 'Bills & Utilities', icon: 'zap', color: 'purple' },
   { id: 'finance', name: 'ตลาดหุ้น / การเงิน', nameEn: 'Stock & Finance', icon: 'trending-up', color: 'green' },
+  { id: 'government', name: 'บริการภาครัฐ & เอกสารดิจิทัล', nameEn: 'Government & Digital ID', icon: 'landmark', color: 'blue' },
   { id: 'education', name: 'การศึกษา / วชช.ยโสธร', nameEn: 'Education & Yasothon College', icon: 'graduation-cap', color: 'indigo' },
 ];
 
@@ -567,6 +568,129 @@ const services = [
     icon: 'user-check',
     color: 'cyan',
     badge: 'ระบบนักศึกษา'
+  },
+
+  // --- เมนูบริการภาครัฐ & เอกสารดิจิทัล (Government & Digital Services) ---
+  {
+    id: 'gov-hub',
+    categoryId: 'government',
+    name: 'บริการภาครัฐ & เอกสารดิจิทัล (Gov Digital Hub)',
+    nameEn: 'Thai Digital Government Portal',
+    description: 'ศูนย์รวมบริการภาครัฐ แอปทางรัฐ, บัตรประชาชนดิจิทัล ThaID, สปสช. บัตรทอง, ประกันสังคม, จองคิวใบขับขี่ DLT และค้นหาแปลงที่ดิน',
+    url: 'https://www.ทางรัฐ.com/',
+    icon: 'landmark',
+    color: 'blue',
+    badge: 'บริการรัฐรวมศูนย์',
+    subServices: [
+      {
+        name: 'แอปทางรัฐ (บริการรัฐรวมศูนย์ DGA)',
+        url: 'https://www.ทางรัฐ.com/',
+        desc: 'รวมบริการรัฐกว่า 150 บริการ เช็คสิทธิ ตรวจสอบเบี้ย บิลค่าน้ำค่าไฟ เครดิตบูโร',
+        icon: 'smartphone',
+        color: '#0284c7'
+      },
+      {
+        name: 'ThaID (บัตรประชาชนดิจิทัล กรมการปกครอง)',
+        url: 'https://www.bora.dopa.go.th/app-thaid/',
+        desc: 'แสดงบัตรประชาชน ทะเบียนบ้านดิจิทัล ยืนยันตัวตนดิจิทัลถูกต้องตามกฎหมาย',
+        icon: 'badge-check',
+        color: '#2563eb'
+      },
+      {
+        name: 'สปสช. (เช็กสิทธิบัตรทอง 30 บาทรักษาทุกที่)',
+        url: 'https://eservices.nhso.go.th/eServices/mobile/login.xhtml',
+        desc: 'ตรวจสอบสิทธิการรักษาพยาบาล สิทธิหลักประกันสุขภาพแห่งชาติ บัตรทอง 30 บาท',
+        icon: 'heart-pulse',
+        color: '#059669'
+      },
+      {
+        name: 'ประกันสังคม SSO e-Service (สปส.)',
+        url: 'https://www.sso.go.th/wpr/main/login',
+        desc: 'เช็กเงินสมทบชราภาพ สิทธิประโยชน์ทันตกรรม และสถานพยาบาลตามสิทธิ',
+        icon: 'clipboard-list',
+        color: '#d97706'
+      },
+      {
+        name: 'DLT Smart Queue (กรมการขนส่งทางบก)',
+        url: 'https://gecc.dlt.go.th/',
+        desc: 'จองคิวทำใบขับขี่ ต่ออายุใบขับขี่ อบรมออนไลน์ และทะเบียนรถล่วงหน้า',
+        icon: 'calendar-clock',
+        color: '#7c3aed'
+      },
+      {
+        name: 'LandsMaps (ระบบค้นหารูปแปลงที่ดิน กรมที่ดิน)',
+        url: 'https://landsmaps.dol.go.th/',
+        desc: 'ค้นหาตำแหน่งแปลงที่ดิน ตรวจสอบราคาประเมิน และภาพถ่ายดาวเทียมทั่วไทย',
+        icon: 'map-pin',
+        color: '#0d9488'
+      }
+    ]
+  },
+  {
+    id: 'thangrath-app',
+    categoryId: 'government',
+    name: 'แอปทางรัฐ (บริการรัฐรวมศูนย์)',
+    nameEn: 'ThangRath - Digital Government Services',
+    description: 'ซูเปอร์แอปภาครัฐ รวมบริการหน่วยงานรัฐกว่า 150 บริการ เช็คสิทธิ บิลรัฐ ค่าน้ำค่าไฟ เบี้ยยังชีพ และเครดิตบูโร',
+    url: 'https://www.ทางรัฐ.com/',
+    icon: 'smartphone',
+    color: 'sky',
+    badge: 'DGA รวมศูนย์'
+  },
+  {
+    id: 'thaid-app',
+    categoryId: 'government',
+    name: 'ThaID (บัตรประชาชนดิจิทัล กรมการปกครอง)',
+    nameEn: 'ThaID - Digital ID by DOPA',
+    description: 'แอปพลิเคชันแสดงบัตรประจำตัวประชาชน ทะเบียนบ้านดิจิทัล และระบบพิสูจน์ยืนยันตัวตนดิจิทัล (DOPA)',
+    url: 'https://www.bora.dopa.go.th/app-thaid/',
+    icon: 'badge-check',
+    color: 'blue',
+    badge: 'กรมการปกครอง'
+  },
+  {
+    id: 'nhso-gold-card',
+    categoryId: 'government',
+    name: 'สปสช. (เช็กสิทธิบัตรทอง 30 บาทรักษาทุกที่)',
+    nameEn: 'NHSO Universal Healthcare Coverage',
+    description: 'ระบบตรวจสอบสิทธิการรักษาพยาบาล สิทธิหลักประกันสุขภาพถ้วนหน้า (บัตรทอง 30 บาท) และเปลี่ยนหน่วยบริการ',
+    url: 'https://eservices.nhso.go.th/eServices/mobile/login.xhtml',
+    icon: 'heart-pulse',
+    color: 'emerald',
+    badge: 'สิทธิบัตรทอง'
+  },
+  {
+    id: 'sso-eservice',
+    categoryId: 'government',
+    name: 'ประกันสังคม SSO e-Service (เช็กเงินสมทบ/สิทธิการรักษา)',
+    nameEn: 'Social Security Office (SSO e-Service)',
+    description: 'ตรวจสอบยอดเงินสมทบชราภาพ เช็คสิทธิรักษาพยาบาล ทันตกรรม คลอดบุตร และเงินชดเชยว่างงาน',
+    url: 'https://www.sso.go.th/wpr/main/login',
+    icon: 'clipboard-list',
+    color: 'amber',
+    badge: 'ประกันสังคม'
+  },
+  {
+    id: 'dlt-smart-queue',
+    categoryId: 'government',
+    name: 'DLT Smart Queue (จองคิวใบขับขี่ กรมการขนส่งทางบก)',
+    nameEn: 'DLT Smart Queue - Driving License Booking',
+    description: 'ระบบจองคิวล่วงหน้าทำใบขับขี่ ต่ออายุใบขับขี่ ตรวจสภาพรถ และต่อทะเบียน กรมการขนส่งทางบก',
+    url: 'https://gecc.dlt.go.th/',
+    icon: 'calendar-clock',
+    color: 'purple',
+    badge: 'จองคิวด่วน'
+  },
+  {
+    id: 'landsmaps-dol',
+    categoryId: 'government',
+    name: 'LandsMaps (ระบบค้นหารูปแปลงที่ดิน กรมที่ดิน)',
+    nameEn: 'LandsMaps - Thailand Land Parcel Search',
+    description: 'ระบบค้นหาตำแหน่งแปลงที่ดิน ตรวจสอบแนวเขต ระวางที่ดิน ราคาประเมินทุนทรัพย์ และคำนวณค่าธรรมเนียมภาษี',
+    url: 'https://landsmaps.dol.go.th/',
+    icon: 'map-pin',
+    color: 'teal',
+    badge: 'กรมที่ดิน'
   },
 
   // --- เมนูแจ้งเหตุด่วนเหตุร้าย (Emergency) ---
