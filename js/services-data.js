@@ -13,6 +13,7 @@ const categories = [
   { id: 'news', name: 'ข่าวสาร', nameEn: 'News & Media', icon: 'newspaper', color: 'cyan' },
   { id: 'utility', name: 'จ่ายค่าไฟ / บิล', nameEn: 'Bills & Utilities', icon: 'zap', color: 'purple' },
   { id: 'finance', name: 'ตลาดหุ้น / การเงิน', nameEn: 'Stock & Finance', icon: 'trending-up', color: 'green' },
+  { id: 'education', name: 'การศึกษา / วชช.ยโสธร', nameEn: 'Education & Yasothon College', icon: 'graduation-cap', color: 'indigo' },
 ];
 
 const emergencyNumbers = [
@@ -515,6 +516,57 @@ const services = [
     color: 'amber',
     badge: 'เชื่อมต่อด่วน',
     isSmartHome: true
+  },
+
+  // --- เมนูการศึกษา / วิทยาลัยชุมชนยโสธร (Education & Yasothon Community College) ---
+  {
+    id: 'yasocc-hub',
+    categoryId: 'education',
+    name: 'วิทยาลัยชุมชนยโสธร (Yasothon Community College)',
+    nameEn: 'Yasothon Community College Portal',
+    description: 'ศูนย์รวมบริการข้อมูลการศึกษา เว็บไซต์หลัก และระบบสารสนเทศนักศึกษา (ICCS SSO) วิทยาลัยชุมชนยโสธร',
+    url: 'https://www.yasocc.ac.th/',
+    icon: 'graduation-cap',
+    color: 'indigo',
+    badge: 'วชช.ยโสธร',
+    subServices: [
+      {
+        name: 'เว็บไซต์หลัก วิทยาลัยชุมชนยโสธร',
+        url: 'https://www.yasocc.ac.th/',
+        desc: 'ประชาสัมพันธ์ ข่าวสารการศึกษา หลักสูตรปริญญา/อนุปริญญา และข้อมูลสถาบัน',
+        icon: 'globe',
+        color: '#4f46e5'
+      },
+      {
+        name: 'เข้าสู่ระบบนักศึกษา (ICCS Student SSO)',
+        url: 'https://iccs-sso.iccs.ac.th/oAuthBcca?client_id=6&redirect_uri=https%3A%2F%2Ficcs-portal.iccs.ac.th%2FcallbackResponseCode&response_type=code&scope=',
+        desc: 'ระบบสารสนเทศนักศึกษา ICCS SSO ลงทะเบียน ตรวจสอบผลการเรียน และตารางเรียน',
+        icon: 'user-check',
+        color: '#0284c7'
+      }
+    ]
+  },
+  {
+    id: 'yasocc-web',
+    categoryId: 'education',
+    name: 'เว็บไซต์หลัก วชช.ยโสธร (YASOCC)',
+    nameEn: 'Yasothon Community College Official Website',
+    description: 'เว็บไซต์ทางการวิทยาลัยชุมชนยโสธร ข่าวสารการศึกษา หลักสูตร และบริการวิชาการเพื่อชุมชน',
+    url: 'https://www.yasocc.ac.th/',
+    icon: 'school',
+    color: 'indigo',
+    badge: 'เว็บหลัก'
+  },
+  {
+    id: 'yasocc-sso',
+    categoryId: 'education',
+    name: 'เข้าสู่ระบบนักศึกษา วชช.ยโสธร (ICCS SSO Login)',
+    nameEn: 'Student SSO Login - Yasothon Community College',
+    description: 'ระบบล็อกอินสารสนเทศนักศึกษา ICCS SSO วิทยาลัยชุมชนยโสธร สำหรับนักศึกษาเข้าใช้งานระบบบริการการศึกษา',
+    url: 'https://iccs-sso.iccs.ac.th/oAuthBcca?client_id=6&redirect_uri=https%3A%2F%2Ficcs-portal.iccs.ac.th%2FcallbackResponseCode&response_type=code&scope=',
+    icon: 'user-check',
+    color: 'cyan',
+    badge: 'ระบบนักศึกษา'
   },
 
   // --- เมนูแจ้งเหตุด่วนเหตุร้าย (Emergency) ---

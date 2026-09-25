@@ -75,6 +75,10 @@
 - ลิงก์ดาวน์โหลดบน [iOS App Store](https://apps.apple.com/th/app/ihitek/id1453913076) และ [Google Play Store](https://play.google.com/store/apps/details?id=com.hitekhome.smart)
 - **Web Smart Switch Simulator**: หน้าต่างจำลองแผงควบคุมสวิตช์ไฟอัจฉริยะ ปรับความสว่าง เปลี่ยนสี และเลือก Scene บรรยากาศ (ผ่อนคลาย, ทำงาน, ดูหนัง, ปาร์ตี้)
 
+### 9. 🎓 การศึกษา & วิทยาลัยชุมชนยโสธร (Education & Student Portal)
+- [เว็บไซต์หลัก วิทยาลัยชุมชนยโสธร](https://www.yasocc.ac.th/): ข่าวสารการศึกษา หลักสูตรปริญญาและอนุปริญญา บริการวิชาการสู่ชุมชน
+- [เข้าสู่ระบบนักศึกษา วชช.ยโสธร (ICCS SSO Login)](https://iccs-sso.iccs.ac.th/oAuthBcca?client_id=6&redirect_uri=https%3A%2F%2Ficcs-portal.iccs.ac.th%2FcallbackResponseCode&response_type=code&scope=): ระบบล็อกอินสารสนเทศนักศึกษา ICCS SSO วิทยาลัยชุมชนยโสธร สำหรับลงทะเบียน ตรวจสอบผลการเรียน และตารางเรียน
+
 ---
 
 ## 📱 วิธีติดตั้งลงหน้าจอมือถือ (PWA Installation Guide)

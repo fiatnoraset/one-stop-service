@@ -33,7 +33,9 @@ const requiredLinks = {
   'PEA': 'https://eservice.pea.co.th/Account/Login?ReturnUrl=%2f',
   'Lazada': 'https://pages.lazada.co.th/',
   'Shopee': 'https://shopee.co.th/',
-  'SET': 'https://www.set.or.th/th/market/index/set/overview'
+  'SET': 'https://www.set.or.th/th/market/index/set/overview',
+  'Yasothon Community College': 'https://www.yasocc.ac.th/',
+  'ICCS Student SSO': 'https://iccs-sso.iccs.ac.th/oAuthBcca?client_id=6&redirect_uri=https%3A%2F%2Ficcs-portal.iccs.ac.th%2FcallbackResponseCode&response_type=code&scope='
 };
 
 for (const [name, targetUrl] of Object.entries(requiredLinks)) {
