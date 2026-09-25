@@ -94,6 +94,11 @@ requiredFiles.forEach(file => {
   const fp = path.join(__dirname, file);
   assert.ok(fs.existsSync(fp), `File ${file} must exist`);
 });
-console.log('✅ All core web and PWA files verified');
+// 7. Test Favorites Section and Elements in index.html
+const indexHtmlContent = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+assert.ok(indexHtmlContent.includes('id="favorites-section"'), 'index.html must contain #favorites-section');
+assert.ok(indexHtmlContent.includes('id="favorites-grid"'), 'index.html must contain #favorites-grid');
+assert.ok(indexHtmlContent.includes('id="favorites-count-badge"'), 'index.html must contain #favorites-count-badge');
+console.log('✅ Favorites section (#favorites-section, #favorites-grid) verified in index.html');
 
 console.log('\n🎉 All test cases passed successfully!');

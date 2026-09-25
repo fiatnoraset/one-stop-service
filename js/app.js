@@ -18,6 +18,7 @@ const App = {
     this.initTheme();
     this.initDateTime();
     this.initCategories();
+    this.renderFavorites();
     this.renderServices();
     this.renderEmergencyHotlines();
     this.initEventListeners();
@@ -80,25 +81,150 @@ const App = {
   loadFavorites: function() {
     try {
       const saved = localStorage.getItem('oss_favorites');
-      this.favorites = saved ? JSON.parse(saved) : ['news-hub', 'food-delivery-hub', 'ride-transport-hub', 'utility-bills-hub', 'ihitek', 'emergency-hub'];
+      this.favorites = saved ? JSON.parse(saved) : ['news-hub', 'food-delivery-hub', 'yasocc-hub', 'ihitek', 'emergency-hub'];
     } catch (e) {
-      this.favorites = ['news-hub', 'food-delivery-hub', 'ride-transport-hub', 'utility-bills-hub', 'ihitek', 'emergency-hub'];
+      this.favorites = ['news-hub', 'food-delivery-hub', 'yasocc-hub', 'ihitek', 'emergency-hub'];
     }
   },
 
   toggleFavorite: function(serviceId, event) {
     if (event) event.stopPropagation();
     const index = this.favorites.indexOf(serviceId);
+    const service = services.find(s => s.id === serviceId);
+    const serviceName = service ? service.name : 'บริการ';
+
     if (index > -1) {
       this.favorites.splice(index, 1);
-      this.showToast('นำออกจากรายการโปรดแล้ว');
+      this.showToast(`นำ "${serviceName}" ออกจากรายการโปรดแล้ว`);
     } else {
       this.favorites.push(serviceId);
-      this.showToast('เพิ่มในรายการโปรดแล้ว ⭐');
+      this.showToast(`ปักหมุด "${serviceName}" ในรายการโปรดแล้ว ⭐`);
     }
     localStorage.setItem('oss_favorites', JSON.stringify(this.favorites));
+    this.renderFavorites();
     this.renderServices();
     if (window.lucide) lucide.createIcons();
+  },
+
+  // Reusable Card Component
+  renderCard: function(item) {
+    const isFav = this.favorites.includes(item.id);
+    const favIconFill = isFav ? 'fill-amber-400 text-amber-400' : 'text-slate-400 hover:text-amber-400';
+    const favTitle = isFav ? 'คลิกเพื่อนำออกจากรายการโปรด' : 'คลิกเพื่อปักหมุดบริการโปรด';
+    const hasSubServices = item.subServices && item.subServices.length > 0;
+    
+    let clickAction = '';
+    if (item.isSmartHome) {
+      clickAction = `onclick="SmartHomeManager.launchApp()"`;
+    } else if (item.isEmergencyHub) {
+      clickAction = `onclick="App.scrollToEmergency()"`;
+    } else if (hasSubServices) {
+      clickAction = `onclick="App.openSubServicesModal('${item.id}')"`;
+    } else {
+      clickAction = `onclick="App.launchExternalUrl('${item.url}')"`;
+    }
+
+    return `
+      <div class="service-card group relative bg-white dark:bg-slate-800/90 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-700/80 shadow-sm hover:shadow-xl hover:border-emerald-500/50 dark:hover:border-emerald-400/50 transition-all duration-300 flex flex-col justify-between cursor-pointer" ${clickAction}>
+        
+        <div>
+          <!-- Top Header in Card -->
+          <div class="flex items-start justify-between gap-3 mb-3.5">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/10 to-teal-500/20 dark:from-emerald-500/20 dark:to-teal-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform duration-300">
+              <i data-lucide="${item.icon}" class="w-6 h-6"></i>
+            </div>
+
+            <div class="flex items-center gap-1.5">
+              ${item.badge ? `
+                <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                  ${item.badge}
+                </span>
+              ` : ''}
+              <button type="button" onclick="App.toggleFavorite('${item.id}', event)" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors" title="${favTitle}">
+                <i data-lucide="star" class="w-4 h-4 ${favIconFill}"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Title & Description -->
+          <h3 class="text-base font-semibold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+            ${item.name}
+          </h3>
+          <p class="text-xs text-slate-400 dark:text-slate-500 font-medium mb-2">${item.nameEn}</p>
+          <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
+            ${item.description}
+          </p>
+        </div>
+
+        <!-- Bottom Action Buttons -->
+        <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
+          <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            ${hasSubServices ? 'เลือกบริการย่อย' : (item.isSmartHome ? 'เปิดแอป / ควบคุม' : 'เข้าใช้งาน')}
+            <i data-lucide="${hasSubServices ? 'chevron-right' : 'external-link'}" class="w-3.5 h-3.5"></i>
+          </span>
+
+          ${hasSubServices ? `
+            <div class="flex -space-x-1.5 overflow-hidden">
+              ${item.subServices.slice(0, 3).map(sub => `
+                <span class="inline-block w-5 h-5 rounded-full bg-slate-100 dark:bg-slate-700 text-[10px] flex items-center justify-center font-bold text-slate-600 dark:text-slate-300 border border-white dark:border-slate-800" title="${sub.name}">
+                  ${sub.name.charAt(0)}
+                </span>
+              `).join('')}
+              ${item.subServices.length > 3 ? `<span class="inline-block w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-900 text-[9px] flex items-center justify-center font-bold text-emerald-700 dark:text-emerald-300 border border-white dark:border-slate-800">+${item.subServices.length - 3}</span>` : ''}
+            </div>
+          ` : ''}
+        </div>
+
+      </div>
+    `;
+  },
+
+  // Render Favorites Cards Section
+  renderFavorites: function() {
+    const grid = document.getElementById('favorites-grid');
+    const badge = document.getElementById('favorites-count-badge');
+    if (!grid || !services) return;
+
+    let favItems = services.filter(s => this.favorites.includes(s.id));
+
+    // If searching, filter favorites matching query as well
+    if (this.searchQuery.trim()) {
+      const q = this.searchQuery.toLowerCase().trim();
+      favItems = favItems.filter(s => 
+        s.name.toLowerCase().includes(q) || 
+        s.nameEn.toLowerCase().includes(q) || 
+        s.description.toLowerCase().includes(q) ||
+        (s.subServices && s.subServices.some(sub => sub.name.toLowerCase().includes(q) || sub.desc.toLowerCase().includes(q)))
+      );
+    }
+
+    if (badge) {
+      const totalFavs = this.favorites.length;
+      badge.textContent = `${totalFavs} รายการ`;
+    }
+
+    if (favItems.length === 0) {
+      if (this.favorites.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full p-6 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 text-center space-y-2">
+            <div class="w-10 h-10 rounded-full bg-amber-50 dark:bg-amber-950/50 text-amber-500 flex items-center justify-center mx-auto">
+              <i data-lucide="star" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-sm font-semibold text-slate-700 dark:text-slate-200">ยังไม่มีบริการโปรดที่ปักหมุดไว้</h4>
+            <p class="text-xs text-slate-500 dark:text-slate-400">กดไอคอนรูปดาว ⭐ ที่มุมขวาบนของการ์ดบริการ เพื่อนำมาปักหมุดไว้ที่นี่</p>
+          </div>
+        `;
+      } else {
+        grid.innerHTML = `
+          <div class="col-span-full p-4 rounded-xl bg-slate-100/60 dark:bg-slate-800/40 text-center text-xs text-slate-500 dark:text-slate-400">
+            ไม่พบบริการโปรดที่ตรงกับคำค้นหา "${this.searchQuery}"
+          </div>
+        `;
+      }
+      return;
+    }
+
+    grid.innerHTML = favItems.map(item => this.renderCard(item)).join('');
   },
 
   // Category Tabs
@@ -174,77 +300,7 @@ const App = {
       return;
     }
 
-    grid.innerHTML = filtered.map(item => {
-      const isFav = this.favorites.includes(item.id);
-      const favIconFill = isFav ? 'fill-amber-400 text-amber-400' : 'text-slate-400 hover:text-amber-400';
-      const hasSubServices = item.subServices && item.subServices.length > 0;
-      
-      let clickAction = '';
-      if (item.isSmartHome) {
-        clickAction = `onclick="SmartHomeManager.launchApp()"`;
-      } else if (item.isEmergencyHub) {
-        clickAction = `onclick="App.scrollToEmergency()"`;
-      } else if (hasSubServices) {
-        clickAction = `onclick="App.openSubServicesModal('${item.id}')"`;
-      } else {
-        clickAction = `onclick="App.launchExternalUrl('${item.url}')"`;
-      }
-
-      return `
-        <div class="service-card group relative bg-white dark:bg-slate-800/90 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-700/80 shadow-sm hover:shadow-xl hover:border-emerald-500/50 dark:hover:border-emerald-400/50 transition-all duration-300 flex flex-col justify-between cursor-pointer" ${clickAction}>
-          
-          <div>
-            <!-- Top Header in Card -->
-            <div class="flex items-start justify-between gap-3 mb-3.5">
-              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/10 to-teal-500/20 dark:from-emerald-500/20 dark:to-teal-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform duration-300">
-                <i data-lucide="${item.icon}" class="w-6 h-6"></i>
-              </div>
-
-              <div class="flex items-center gap-1.5">
-                ${item.badge ? `
-                  <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                    ${item.badge}
-                  </span>
-                ` : ''}
-                <button type="button" onclick="App.toggleFavorite('${item.id}', event)" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors" title="ปักหมุดรายการโปรด">
-                  <i data-lucide="star" class="w-4 h-4 ${favIconFill}"></i>
-                </button>
-              </div>
-            </div>
-
-            <!-- Title & Description -->
-            <h3 class="text-base font-semibold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors flex items-center gap-1.5">
-              ${item.name}
-            </h3>
-            <p class="text-xs text-slate-400 dark:text-slate-500 font-medium mb-2">${item.nameEn}</p>
-            <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
-              ${item.description}
-            </p>
-          </div>
-
-          <!-- Bottom Action Buttons -->
-          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
-            <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-              ${hasSubServices ? 'เลือกบริการย่อย' : (item.isSmartHome ? 'เปิดแอป / ควบคุม' : 'เข้าใช้งาน')}
-              <i data-lucide="${hasSubServices ? 'chevron-right' : 'external-link'}" class="w-3.5 h-3.5"></i>
-            </span>
-
-            ${hasSubServices ? `
-              <div class="flex -space-x-1.5 overflow-hidden">
-                ${item.subServices.slice(0, 3).map(sub => `
-                  <span class="inline-block w-5 h-5 rounded-full bg-slate-100 dark:bg-slate-700 text-[10px] flex items-center justify-center font-bold text-slate-600 dark:text-slate-300 border border-white dark:border-slate-800" title="${sub.name}">
-                    ${sub.name.charAt(0)}
-                  </span>
-                `).join('')}
-                ${item.subServices.length > 3 ? `<span class="inline-block w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-900 text-[9px] flex items-center justify-center font-bold text-emerald-700 dark:text-emerald-300 border border-white dark:border-slate-800">+${item.subServices.length - 3}</span>` : ''}
-              </div>
-            ` : ''}
-          </div>
-
-        </div>
-      `;
-    }).join('');
-
+    grid.innerHTML = filtered.map(item => this.renderCard(item)).join('');
     if (window.lucide) lucide.createIcons();
   },
 
@@ -406,6 +462,7 @@ const App = {
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
         this.searchQuery = e.target.value;
+        this.renderFavorites();
         this.renderServices();
       });
     }
