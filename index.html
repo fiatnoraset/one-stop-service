@@ -58,10 +58,11 @@
 
 <body class="bg-slate-50 text-slate-800 dark:bg-[#090d16] dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300 antialiased selection:bg-emerald-500 selection:text-white relative">
 
-  <!-- Ambient Mesh Glow Orbs (Glassmorphism visual background) -->
+  <!-- Ambient Mesh Glow Orbs (Apple / Linear UI Ambient Light) -->
   <div class="mesh-bg">
     <div class="mesh-orb-1"></div>
     <div class="mesh-orb-2"></div>
+    <div class="mesh-orb-3"></div>
   </div>
 
   <!-- Toast Notification Container -->
@@ -73,22 +74,22 @@
       
       <!-- Brand Logo & Title -->
       <a href="index.html" class="flex items-center gap-2.5 group shrink-0">
-        <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-2xl overflow-hidden border border-emerald-500/40 shadow-sm group-hover:scale-105 transition-transform duration-200">
+        <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-2xl overflow-hidden border border-blue-500/40 shadow-sm group-hover:scale-105 transition-transform duration-200">
           <img src="assets/logo.png" alt="One Stop Service Logo" class="w-full h-full object-cover">
         </div>
         <div>
           <div class="flex items-center gap-1.5">
-            <span class="font-black text-base sm:text-lg text-slate-900 dark:text-white tracking-tight leading-none group-hover:text-emerald-500 transition-colors">One Stop Service</span>
-            <span class="text-[9px] sm:text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 font-bold uppercase">Pro</span>
+            <span class="font-black text-base sm:text-lg text-slate-900 dark:text-white tracking-tight leading-none group-hover:text-blue-400 transition-colors">One Stop Service</span>
+            <span class="text-[9px] sm:text-[10px] px-1.5 py-0.2 rounded-full bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/30 font-bold uppercase">Pro</span>
           </div>
           <p class="text-[10px] sm:text-[11px] text-slate-400 font-medium hidden xs:block">ศูนย์รวมบริการดิจิทัลไทย</p>
         </div>
       </a>
 
       <!-- Quick Date & Live Status (Desktop/Tablet) -->
-      <div class="hidden lg:flex items-center gap-3 text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100/60 dark:bg-slate-800/50 backdrop-blur-md px-3.5 py-1 rounded-full border border-slate-200/50 dark:border-white/10">
+      <div class="hidden lg:flex items-center gap-3 text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100/60 dark:bg-white/[0.04] backdrop-blur-md px-3.5 py-1 rounded-full border border-slate-200/50 dark:border-white/10">
         <div class="flex items-center gap-1.5">
-          <i data-lucide="calendar" class="w-3.5 h-3.5 text-emerald-500"></i>
+          <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-500"></i>
           <span id="current-date">กำลังโหลด...</span>
         </div>
         <span class="text-slate-300 dark:text-slate-700">|</span>
@@ -136,15 +137,15 @@
   </header>
 
   <!-- Ultramodern Auto-Scrolling Market Ticker Strip (Infinite Marquee) -->
-  <section class="border-b border-slate-200/70 dark:border-white/10 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl overflow-hidden py-1.5 z-30 relative">
+  <section class="border-b border-slate-200/70 dark:border-white/10 bg-white/50 dark:bg-slate-900/40 backdrop-blur-xl overflow-hidden py-1.5 z-30 relative">
     <div class="ticker-wrapper flex overflow-hidden whitespace-nowrap">
       <div class="ticker-track flex items-center gap-8 text-xs font-medium px-4">
         
         <!-- Item 1: SET Index -->
         <a href="https://www.set.or.th/th/market/index/set/overview" target="_blank" rel="noopener noreferrer"
-           class="inline-flex items-center gap-1.5 text-slate-700 dark:text-slate-300 hover:text-emerald-500 transition-colors">
+           class="inline-flex items-center gap-1.5 text-slate-700 dark:text-slate-300 hover:text-blue-400 transition-colors">
           <span class="font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1">
-            <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-500"></i> SET
+            <i data-lucide="trending-up" class="w-3.5 h-3.5 text-blue-500"></i> SET
           </span>
           <span id="set-index-val" class="font-bold text-slate-900 dark:text-white font-mono">1,428.50</span>
           <span id="set-index-chg" class="font-bold text-emerald-500 text-[11px] font-mono">+8.35 (+0.59%)</span>
@@ -186,8 +187,8 @@
 
         <!-- Duplicate stream to loop infinitely -->
         <a href="https://www.set.or.th/th/market/index/set/overview" target="_blank" rel="noopener noreferrer"
-           class="inline-flex items-center gap-1.5 text-slate-700 dark:text-slate-300 hover:text-emerald-500 transition-colors">
-          <span class="font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1"><i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-500"></i> SET</span>
+           class="inline-flex items-center gap-1.5 text-slate-700 dark:text-slate-300 hover:text-blue-400 transition-colors">
+          <span class="font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1"><i data-lucide="trending-up" class="w-3.5 h-3.5 text-blue-500"></i> SET</span>
           <span class="font-bold text-slate-900 dark:text-white font-mono">1,428.50</span>
           <span class="font-bold text-emerald-500 text-[11px] font-mono">+8.35 (+0.59%)</span>
         </a>
@@ -220,14 +221,14 @@
   </section>
 
   <!-- PWA Install Banner -->
-  <div id="pwa-install-banner" class="hidden bg-gradient-to-r from-emerald-600/90 to-teal-700/90 backdrop-blur-md text-white px-4 py-2 text-xs font-medium shadow-sm z-30 relative">
+  <div id="pwa-install-banner" class="hidden bg-gradient-to-r from-blue-600/90 to-indigo-700/90 backdrop-blur-md text-white px-4 py-2 text-xs font-medium shadow-sm z-30 relative">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
       <div class="flex items-center gap-2">
         <i data-lucide="smartphone" class="w-4 h-4 shrink-0 text-amber-300"></i>
         <span>ติดตั้ง One Stop Service ลงบนหน้าจอเพื่อเข้าใช้งานได้ทันทีเหมือนแอปมือถือ</span>
       </div>
       <div class="flex items-center gap-2">
-        <button onclick="App.installPWA()" class="px-2.5 py-1 bg-white text-emerald-800 rounded-xl font-bold hover:bg-emerald-50 transition-colors shadow-sm">
+        <button onclick="App.installPWA()" class="px-2.5 py-1 bg-white text-blue-800 rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-sm">
           ติดตั้งแอป
         </button>
         <button onclick="document.getElementById('pwa-install-banner').classList.add('hidden')" class="p-1 hover:bg-white/20 rounded-lg">
@@ -245,8 +246,8 @@
       
       <!-- Centerpiece Search Bar -->
       <div class="max-w-2xl mx-auto text-center space-y-2.5">
-        <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 text-[11px] font-semibold backdrop-blur-md">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/25 text-[11px] font-semibold backdrop-blur-md">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
           ไม่ต้องล็อกอิน • ใช้งานฟรีทุกอุปกรณ์
         </div>
 
@@ -254,16 +255,16 @@
           One Stop Service Hub
         </h1>
 
-        <!-- Search Input with Glass Styling -->
+        <!-- Search Input with Apple / Linear Glass Styling -->
         <div class="pt-1">
           <div class="relative group">
-            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-emerald-500 transition-colors">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-400 transition-colors">
               <i data-lucide="search" class="w-5 h-5"></i>
             </div>
             <input type="text" 
                    id="global-search-input"
                    placeholder="ค้นหาบริการ เช่น ข่าว, grab, ค่าไฟ, รัฐบาล, หุ้น, 191, พัสดุ..." 
-                   class="w-full pl-11 pr-20 py-3.5 rounded-2xl glass-card text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500/60 shadow-sm group-hover:shadow-md transition-all"
+                   class="w-full pl-11 pr-20 py-3.5 rounded-2xl glass-card text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500/60 shadow-lg group-hover:shadow-xl transition-all"
                    autocomplete="off">
             <div class="absolute inset-y-0 right-0 pr-3 flex items-center gap-1 text-[10px] font-mono text-slate-400 pointer-events-none hidden sm:flex">
               <kbd class="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10">Ctrl</kbd>
@@ -275,15 +276,15 @@
       </div>
 
       <!-- Minimalist Yasothon Community College (วชช.ยโสธร) Banner -->
-      <div class="glass-card rounded-2xl p-3 sm:p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 border border-indigo-500/30">
-        <div class="flex items-center gap-2.5 text-center sm:text-left">
-          <div class="w-8 h-8 rounded-xl bg-indigo-500/20 border border-indigo-400/40 flex items-center justify-center text-indigo-400 shrink-0">
-            <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+      <div class="glass-card rounded-[20px] p-3.5 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3 border border-indigo-500/30 dark:border-indigo-500/20 shadow-lg">
+        <div class="flex items-center gap-3 text-center sm:text-left">
+          <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-indigo-500/25 to-purple-600/20 border border-indigo-400/30 flex items-center justify-center text-indigo-400 shrink-0 shadow-sm shadow-indigo-500/20">
+            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
           </div>
           <div>
             <div class="flex items-center gap-1.5 justify-center sm:justify-start">
-              <span class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">วิทยาลัยชุมชนยโสธร (Yasothon Community College)</span>
-              <span class="px-1.5 py-0.2 text-[9px] font-bold rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">วชช.ยโสธร</span>
+              <span class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white tracking-tight">วิทยาลัยชุมชนยโสธร (Yasothon Community College)</span>
+              <span class="px-2 py-0.5 text-[9px] font-bold rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">วชช.ยโสธร</span>
             </div>
             <p class="text-[11px] text-slate-400 truncate">ศูนย์ข้อมูลการศึกษา & ระบบสารสนเทศนักศึกษา</p>
           </div>
@@ -291,12 +292,12 @@
 
         <div class="flex items-center gap-2 w-full sm:w-auto shrink-0">
           <a href="https://www.yasocc.ac.th/" target="_blank" rel="noopener noreferrer"
-             class="flex-1 sm:flex-none px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-sm transition-all">
+             class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/35 border border-indigo-400/40 text-indigo-100 hover:text-white backdrop-blur-md shadow-sm transition-all active:scale-95 text-xs font-semibold flex items-center justify-center gap-1.5">
             <i data-lucide="globe" class="w-3.5 h-3.5"></i>
             <span>เว็บสถาบัน (yasocc.ac.th)</span>
           </a>
           <a href="https://iccs-sso.iccs.ac.th/oAuthBcca?client_id=6&redirect_uri=https%3A%2F%2Ficcs-portal.iccs.ac.th%2FcallbackResponseCode&response_type=code&scope=" target="_blank" rel="noopener noreferrer"
-             class="flex-1 sm:flex-none px-3 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 active:scale-95 text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-sm transition-all">
+             class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl bg-gradient-to-r from-blue-600/80 to-indigo-600/80 hover:from-blue-500 hover:to-indigo-500 border border-blue-400/40 text-white shadow-md shadow-blue-500/25 backdrop-blur-md transition-all active:scale-95 text-xs font-semibold flex items-center justify-center gap-1.5">
             <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
             <span>เข้าสู่ระบบนักศึกษา (ICCS SSO)</span>
           </a>
@@ -305,56 +306,54 @@
 
     </section>
 
-    <!-- Quick Compact Interactive Tools Bar (4 Summary Cards in 1 Row) -->
+    <!-- Quick Compact Interactive Tools Bar (4 Summary Cards in 1 Row - iOS / Linear UI Style) -->
     <section class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
       
       <!-- Tool 1: iHITEK Smart Home -->
       <button onclick="SmartHomeManager.openSmartHomeModal()" 
-              class="glass-card p-3 sm:p-3.5 rounded-2xl hover:border-amber-500/50 hover:shadow-md transition-all flex items-center gap-3 text-left group">
-        <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              class="glass-card p-3 sm:p-3.5 rounded-[20px] hover:border-amber-500/50 hover:shadow-lg transition-all flex items-center gap-3 text-left group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-500/25 to-yellow-600/15 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0 shadow-sm shadow-amber-500/20 group-hover:scale-105 transition-transform">
           <i data-lucide="lightbulb" class="w-5 h-5"></i>
         </div>
         <div class="min-w-0">
-          <div class="flex items-center gap-1.5">
-            <h4 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 truncate group-hover:text-amber-500 transition-colors">เปิดปิดไฟบ้าน</h4>
-          </div>
-          <p id="summary-lights-badge" class="text-[11px] text-amber-500/90 font-medium truncate">💡 3/5 ไฟเปิดอยู่</p>
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-amber-400 transition-colors">เปิดปิดไฟบ้าน</h4>
+          <p id="summary-lights-badge" class="text-[11px] text-amber-500 dark:text-amber-400 font-semibold truncate">💡 3/5 ไฟเปิดอยู่</p>
         </div>
       </button>
 
       <!-- Tool 2: Bill Calculator -->
       <button onclick="App.openBillCalcModal()" 
-              class="glass-card p-3 sm:p-3.5 rounded-2xl hover:border-purple-500/50 hover:shadow-md transition-all flex items-center gap-3 text-left group">
-        <div class="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              class="glass-card p-3 sm:p-3.5 rounded-[20px] hover:border-blue-500/50 hover:shadow-lg transition-all flex items-center gap-3 text-left group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500/25 to-indigo-600/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 shadow-sm shadow-blue-500/20 group-hover:scale-105 transition-transform">
           <i data-lucide="calculator" class="w-5 h-5"></i>
         </div>
         <div class="min-w-0">
-          <h4 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 truncate group-hover:text-purple-500 transition-colors">คำนวณค่าไฟ</h4>
-          <p class="text-[11px] text-slate-400 truncate">ตามหน่วย PEA/MEA</p>
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-blue-400 transition-colors">คำนวณค่าไฟ</h4>
+          <p class="text-[11px] text-slate-400 dark:text-slate-400 font-medium truncate">ตามหน่วย PEA/MEA</p>
         </div>
       </button>
 
       <!-- Tool 3: Emergency SOS -->
       <button onclick="EmergencyManager.openEmergencyModal()" 
-              class="glass-card p-3 sm:p-3.5 rounded-2xl hover:border-red-500/50 hover:shadow-md transition-all flex items-center gap-3 text-left group border-red-500/20">
-        <div class="w-10 h-10 rounded-xl bg-red-500/15 text-red-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              class="glass-card p-3 sm:p-3.5 rounded-[20px] hover:border-rose-500/50 hover:shadow-lg transition-all flex items-center gap-3 text-left group border-rose-500/20">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-rose-500/25 to-red-600/15 border border-rose-500/30 text-rose-400 flex items-center justify-center shrink-0 shadow-sm shadow-rose-500/20 group-hover:scale-105 transition-transform">
           <i data-lucide="shield-alert" class="w-5 h-5 animate-pulse"></i>
         </div>
         <div class="min-w-0">
-          <h4 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 truncate group-hover:text-red-500 transition-colors">สายด่วนฉุกเฉิน</h4>
-          <p class="text-[11px] text-red-500/90 font-medium truncate">🚨 191 • 1669 • SOS</p>
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-rose-400 transition-colors">สายด่วนฉุกเฉิน</h4>
+          <p class="text-[11px] text-rose-500 dark:text-rose-400 font-semibold truncate">🚨 191 • 1669 • SOS</p>
         </div>
       </button>
 
       <!-- Tool 4: Parcel Tracking -->
       <button onclick="ParcelTracker.openTrackingModal()" 
-              class="glass-card p-3 sm:p-3.5 rounded-2xl hover:border-emerald-500/50 hover:shadow-md transition-all flex items-center gap-3 text-left group">
-        <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              class="glass-card p-3 sm:p-3.5 rounded-[20px] hover:border-emerald-500/50 hover:shadow-lg transition-all flex items-center gap-3 text-left group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500/25 to-teal-600/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0 shadow-sm shadow-emerald-500/20 group-hover:scale-105 transition-transform">
           <i data-lucide="package" class="w-5 h-5"></i>
         </div>
         <div class="min-w-0">
-          <h4 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 truncate group-hover:text-emerald-500 transition-colors">เช็กเลขพัสดุ</h4>
-          <p class="text-[11px] text-slate-400 truncate">ไปรษณีย์, Flash, J&T</p>
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-emerald-400 transition-colors">เช็กเลขพัสดุ</h4>
+          <p class="text-[11px] text-slate-400 dark:text-slate-400 font-medium truncate">ไปรษณีย์, Flash, J&T</p>
         </div>
       </button>
 
@@ -534,18 +533,18 @@
   <div class="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-2.5">
     
     <!-- Expanded Glass Popup Menu -->
-    <div id="fab-popup-menu" class="hidden flex-col items-end gap-2 glass-card p-2.5 rounded-2xl shadow-2xl border border-white/20 dark:border-white/10">
+    <div id="fab-popup-menu" class="hidden flex-col items-end gap-2 glass-card p-2.5 rounded-[22px] shadow-2xl border border-white/20 dark:border-white/10">
       <button onclick="SmartHomeManager.openSmartHomeModal(); App.closeFabMenu();" 
               class="w-full px-3 py-2 rounded-xl hover:bg-amber-500/10 text-slate-800 dark:text-slate-200 text-xs font-semibold flex items-center gap-2.5 transition-colors">
-        <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-500 flex items-center justify-center shrink-0">
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-500/25 to-yellow-600/15 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
           <i data-lucide="lightbulb" class="w-4 h-4"></i>
         </div>
         <span>เปิดปิดไฟบ้าน (iHITEK)</span>
       </button>
 
       <button onclick="App.openBillCalcModal(); App.closeFabMenu();" 
-              class="w-full px-3 py-2 rounded-xl hover:bg-purple-500/10 text-slate-800 dark:text-slate-200 text-xs font-semibold flex items-center gap-2.5 transition-colors">
-        <div class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-500 flex items-center justify-center shrink-0">
+              class="w-full px-3 py-2 rounded-xl hover:bg-blue-500/10 text-slate-800 dark:text-slate-200 text-xs font-semibold flex items-center gap-2.5 transition-colors">
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500/25 to-indigo-600/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0">
           <i data-lucide="calculator" class="w-4 h-4"></i>
         </div>
         <span>คำนวณค่าไฟฟ้า</span>
@@ -553,7 +552,7 @@
 
       <button onclick="ParcelTracker.openTrackingModal(); App.closeFabMenu();" 
               class="w-full px-3 py-2 rounded-xl hover:bg-emerald-500/10 text-slate-800 dark:text-slate-200 text-xs font-semibold flex items-center gap-2.5 transition-colors">
-        <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-500 flex items-center justify-center shrink-0">
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-500/25 to-teal-600/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
           <i data-lucide="package" class="w-4 h-4"></i>
         </div>
         <span>เช็กเลขพัสดุด่วน</span>
@@ -570,7 +569,7 @@
 
     <!-- Main FAB Toggle Button -->
     <button id="fab-main-btn" onclick="App.toggleFabMenu()" 
-            class="w-13 h-13 p-3.5 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-xl shadow-emerald-500/30 flex items-center justify-center transition-transform active:scale-95"
+            class="w-13 h-13 p-3.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-xl shadow-blue-500/30 flex items-center justify-center transition-transform active:scale-95"
             title="เมนูลัดบริการด่วน">
       <i id="fab-icon" data-lucide="sparkles" class="w-6 h-6"></i>
     </button>
