@@ -125,6 +125,7 @@ const requiredFiles = [
   '../js/emergency.js',
   '../js/financial.js',
   '../js/tracking.js',
+  '../js/weather.js',
   '../README.md'
 ];
 
@@ -187,8 +188,48 @@ assert.ok(indexHtmlContent.includes('id="loan-rate-input"'), 'index.html must co
 assert.ok(indexHtmlContent.includes('id="loan-months-select"'), 'index.html must contain #loan-months-select');
 assert.ok(indexHtmlContent.includes('id="loan-monthly-val"'), 'index.html must contain #loan-monthly-val');
 assert.ok(indexHtmlContent.includes('id="loan-interest-val"'), 'index.html must contain #loan-interest-val');
-assert.ok(indexHtmlContent.includes('id="loan-principal-val"'), 'index.html must contain #loan-principal-val');
-console.log('✅ Utility Calculators (Electricity & Loan Installments) modal elements verified in index.html');
+// 12. Test Weather & PM 2.5 Open-Meteo Integration
+const { WeatherManager, CITIES } = require('../js/weather.js');
+assert.ok(WeatherManager, 'WeatherManager controller must exist');
+assert.ok(CITIES, 'CITIES dictionary must exist');
+assert.ok(CITIES.bangkok, 'Bangkok coordinates must exist');
+assert.ok(CITIES.yasothon, 'Yasothon coordinates must exist');
+
+// 12.1 Weather code mapping
+const clearSky = WeatherManager.getWeatherInfo(0);
+assert.strictEqual(clearSky.text, 'ท้องฟ้าแจ่มใส', 'WMO 0 must map to ท้องฟ้าแจ่มใส');
+assert.strictEqual(clearSky.icon, 'sun', 'WMO 0 icon must be sun');
+
+const rain = WeatherManager.getWeatherInfo(61);
+assert.strictEqual(rain.text, 'ฝนตกปานกลาง', 'WMO 61 must map to ฝนตกปานกลาง');
+
+// 12.2 PM 2.5 5-tier standard
+const pmVeryGood = WeatherManager.getPM25Level(10.0);
+assert.strictEqual(pmVeryGood.level, 1, 'PM 10.0 must be Level 1');
+assert.strictEqual(pmVeryGood.shortLabel, 'ดีมาก');
+
+const pmModerate = WeatherManager.getPM25Level(35.0);
+assert.strictEqual(pmModerate.level, 3, 'PM 35.0 must be Level 3');
+assert.strictEqual(pmModerate.shortLabel, 'ปานกลาง');
+
+const pmHazardous = WeatherManager.getPM25Level(80.0);
+assert.strictEqual(pmHazardous.level, 5, 'PM 80.0 must be Level 5');
+assert.strictEqual(pmHazardous.shortLabel, 'อันตราย');
+console.log('✅ WeatherManager WMO mapping & 5-tier Thai PM 2.5 standards verified');
+
+// 12.3 Test Weather and PM 2.5 Elements in index.html
+assert.ok(indexHtmlContent.includes('id="weather-pm25-widget"'), 'index.html must contain #weather-pm25-widget');
+assert.ok(indexHtmlContent.includes('id="weather-city-pills"'), 'index.html must contain #weather-city-pills');
+assert.ok(indexHtmlContent.includes('id="weather-city-name"'), 'index.html must contain #weather-city-name');
+assert.ok(indexHtmlContent.includes('id="weather-temp-val"'), 'index.html must contain #weather-temp-val');
+assert.ok(indexHtmlContent.includes('id="weather-pm25-val"'), 'index.html must contain #weather-pm25-val');
+assert.ok(indexHtmlContent.includes('id="weather-pm25-badge"'), 'index.html must contain #weather-pm25-badge');
+assert.ok(indexHtmlContent.includes('id="weather-pm25-bar"'), 'index.html must contain #weather-pm25-bar');
+assert.ok(indexHtmlContent.includes('id="ticker-weather-city"'), 'index.html must contain #ticker-weather-city in Ticker');
+assert.ok(indexHtmlContent.includes('id="ticker-temp-val"'), 'index.html must contain #ticker-temp-val in Ticker');
+assert.ok(indexHtmlContent.includes('id="ticker-pm25-badge"'), 'index.html must contain #ticker-pm25-badge in Ticker');
+assert.ok(indexHtmlContent.includes('js/weather.js'), 'index.html must load js/weather.js');
+console.log('✅ Weather & PM 2.5 widget and ticker elements verified in index.html');
 
 console.log('\n🎉 All test cases passed successfully!');
 

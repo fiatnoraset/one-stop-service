@@ -185,6 +185,18 @@
 
         <span class="text-slate-300 dark:text-slate-700 select-none">•</span>
 
+        <!-- Item 5: Live Weather & PM 2.5 -->
+        <div class="inline-flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
+          <span class="font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1">
+            <i data-lucide="cloud-sun" class="w-3.5 h-3.5 text-sky-400"></i>
+            <span id="ticker-weather-city">กรุงเทพฯ</span>
+          </span>
+          <span id="ticker-temp-val" class="font-bold text-slate-900 dark:text-white font-mono">31.0°C</span>
+          <span id="ticker-pm25-badge" class="px-1.5 py-0.2 rounded text-[10px] font-bold font-mono bg-sky-500/20 text-sky-400 border border-sky-500/30">PM 2.5: 18.5 (ดี)</span>
+        </div>
+
+        <span class="text-slate-300 dark:text-slate-700 select-none">•</span>
+
         <!-- Duplicate stream to loop infinitely -->
         <a href="https://www.set.or.th/th/market/index/set/overview" target="_blank" rel="noopener noreferrer"
            class="inline-flex items-center gap-1.5 text-slate-700 dark:text-slate-300 hover:text-blue-400 transition-colors">
@@ -214,6 +226,17 @@
         <div class="inline-flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
           <span class="font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1"><i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-teal-500"></i> USD/THB</span>
           <span class="font-bold text-slate-900 dark:text-white font-mono">฿36.45</span>
+        </div>
+
+        <span class="text-slate-300 dark:text-slate-700 select-none">•</span>
+
+        <div class="inline-flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
+          <span class="font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1">
+            <i data-lucide="cloud-sun" class="w-3.5 h-3.5 text-sky-400"></i>
+            <span id="ticker-weather-city-2">กรุงเทพฯ</span>
+          </span>
+          <span id="ticker-temp-val-2" class="font-bold text-slate-900 dark:text-white font-mono">31.0°C</span>
+          <span id="ticker-pm25-badge-2" class="px-1.5 py-0.2 rounded text-[10px] font-bold font-mono bg-sky-500/20 text-sky-400 border border-sky-500/30">PM 2.5: 18.5 (ดี)</span>
         </div>
 
       </div>
@@ -271,6 +294,104 @@
               <span>+</span>
               <kbd class="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10">K</kbd>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-time Weather & PM 2.5 Air Quality Widget (Open-Meteo API) -->
+      <div id="weather-pm25-widget" class="glass-card rounded-[22px] p-4 sm:p-5 border border-sky-500/25 dark:border-sky-500/20 shadow-xl relative overflow-hidden group">
+        <!-- Ambient Glow effect -->
+        <div class="absolute -right-16 -top-16 w-48 h-48 bg-sky-500/10 dark:bg-sky-500/15 rounded-full blur-3xl pointer-events-none group-hover:bg-sky-500/20 transition-all duration-700"></div>
+        <div class="absolute -left-16 -bottom-16 w-48 h-48 bg-indigo-500/10 dark:bg-indigo-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 space-y-4">
+          <!-- Top Row: Header & City Pills -->
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2.5 pb-3 border-b border-slate-200/50 dark:border-white/10">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-500/25 to-blue-600/20 border border-sky-400/30 flex items-center justify-center text-sky-400 shrink-0 shadow-sm shadow-sky-500/20">
+                <i data-lucide="cloud-sun" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-1.5">
+                    <span>สภาพอากาศ & คุณภาพอากาศ (PM 2.5)</span>
+                  </h3>
+                  <span class="px-2 py-0.5 text-[9px] font-bold rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Realtime
+                  </span>
+                </div>
+                <p class="text-[11px] text-slate-400">ข้อมูลถ่ายทอดสดจากดาวเทียม Open-Meteo API</p>
+              </div>
+            </div>
+
+            <!-- City Selector Pills & Refresh -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+              <div id="weather-city-pills" class="flex items-center gap-1.5">
+                <!-- Injected by weather.js -->
+              </div>
+              <button type="button" onclick="WeatherManager.fetchData()" title="รีเฟรชข้อมูลสภาพอากาศ"
+                      class="p-1.5 rounded-xl bg-white/5 dark:bg-white/[0.04] hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 transition-all shrink-0">
+                <i id="weather-refresh-spinner" data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Main Weather & PM 2.5 Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+            <!-- Left: Weather & Temperature -->
+            <div class="rounded-2xl bg-white/40 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/5 p-3.5 sm:p-4 flex flex-col justify-between gap-3">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <span id="weather-city-name" class="text-xs font-bold text-slate-500 dark:text-slate-400">กำลังโหลด...</span>
+                  <div class="flex items-baseline gap-2 mt-0.5">
+                    <span id="weather-temp-val" class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white font-mono tracking-tight">--°C</span>
+                  </div>
+                  <div id="weather-condition-text" class="text-xs font-semibold text-sky-500 dark:text-sky-400 mt-1 flex items-center gap-1">
+                    🌤️ กำลังเชื่อมต่อสภาพอากาศ...
+                  </div>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500/20 to-blue-500/10 border border-sky-400/20 flex items-center justify-center text-sky-400 shrink-0">
+                  <i id="weather-icon" data-lucide="cloud-sun" class="w-6 h-6"></i>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 text-[11px] font-medium text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/40 dark:border-white/5">
+                <span id="weather-humidity-val" class="inline-flex items-center gap-1">💧 ความชื้น --%</span>
+                <span id="weather-wind-val" class="inline-flex items-center gap-1">💨 ลม -- km/h</span>
+              </div>
+            </div>
+
+            <!-- Right: PM 2.5 Air Quality Index -->
+            <div class="rounded-2xl bg-white/40 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/5 p-3.5 sm:p-4 flex flex-col justify-between gap-3">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <span class="text-xs font-bold text-slate-500 dark:text-slate-400">ฝุ่นละออง PM 2.5</span>
+                  <div class="flex items-baseline gap-2 mt-0.5">
+                    <span id="weather-pm25-val" class="text-3xl sm:text-4xl font-black font-mono tracking-tight text-emerald-400">--</span>
+                    <span class="text-[11px] text-slate-400 font-mono font-medium">µg/m³</span>
+                  </div>
+                </div>
+                <span id="weather-pm25-badge" class="px-2.5 py-1 rounded-full text-[11px] font-bold border bg-emerald-500/20 text-emerald-400 border-emerald-500/30 whitespace-nowrap">
+                  🟢 คุณภาพอากาศดี
+                </span>
+              </div>
+
+              <div class="space-y-1.5 pt-2 border-t border-slate-200/40 dark:border-white/5">
+                <!-- Multi-tier Bar Scale -->
+                <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden relative">
+                  <div id="weather-pm25-bar" class="h-full rounded-full transition-all duration-500 bg-emerald-400" style="width: 30%;"></div>
+                </div>
+                <p id="weather-pm25-advice" class="text-[11px] text-slate-600 dark:text-slate-300 font-medium leading-relaxed truncate">
+                  กำลังประเมินคุณภาพอากาศ...
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom micro footer -->
+          <div class="flex items-center justify-between text-[10px] text-slate-400 px-0.5">
+            <span id="weather-update-time">อัปเดตล่าสุด: กำลังโหลด...</span>
+            <span class="inline-flex items-center gap-1">Open-Meteo Air Quality API • มาตรฐานกรมควบคุมมลพิษ</span>
           </div>
         </div>
       </div>
@@ -1229,6 +1350,7 @@
   <script src="js/emergency.js"></script>
   <script src="js/smart-home.js"></script>
   <script src="js/tracking.js"></script>
+  <script src="js/weather.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
