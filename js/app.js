@@ -116,7 +116,7 @@ const App = {
     
     let clickAction = '';
     if (item.isSmartHome) {
-      clickAction = `onclick="SmartHomeManager.openSmartHomeModal()"`;
+      clickAction = `onclick="SmartHomeManager.launchApp()"`;
     } else if (item.isEmergencyHub) {
       clickAction = `onclick="EmergencyManager.openEmergencyModal()"`;
     } else if (item.id === 'parcel-tracking-hub') {
@@ -162,7 +162,7 @@ const App = {
         <!-- Bottom Action Buttons -->
         <div class="mt-3.5 pt-2.5 border-t border-slate-200/60 dark:border-white/[0.08] flex items-center justify-between">
           <span class="text-xs font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-            ${hasSubServices ? 'เลือกบริการ' : (item.isSmartHome ? 'ควบคุมไฟ' : 'เข้าใช้งาน')}
+            ${hasSubServices ? 'เลือกบริการ' : (item.isSmartHome ? 'เปิดแอป iHITEK' : 'เข้าใช้งาน')}
             <i data-lucide="${hasSubServices ? 'chevron-right' : 'external-link'}" class="w-3.5 h-3.5"></i>
           </span>
 

@@ -558,13 +558,13 @@ const services = [
     categoryId: 'smarthome',
     name: 'เปิดปิดไฟในบ้าน (iHITEK Smart Home)',
     nameEn: 'iHITEK Smart Light & Home IoT',
-    description: 'เปิดแอปพลิเคชัน iHITEK สำหรับสั่งงานเปิด-ปิดไฟ สวิตช์อัจฉริยะ และควบคุมไฟในบ้านบนเว็บจำลอง',
+    description: 'เปิดแอปพลิเคชัน iHITEK ทันที สำหรับสั่งงานเปิด-ปิดไฟ สวิตช์อัจฉริยะ และควบคุมไฟในบ้านบนสมาร์ทโฟน',
     url: 'ihitek://',
     appStoreUrl: 'https://apps.apple.com/th/app/ihitek/id1453913076',
     playStoreUrl: 'https://play.google.com/store/apps/details?id=com.hitekhome.smart',
     icon: 'lightbulb',
     color: 'amber',
-    badge: 'เชื่อมต่อด่วน',
+    badge: 'เปิดแอปทันที',
     isSmartHome: true
   },
 

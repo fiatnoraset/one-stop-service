@@ -15,7 +15,7 @@ const SmartHomeManager = {
 
   // Launch iHITEK App with smart device detection
   launchApp: function() {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera || '';
     const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
     const isAndroid = /android/i.test(userAgent);
 
@@ -24,31 +24,35 @@ const SmartHomeManager = {
     const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.hitekhome.smart';
 
     // Notify user
-    this.showToast('กำลังเชื่อมต่อไปยังแอป iHITEK...');
+    this.showToast('กำลังเปิดแอปพลิเคชัน iHITEK Smart Home... 💡');
 
-    const startTime = Date.now();
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = appSchemeUrl;
-    document.body.appendChild(iframe);
-
-    // Fallback if app not installed or running on desktop browser
-    setTimeout(() => {
-      document.body.removeChild(iframe);
-      const elapsed = Date.now() - startTime;
-      
-      // If still within 2.5 seconds, the app was likely not opened
-      if (elapsed < 2500) {
-        if (isIOS) {
-          window.location.href = appStoreUrl;
-        } else if (isAndroid) {
+    if (isAndroid) {
+      // Android Chrome intent URL: opens app if installed, or falls back to Play Store
+      const androidIntentUrl = 'intent://#Intent;scheme=ihitek;package=com.hitekhome.smart;end';
+      window.location.href = androidIntentUrl;
+      setTimeout(() => {
+        if (!document.hidden) {
           window.location.href = playStoreUrl;
-        } else {
-          // On Desktop or if app is not installed, open modal & store selection
-          this.openSmartHomeModal();
         }
-      }
-    }, 1500);
+      }, 2000);
+    } else if (isIOS) {
+      // iOS: try custom scheme first, fallback to App Store if app is not installed
+      const startTime = Date.now();
+      window.location.href = appSchemeUrl;
+      setTimeout(() => {
+        if (!document.hidden && Date.now() - startTime < 2500) {
+          window.location.href = appStoreUrl;
+        }
+      }, 1500);
+    } else {
+      // Desktop / PC / Mac: Try app scheme or open Play Store / App Store in new tab
+      try {
+        window.location.href = appSchemeUrl;
+      } catch (e) {}
+      setTimeout(() => {
+        window.open(playStoreUrl, '_blank', 'noopener,noreferrer');
+      }, 500);
+    }
   },
 
   // Open Smart Home Simulator Modal

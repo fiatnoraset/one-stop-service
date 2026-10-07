@@ -63,11 +63,17 @@ mandatoryHotlines.forEach(num => {
 });
 console.log('✅ All mandatory emergency numbers verified with valid tel: protocol');
 
-// 4. Validate iHITEK integration details
+// 4. Validate iHITEK integration details & direct app launcher
 const ihitekService = servicesData.services.find(s => s.id === 'ihitek' || s.name.toLowerCase().includes('ihitek') || s.name.includes('เปิดปิดไฟ'));
 assert.ok(ihitekService, 'iHITEK Smart Home service must exist');
 assert.strictEqual(ihitekService.playStoreUrl, 'https://play.google.com/store/apps/details?id=com.hitekhome.smart', 'playStoreUrl must match updated link');
-console.log('✅ Verified iHITEK Smart Home integration data and Google Play URL');
+assert.strictEqual(ihitekService.appStoreUrl, 'https://apps.apple.com/th/app/ihitek/id1453913076', 'appStoreUrl must match iOS App Store link');
+assert.strictEqual(ihitekService.url, 'ihitek://', 'Service URL must use ihitek:// deep link scheme');
+
+const SmartHomeManager = require('../js/smart-home.js');
+assert.ok(SmartHomeManager, 'SmartHomeManager module must exist');
+assert.ok(typeof SmartHomeManager.launchApp === 'function', 'SmartHomeManager.launchApp must be a function');
+console.log('✅ Verified iHITEK Smart Home direct app launcher & store links');
 
 // 5. Test Utility Calculators Logic (Electricity & Loan Installments)
 const billCalc = require('../js/bill-calc.js');
