@@ -430,15 +430,15 @@
     <!-- Quick Compact Interactive Tools Bar (4 Summary Cards in 1 Row - iOS / Linear UI Style) -->
     <section class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
       
-      <!-- Tool 1: Smart Home & CCTV (iHITEK & Xiaomi) -->
-      <button onclick="SmartHomeManager.openSmartHomeModal()" 
+      <!-- Tool 1: iHITEK Smart Home (เปิดปิดไฟบ้าน - Direct Launch) -->
+      <button onclick="SmartHomeManager.launchApp('ihitek')" 
               class="glass-card p-3 sm:p-3.5 rounded-[20px] hover:border-amber-500/50 hover:shadow-lg transition-all flex items-center gap-3 text-left group">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-500/25 to-orange-600/15 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0 shadow-sm shadow-amber-500/20 group-hover:scale-105 transition-transform">
-          <i data-lucide="home" class="w-5 h-5"></i>
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-500/25 to-yellow-600/15 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0 shadow-sm shadow-amber-500/20 group-hover:scale-105 transition-transform">
+          <i data-lucide="lightbulb" class="w-5 h-5"></i>
         </div>
         <div class="min-w-0">
-          <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-amber-400 transition-colors">ไฟบ้าน & กล้อง CCTV</h4>
-          <p id="summary-lights-badge" class="text-[11px] text-amber-500 dark:text-amber-400 font-semibold truncate">⚡ iHITEK • Xiaomi</p>
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-amber-400 transition-colors">เปิดปิดไฟบ้าน (iHITEK)</h4>
+          <p id="summary-lights-badge" class="text-[11px] text-amber-500 dark:text-amber-400 font-semibold truncate">⚡ กดเข้าแอปทันที</p>
         </div>
       </button>
 
@@ -818,25 +818,6 @@
               Android
             </a>
           </div>
-        </div>
-      </div>
-
-      <!-- Quick Scene Presets -->
-      <div class="space-y-1.5">
-        <label class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">โหมดบรรยากาศสำเร็จรูป (Preset Scenes)</label>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          <button onclick="SmartHomeManager.applyScene('relax')" class="p-2 rounded-xl border border-amber-500/30 bg-amber-500/5 hover:bg-amber-500/15 text-xs font-medium text-amber-600 dark:text-amber-300 flex items-center justify-center gap-1.5 transition-colors">
-            <span>🛋️ ผ่อนคลาย</span>
-          </button>
-          <button onclick="SmartHomeManager.applyScene('focus')" class="p-2 rounded-xl border border-blue-500/30 bg-blue-500/5 hover:bg-blue-500/15 text-xs font-medium text-blue-600 dark:text-blue-300 flex items-center justify-center gap-1.5 transition-colors">
-            <span>📚 ทำงาน/อ่าน</span>
-          </button>
-          <button onclick="SmartHomeManager.applyScene('movie')" class="p-2 rounded-xl border border-indigo-500/30 bg-indigo-500/5 hover:bg-indigo-500/15 text-xs font-medium text-indigo-600 dark:text-indigo-300 flex items-center justify-center gap-1.5 transition-colors">
-            <span>🍿 ดูหนัง</span>
-          </button>
-          <button onclick="SmartHomeManager.applyScene('party')" class="p-2 rounded-xl border border-pink-500/30 bg-pink-500/5 hover:bg-pink-500/15 text-xs font-medium text-pink-600 dark:text-pink-300 flex items-center justify-center gap-1.5 transition-colors">
-            <span>🎉 ปาร์ตี้</span>
-          </button>
         </div>
       </div>
 

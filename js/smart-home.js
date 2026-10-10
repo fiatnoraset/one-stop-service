@@ -147,35 +147,6 @@ const SmartHomeManager = {
     }
   },
 
-  applyScene: function(scene) {
-    switch (scene) {
-      case 'relax':
-        this.state.livingRoom = { on: true, brightness: 40, color: '#fde68a', mode: 'warm', name: 'ไฟห้องนั่งเล่น' };
-        this.state.bedroom = { on: true, brightness: 30, color: '#fef08a', mode: 'warm', name: 'ไฟห้องนอนใหญ่' };
-        this.state.kitchen = { on: false, brightness: 0, color: '#ffffff', mode: 'off', name: 'ไฟห้องครัว' };
-        this.state.study = { on: false, brightness: 0, color: '#ffffff', mode: 'off', name: 'ไฟห้องทำงาน' };
-        this.showToast('เปิดโหมดผ่อนคลาย (Relaxing Mood) 🛋️');
-        break;
-      case 'focus':
-        this.state.study = { on: true, brightness: 100, color: '#f8fafc', mode: 'focus', name: 'ไฟห้องทำงาน' };
-        this.state.livingRoom = { on: false, brightness: 0, color: '#fef08a', mode: 'off', name: 'ไฟห้องนั่งเล่น' };
-        this.showToast('เปิดโหมดสมาธิ/ทำงาน (Focus Mode) 📚');
-        break;
-      case 'movie':
-        this.state.livingRoom = { on: true, brightness: 15, color: '#818cf8', mode: 'cinema', name: 'ไฟห้องนั่งเล่น' };
-        this.state.bedroom = { on: false, brightness: 0, color: '#fef08a', mode: 'off', name: 'ไฟห้องนอนใหญ่' };
-        this.state.kitchen = { on: false, brightness: 0, color: '#ffffff', mode: 'off', name: 'ไฟห้องครัว' };
-        this.showToast('เปิดโหมดดูหนัง (Cinema Night) 🍿');
-        break;
-      case 'party':
-        this.state.livingRoom = { on: true, brightness: 90, color: '#ec4899', mode: 'party', name: 'ไฟห้องนั่งเล่น' };
-        this.state.kitchen = { on: true, brightness: 80, color: '#a855f7', mode: 'party', name: 'ไฟห้องครัว' };
-        this.showToast('เปิดโหมดปาร์ตี้ (Party Glow) 🎉');
-        break;
-    }
-    this.render();
-  },
-
   renderLightBulb: function(roomKey) {
     const light = this.state[roomKey];
     const bulbEl = document.getElementById(`bulb-icon-${roomKey}`);
