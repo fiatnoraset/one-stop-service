@@ -115,8 +115,9 @@ const App = {
     const hasSubServices = item.subServices && item.subServices.length > 0;
     
     let clickAction = '';
-    if (item.isSmartHome) {
-      clickAction = `onclick="SmartHomeManager.launchApp()"`;
+    if (item.isSmartHome || item.id === 'ihitek' || item.id === 'xiaomi-home') {
+      const appKey = item.appType || (item.id === 'xiaomi-home' ? 'xiaomi' : 'ihitek');
+      clickAction = `onclick="SmartHomeManager.launchApp('${appKey}')"`;
     } else if (item.isEmergencyHub) {
       clickAction = `onclick="EmergencyManager.openEmergencyModal()"`;
     } else if (item.id === 'parcel-tracking-hub') {
@@ -125,6 +126,15 @@ const App = {
       clickAction = `onclick="App.openSubServicesModal('${item.id}')"`;
     } else {
       clickAction = `onclick="App.launchExternalUrl('${item.url}')"`;
+    }
+
+    let btnText = 'เข้าใช้งาน';
+    if (hasSubServices) {
+      btnText = 'เลือกบริการ';
+    } else if (item.id === 'xiaomi-home' || item.appType === 'xiaomi') {
+      btnText = 'เปิดแอป Xiaomi';
+    } else if (item.id === 'ihitek' || item.isSmartHome) {
+      btnText = 'เปิดแอป iHITEK';
     }
 
     return `
@@ -162,7 +172,7 @@ const App = {
         <!-- Bottom Action Buttons -->
         <div class="mt-3.5 pt-2.5 border-t border-slate-200/60 dark:border-white/[0.08] flex items-center justify-between">
           <span class="text-xs font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-            ${hasSubServices ? 'เลือกบริการ' : (item.isSmartHome ? 'เปิดแอป iHITEK' : 'เข้าใช้งาน')}
+            ${btnText}
             <i data-lucide="${hasSubServices ? 'chevron-right' : 'external-link'}" class="w-3.5 h-3.5"></i>
           </span>
 
@@ -359,6 +369,11 @@ const App = {
           action = `onclick="App.closeSubServicesModal(); App.openBillCalcModal();"`;
         } else if (sub.isInteractiveModal && sub.url === '#parcel-tracking-modal') {
           action = `onclick="App.closeSubServicesModal(); ParcelTracker.openTrackingModal();"`;
+        } else if (sub.isInteractiveModal && sub.url === '#smart-home-modal') {
+          action = `onclick="App.closeSubServicesModal(); SmartHomeManager.openSmartHomeModal();"`;
+        } else if (sub.appType || sub.url === 'ihitek://' || sub.url === 'mihome://') {
+          const targetApp = sub.appType || (sub.url.includes('mihome') ? 'xiaomi' : 'ihitek');
+          action = `onclick="App.closeSubServicesModal(); SmartHomeManager.launchApp('${targetApp}');"`;
         } else {
           action = `onclick="App.launchExternalUrl('${sub.url}')"`;
         }

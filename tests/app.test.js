@@ -41,14 +41,16 @@ const requiredLinks = {
   'สปสช.': 'https://eservices.nhso.go.th/eServices/mobile/login.xhtml',
   'ประกันสังคม SSO': 'https://www.sso.go.th/wpr/main/login',
   'DLT Smart Queue': 'https://gecc.dlt.go.th/',
-  'LandsMaps': 'https://landsmaps.dol.go.th/'
+  'LandsMaps': 'https://landsmaps.dol.go.th/',
+  'Xiaomi Home': 'https://play.google.com/store/apps/details?id=com.xiaomi.smarthome'
 };
 
 for (const [name, targetUrl] of Object.entries(requiredLinks)) {
   const match = servicesData.services.find(s => 
     s.name.toLowerCase().includes(name.toLowerCase()) || 
     (s.url && s.url.toLowerCase().includes(targetUrl.toLowerCase())) ||
-    (s.subServices && s.subServices.some(sub => sub.url.includes(targetUrl) || sub.name.includes(name)))
+    (s.playStoreUrl && s.playStoreUrl.toLowerCase().includes(targetUrl.toLowerCase())) ||
+    (s.subServices && s.subServices.some(sub => (sub.url && sub.url.includes(targetUrl)) || sub.name.toLowerCase().includes(name.toLowerCase())))
   );
   assert.ok(match, `Required service "${name}" must exist in services list`);
   console.log(`  ✓ Verified required service link: ${name}`);
@@ -63,17 +65,25 @@ mandatoryHotlines.forEach(num => {
 });
 console.log('✅ All mandatory emergency numbers verified with valid tel: protocol');
 
-// 4. Validate iHITEK integration details & direct app launcher
+// 4. Validate Smart Home & IoT Apps (iHITEK & Xiaomi Home)
 const ihitekService = servicesData.services.find(s => s.id === 'ihitek' || s.name.toLowerCase().includes('ihitek') || s.name.includes('เปิดปิดไฟ'));
 assert.ok(ihitekService, 'iHITEK Smart Home service must exist');
 assert.strictEqual(ihitekService.playStoreUrl, 'https://play.google.com/store/apps/details?id=com.hitekhome.smart', 'playStoreUrl must match updated link');
 assert.strictEqual(ihitekService.appStoreUrl, 'https://apps.apple.com/th/app/ihitek/id1453913076', 'appStoreUrl must match iOS App Store link');
 assert.strictEqual(ihitekService.url, 'ihitek://', 'Service URL must use ihitek:// deep link scheme');
 
+const xiaomiService = servicesData.services.find(s => s.id === 'xiaomi-home');
+assert.ok(xiaomiService, 'Xiaomi Home service must exist');
+assert.ok(xiaomiService.playStoreUrl && xiaomiService.playStoreUrl.includes('com.xiaomi.smarthome'), 'Xiaomi Home playStoreUrl must match package com.xiaomi.smarthome');
+assert.strictEqual(xiaomiService.appStoreUrl, 'https://apps.apple.com/th/app/mi-home-xiaomi-smarthome/id883807065', 'appStoreUrl must match iOS Mi Home link');
+assert.strictEqual(xiaomiService.url, 'mihome://', 'Xiaomi Service URL must use mihome:// deep link scheme');
+
 const SmartHomeManager = require('../js/smart-home.js');
 assert.ok(SmartHomeManager, 'SmartHomeManager module must exist');
 assert.ok(typeof SmartHomeManager.launchApp === 'function', 'SmartHomeManager.launchApp must be a function');
-console.log('✅ Verified iHITEK Smart Home direct app launcher & store links');
+assert.ok(SmartHomeManager.SMART_APPS.ihitek, 'ihitek config must exist in SMART_APPS');
+assert.ok(SmartHomeManager.SMART_APPS.xiaomi, 'xiaomi config must exist in SMART_APPS');
+console.log('✅ Verified iHITEK and Xiaomi Home Smart Home direct app launchers & store links');
 
 // 5. Test Utility Calculators Logic (Electricity & Loan Installments)
 const billCalc = require('../js/bill-calc.js');

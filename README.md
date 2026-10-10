@@ -87,9 +87,9 @@
 - **1323**: สายด่วนสุขภาพจิต ปรึกษาคลายเครียด 24 ชม.
 - **ระบบเสียงไซเรนฉุกเฉิน SOS (Web Audio API)** และ **ปุ่มแชร์พิกัด GPS** ขอความช่วยเหลือด่วน
 
-### 8. 💡 เปิดปิดไฟในบ้าน (Smart Home Lighting - iHITEK)
-- **เชื่อมต่อแอป iHITEK**: รองรับ Deep Link `ihitek://` เปิดแอปบนมือถือทันที
-- ลิงก์ดาวน์โหลดบน [iOS App Store](https://apps.apple.com/th/app/ihitek/id1453913076) และ [Google Play Store](https://play.google.com/store/apps/details?id=com.hitekhome.smart)
+### 8. 🏠 บ้านอัจฉริยะ & กล้องวงจรปิด (Smart Home & CCTV - iHITEK & Xiaomi Home)
+- **💡 iHITEK Smart Home (สวิตช์ไฟบ้าน)**: สั่งงานเปิด-ปิดไฟ สวิตช์อัจฉริยะ รองรับ Deep Link `ihitek://` เปิดแอปทันที พร้อมลิงก์ [iOS App Store](https://apps.apple.com/th/app/ihitek/id1453913076) และ [Google Play Store](https://play.google.com/store/apps/details?id=com.hitekhome.smart)
+- **📹 Xiaomi Home (Mi Home - กล้องวงจรปิด CCTV)**: ดูกล้องวงจรปิด 360° และควบคุมอุปกรณ์ IoT เสียวหมี่ รองรับ Deep Link `mihome://` เปิดแอปทันที พร้อมลิงก์ [iOS App Store](https://apps.apple.com/th/app/mi-home-xiaomi-smarthome/id883807065) และ [Google Play Store](https://play.google.com/store/apps/details?id=com.xiaomi.smarthome)
 - **Web Smart Switch Simulator**: หน้าต่างจำลองแผงควบคุมสวิตช์ไฟอัจฉริยะ ปรับความสว่าง เปลี่ยนสี และเลือก Scene บรรยากาศ (ผ่อนคลาย, ทำงาน, ดูหนัง, ปาร์ตี้)
 
 ### 9. 🎓 การศึกษา & วิทยาลัยชุมชนยโสธร (Education & Student Portal)

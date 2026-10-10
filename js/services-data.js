@@ -6,7 +6,7 @@
 const categories = [
   { id: 'all', name: 'ทั้งหมด', nameEn: 'All Services', icon: 'grid', color: 'teal' },
   { id: 'emergency', name: 'แจ้งเหตุฉุกเฉิน', nameEn: 'Emergency & SOS', icon: 'shield-alert', color: 'red' },
-  { id: 'smarthome', name: 'เปิดปิดไฟบ้าน', nameEn: 'Smart Home Lighting', icon: 'lightbulb', color: 'amber' },
+  { id: 'smarthome', name: 'เปิดปิดไฟ & กล้องวงจรปิด', nameEn: 'Smart Home & CCTV', icon: 'home', color: 'amber' },
   { id: 'transport', name: 'เดินทาง / เรียกรถ', nameEn: 'Ride & Transport', icon: 'car', color: 'emerald' },
   { id: 'food', name: 'สั่งอาหาร', nameEn: 'Food Delivery', icon: 'utensils', color: 'orange' },
   { id: 'shopping', name: 'สั่งสินค้าออนไลน์', nameEn: 'Online Shopping', icon: 'shopping-bag', color: 'blue' },
@@ -552,7 +552,37 @@ const services = [
     badge: 'SET Index'
   },
 
-  // --- เมนูเปิดปิดไฟในบ้าน (Smart Home - iHITEK) ---
+  // --- เมนูบ้านอัจฉริยะ & กล้องวงจรปิด (Smart Home - iHITEK & Xiaomi Home) ---
+  {
+    id: 'smart-home-hub',
+    categoryId: 'smarthome',
+    name: 'บ้านอัจฉริยะ & กล้องวงจรปิด (Smart Home Hub)',
+    nameEn: 'Smart Home & CCTV Devices Hub',
+    description: 'ศูนย์รวมแอปพลิเคชันบ้านอัจฉริยะ ทั้งสวิตช์ไฟ iHITEK และกล้องวงจรปิด Xiaomi Home (Mi Home)',
+    url: '#smart-home-modal',
+    icon: 'home',
+    color: 'amber',
+    badge: 'สมาร์ทโฮม',
+    isInteractiveModal: true,
+    subServices: [
+      {
+        name: 'iHITEK Smart Home (เปิดปิดไฟในบ้าน)',
+        url: 'ihitek://',
+        appType: 'ihitek',
+        desc: 'เปิดแอปพลิเคชัน iHITEK สั่งงานเปิด-ปิดไฟ สวิตช์อัจฉริยะ และควบคุมไฟในบ้าน',
+        icon: 'lightbulb',
+        color: '#f59e0b'
+      },
+      {
+        name: 'Xiaomi Home (กล้องวงจรปิดในบ้าน & CCTV)',
+        url: 'mihome://',
+        appType: 'xiaomi',
+        desc: 'เปิดแอปพลิเคชัน Xiaomi Home (Mi Home) ดูกล้องวงจรปิด CCTV 360° และอุปกรณ์ IoT',
+        icon: 'video',
+        color: '#ff6900'
+      }
+    ]
+  },
   {
     id: 'ihitek',
     categoryId: 'smarthome',
@@ -560,10 +590,26 @@ const services = [
     nameEn: 'iHITEK Smart Light & Home IoT',
     description: 'เปิดแอปพลิเคชัน iHITEK ทันที สำหรับสั่งงานเปิด-ปิดไฟ สวิตช์อัจฉริยะ และควบคุมไฟในบ้านบนสมาร์ทโฟน',
     url: 'ihitek://',
+    appType: 'ihitek',
     appStoreUrl: 'https://apps.apple.com/th/app/ihitek/id1453913076',
     playStoreUrl: 'https://play.google.com/store/apps/details?id=com.hitekhome.smart',
     icon: 'lightbulb',
     color: 'amber',
+    badge: 'เปิดแอปทันที',
+    isSmartHome: true
+  },
+  {
+    id: 'xiaomi-home',
+    categoryId: 'smarthome',
+    name: 'Xiaomi Home (กล้องวงจรปิด & CCTV)',
+    nameEn: 'Xiaomi Home (Mi Home CCTV & IoT)',
+    description: 'เปิดแอปพลิเคชัน Xiaomi Home ทันที สำหรับดูกล้องวงจรปิดในบ้าน ควบคุมกล้อง 360° และจัดการอุปกรณ์ Smart Home',
+    url: 'mihome://',
+    appType: 'xiaomi',
+    appStoreUrl: 'https://apps.apple.com/th/app/mi-home-xiaomi-smarthome/id883807065',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.xiaomi.smarthome&pcampaignid=web_share',
+    icon: 'video',
+    color: 'orange',
     badge: 'เปิดแอปทันที',
     isSmartHome: true
   },
