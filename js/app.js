@@ -82,9 +82,9 @@ const App = {
   loadFavorites: function() {
     try {
       const saved = localStorage.getItem('oss_favorites');
-      this.favorites = saved ? JSON.parse(saved) : ['news-hub', 'food-delivery-hub', 'yasocc-hub', 'ihitek', 'emergency-hub'];
+      this.favorites = saved ? JSON.parse(saved) : ['news-hub', 'food-delivery-hub', 'yasocc-hub', 'ihitek', 'xiaomi-home', 'emergency-hub'];
     } catch (e) {
-      this.favorites = ['news-hub', 'food-delivery-hub', 'yasocc-hub', 'ihitek', 'emergency-hub'];
+      this.favorites = ['news-hub', 'food-delivery-hub', 'yasocc-hub', 'ihitek', 'xiaomi-home', 'emergency-hub'];
     }
   },
 

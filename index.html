@@ -427,8 +427,8 @@
 
     </section>
 
-    <!-- Quick Compact Interactive Tools Bar (4 Summary Cards in 1 Row - iOS / Linear UI Style) -->
-    <section class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+    <!-- Quick Compact Interactive Tools Bar (5 Summary Cards - Apple / Linear UI Style) -->
+    <section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3">
       
       <!-- Tool 1: iHITEK Smart Home (เปิดปิดไฟบ้าน - Direct Launch) -->
       <button onclick="SmartHomeManager.launchApp('ihitek')" 
@@ -437,12 +437,24 @@
           <i data-lucide="lightbulb" class="w-5 h-5"></i>
         </div>
         <div class="min-w-0">
-          <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-amber-400 transition-colors">เปิดปิดไฟบ้าน (iHITEK)</h4>
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-amber-400 transition-colors">ไฟบ้าน (iHITEK)</h4>
           <p id="summary-lights-badge" class="text-[11px] text-amber-500 dark:text-amber-400 font-semibold truncate">⚡ กดเข้าแอปทันที</p>
         </div>
       </button>
 
-      <!-- Tool 2: Utility Calculators -->
+      <!-- Tool 2: Xiaomi Home (กล้องวงจรปิด CCTV - Direct Launch) -->
+      <button onclick="SmartHomeManager.launchApp('xiaomi')" 
+              class="glass-card p-3 sm:p-3.5 rounded-[20px] hover:border-orange-500/50 hover:shadow-lg transition-all flex items-center gap-3 text-left group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-orange-500/25 to-red-600/15 border border-orange-500/30 text-orange-400 flex items-center justify-center shrink-0 shadow-sm shadow-orange-500/20 group-hover:scale-105 transition-transform">
+          <i data-lucide="video" class="w-5 h-5"></i>
+        </div>
+        <div class="min-w-0">
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-orange-400 transition-colors">กล้อง CCTV (Xiaomi)</h4>
+          <p class="text-[11px] text-orange-500 dark:text-orange-400 font-semibold truncate">📹 ⚡ กดเข้าแอปทันที</p>
+        </div>
+      </button>
+
+      <!-- Tool 3: Utility Calculators -->
       <button onclick="App.openBillCalcModal()" 
               class="glass-card p-3 sm:p-3.5 rounded-[20px] hover:border-blue-500/50 hover:shadow-lg transition-all flex items-center gap-3 text-left group">
         <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500/25 to-indigo-600/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 shadow-sm shadow-blue-500/20 group-hover:scale-105 transition-transform">
@@ -454,7 +466,7 @@
         </div>
       </button>
 
-      <!-- Tool 3: Emergency SOS -->
+      <!-- Tool 4: Emergency SOS -->
       <button onclick="EmergencyManager.openEmergencyModal()" 
               class="glass-card p-3 sm:p-3.5 rounded-[20px] hover:border-rose-500/50 hover:shadow-lg transition-all flex items-center gap-3 text-left group border-rose-500/20">
         <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-rose-500/25 to-red-600/15 border border-rose-500/30 text-rose-400 flex items-center justify-center shrink-0 shadow-sm shadow-rose-500/20 group-hover:scale-105 transition-transform">
@@ -466,7 +478,7 @@
         </div>
       </button>
 
-      <!-- Tool 4: Parcel Tracking -->
+      <!-- Tool 5: Parcel Tracking -->
       <button onclick="ParcelTracker.openTrackingModal()" 
               class="glass-card p-3 sm:p-3.5 rounded-[20px] hover:border-emerald-500/50 hover:shadow-lg transition-all flex items-center gap-3 text-left group">
         <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500/25 to-teal-600/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0 shadow-sm shadow-emerald-500/20 group-hover:scale-105 transition-transform">

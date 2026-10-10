@@ -56,15 +56,16 @@ const SmartHomeManager = {
     this.showToast(app.toastMsg);
 
     if (isAndroid) {
-      // Android Chrome intent URL: opens app if installed, or falls back to Play Store
+      // Android Chrome intent URL: opens app if installed, or falls back to Play Store automatically
       const schemeName = app.scheme.replace('://', '');
-      const androidIntentUrl = `intent://#Intent;scheme=${schemeName};package=${app.package};end`;
+      const fallbackUrl = encodeURIComponent(app.playStoreUrl);
+      const androidIntentUrl = `intent://#Intent;scheme=${schemeName};package=${app.package};S.browser_fallback_url=${fallbackUrl};end`;
       window.location.href = androidIntentUrl;
       setTimeout(() => {
         if (!document.hidden) {
           window.location.href = app.playStoreUrl;
         }
-      }, 2000);
+      }, 1800);
     } else if (isIOS) {
       // iOS: try custom scheme first, fallback to App Store if app is not installed
       const startTime = Date.now();
