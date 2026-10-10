@@ -48,24 +48,35 @@ const SmartHomeManager = {
   // Launch Smart Home App (iHITEK or Xiaomi Home) with platform detection
   launchApp: function(appType = 'ihitek') {
     const app = SMART_APPS[appType] || SMART_APPS.ihitek;
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera || '';
-    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-    const isAndroid = /android/i.test(userAgent);
+    const userAgent = (navigator.userAgent || navigator.vendor || window.opera || '').toLowerCase();
+    const isIOS = /ipad|iphone|ipod/.test(userAgent) && !window.MSStream;
+    const isAndroid = /android/.test(userAgent);
 
     // Notify user
     this.showToast(app.toastMsg);
 
     if (isAndroid) {
-      // Android Chrome intent URL: opens app if installed, or falls back to Play Store automatically
-      const schemeName = app.scheme.replace('://', '');
+      // Direct Android Intent targeting Main Launcher Activity of the installed package
       const fallbackUrl = encodeURIComponent(app.playStoreUrl);
-      const androidIntentUrl = `intent://#Intent;scheme=${schemeName};package=${app.package};S.browser_fallback_url=${fallbackUrl};end`;
+      const androidIntentUrl = `intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=${app.package};S.browser_fallback_url=${fallbackUrl};end`;
+
+      // Navigate to intent
       window.location.href = androidIntentUrl;
+
+      const startTime = Date.now();
       setTimeout(() => {
-        if (!document.hidden) {
-          window.location.href = app.playStoreUrl;
+        // If still in browser and not navigated away, try custom scheme then store
+        if (!document.hidden && Date.now() - startTime < 2800) {
+          try {
+            window.location.href = app.scheme;
+          } catch (e) {}
+          setTimeout(() => {
+            if (!document.hidden) {
+              window.location.href = app.playStoreUrl;
+            }
+          }, 800);
         }
-      }, 1800);
+      }, 1500);
     } else if (isIOS) {
       // iOS: try custom scheme first, fallback to App Store if app is not installed
       const startTime = Date.now();
@@ -82,7 +93,7 @@ const SmartHomeManager = {
       } catch (e) {}
       setTimeout(() => {
         window.open(app.playStoreUrl, '_blank', 'noopener,noreferrer');
-      }, 500);
+      }, 300);
     }
   },
 
